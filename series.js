@@ -66,7 +66,6 @@ function onMapClick(e) {
         btn_series.innerHTML="Serie de tiempo";
         lat= e.latlng['lat'];
         lon= e.latlng['lng'];
-        console.log(e.latlng);
         req_plot= get_request(urlbase, rtype, layers, time, lon, lat,
                 format='image/png');
         req_down= get_request(urlbase, rtype, layers, time, lon, lat,
