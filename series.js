@@ -4,10 +4,12 @@ var mbAttr = ' <a href="http://grupo-ioa.atmosfera.unam.mx/" > Interacción Océ
         mbUrl = "https://mt1.google.com/vt/lyrs=s&hl=pl&&x={x}&y={y}&z={z}";
 
 var back_layer= L.tileLayer(mbUrl, {id: 'back', attribution: mbAttr});
-const url_owgis="http://pronosticos.unam.mx:8080/ncWMS_2015/wms"
+//const url_owgis="http://pronosticos.unam.mx:8080/ncWMS_2015/wms"
+const urlbase="https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/";
+const urlbase2="http://132.248.8.238:8080/ncWMS_2015/";
 //var t=require("./mensual.json");
 //console.log(t);
-var temp=L.tileLayer.wms(url_owgis,
+var temp=L.tileLayer.wms(urlbase+'wms',
         {
                 version:"1.3.0",
         layers: 'atlas_mensuales/T2',
@@ -36,27 +38,26 @@ var lon_min=-99.56926749;
 var lat_min= 16.49108867;
 var lat_max= 32.44792175;
 bounds = new L.LatLngBounds(new L.LatLng(16.491, -78.511), new L.LatLng(32.448, -99.569));
-console.log('b:', bounds);
 var map = L.map('map', {
-        //center: bounds.getCenter(),
-        center:[19.3262492550136, -99.17620429776193],
+        center: bounds.getCenter(),
+        //center:[19.3262492550136, -99.17620429776193],//coordenadas CU
         zoomSnap: 0.1,
-        zoom: 20,
+        zoom: 5.6,
         minZoom:5,
         maxZoom:20,
         layers: [ back_layer, temp],
         maxBounds: bounds,
         maxBoundsViscosity: 1,
         });
+//menu de capas leaflet
 //layer_control=L.control.layers(base_layers,)
     //.addTo(map);
 
-map.flyTo(bounds.getCenter(), 5.6);
+//map.flyTo(bounds.getCenter(), 5.6);
 var popup = L.popup()
 
-const urlbase="http://132.248.8.238:8080/ncWMS_2015/";
 const rtype= "GetTimeseries";
-const layers= "atlas_diario/T2";
+const layers= "atlas_mensuales/T2";
 const time="2018-01-01T00:00:00.000Z/2018-12-31T00:00:00.000Z";
 
 function onMapClick(e) {
