@@ -15,5 +15,4 @@ El repositorio cuenta con los siguientes archivos y carpetas:
 - series.js, código Javascript principal;
 
 
-## [Colaboradores] (github.com/ma-robles/gis_agm_series/graphs/contributors)
-
+## Colaboradores [Estadísticas](https://www.github.com/ma-robles/gis_agm_series/graphs/contributors)
