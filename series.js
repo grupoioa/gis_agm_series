@@ -85,7 +85,26 @@ const rtype= "GetTimeseries";
 var active_layer= "";
 const time="2018-01-01T00:00:00.000Z/2018-12-31T00:00:00.000Z";
 
+function readTextFile(file)
+{
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file, false);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                var allText = rawFile.responseText;
+                alert(allText);
+            }
+        }
+    }
+    rawFile.send(null);
+}
+
 function onMapClick(e) {
+        readTextFile('https://pronosticos.atmosfera.unam.mx/AGMseries/temperatura/README.md');
         lat= e.latlng['lat'];
         lon= e.latlng['lng'];
         if (active_layer==''){
