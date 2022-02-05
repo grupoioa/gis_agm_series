@@ -87,6 +87,12 @@ const time="2018-01-01T00:00:00.000Z/2018-12-31T00:00:00.000Z";
 
 function readTextFile(file)
 {
+	/*
+	jQuery.getJSON(file,function (csvdata) {
+  console.log(csvdata.csvToArray());
+		console.log('yei!', csvdata);
+});
+    */
     var rawFile = new XMLHttpRequest();
     rawFile.open("GET", file, false);
     rawFile.onreadystatechange = function ()
@@ -100,11 +106,14 @@ function readTextFile(file)
             }
         }
     }
+	rawFile.setRequestHeader("Content-Type", "text/plain");
+	//rawFile.setRequestHeader("Content-Type", "text/plain; charset='utf-8'");
+	//rawFile.withCredentials = true;
     rawFile.send(null);
 }
 
 function onMapClick(e) {
-        readTextFile('https://pronosticos.atmosfera.unam.mx/AGMseries/temperatura/README.md');
+        //readTextFile('https://pronosticos.atmosfera.unam.mx/AGMseries/temperatura/README.md');
         lat= e.latlng['lat'];
         lon= e.latlng['lng'];
         if (active_layer==''){
@@ -122,6 +131,11 @@ function onMapClick(e) {
                 format='image/png');
         req_down= get_request(urlbase, rtype, active_layer, time, lon, lat,
                 format='text/csv');
+	url_test="https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/wms?REQUEST=GetTimeseries&LAYERS=atlas_maxs_abs_diarios/T2&QUERY_LAYERS=atlas_maxs_abs_diarios/T2&TIME=2018-01-01T00:00:00.000Z/2018-12-31T00:00:00.000Z&I=554&J=269&BBOX=-99.56926749939244,16.4910888671875,-78.51112343078334,32.44792175292969&CRS=CRS:84&HEIGHT=600&WIDTH=750&STYLES=default/default&VERSION=1.3.0&INFO_FORMAT=text/csv";
+	//url_test="https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/wms?SERVICE=WMS&REQUEST=GetMap&LAYERS=atlas_diario/T2&STYLES=default-scalar/tempatlas&FORMAT=image/png&TRANSPARENT=true&VERSION=1.3.0&TIME=2018-01-01T00:00:00.000Z&COLORSCALERANGE=-15.5,49.5&BELOWMINCOLOR=extend&ABOVEMAXCOLOR=extend&NUMCOLORBANDS=65&WIDHT=256&HEIGHT=256&WIDTH=256&CRS=EPSG:3857&BBOX=-11271098.44281895,3757032.8142729844,-10644926.307106787,4383204.949985149";
+
+	console.log(url_test);
+	readTextFile(url_test);
         if (lat>lat_min && lat<lat_max && lon>lon_min && lon<lon_max){
                 popup
                         .setLatLng(e.latlng)
