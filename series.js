@@ -18,12 +18,20 @@ var plantilla_temp={
         belowmincolor:"extend",
         abovemaxcolor:"extend",
         numcolorbands:65,
-        attribution:'IOA',
+        //attribution:'IOA',
         uppercase:true,
         widht:256,
         height:256,
 };
 
+const name_layers=["atlas_mensuales/T2",
+        "atlas_diario/T2",
+        "atlas_maxs_abs_mensuales/T2",
+        "atlas_maxs_abs_diarios/T2",
+        "atlas_promedios_maxs_abs_mensuales/T2",
+        "atlas_promedios_mins_mensuales/T2",
+        "atlas_mins_abs_mensuales/T2",
+];
 var t_mensual= {'layers':'atlas_mensuales/T2'};
 var t_horaria= {'layers':'atlas_diario/T2'};
 var t_max_prom= {'layers':'atlas_maxs_abs_mensuales/T2'};
@@ -39,6 +47,16 @@ Object.assign(t_max_abs,plantilla_temp);
 Object.assign(t_max_abs_m,plantilla_temp);
 Object.assign(t_min_prom,plantilla_temp);
 Object.assign(t_min_abs,plantilla_temp);
+var info_layers={ t_mensual,
+    t_horaria,
+    t_max_prom,
+    t_max_abs,
+    t_max_abs_m,
+    t_min_prom,
+    t_min_abs,
+    };
+console.log(typeof info_layers);
+console.log(info_layers, Object.keys(info_layers));
 var layerT_mensual=L.tileLayer.wms(urlbase+'wms', t_mensual);
 var layerT_hr=L.tileLayer.wms(urlbase+'wms', t_horaria);
 var layerT_max_prom=L.tileLayer.wms(urlbase+'wms', t_max_prom);
@@ -66,87 +84,133 @@ var map = L.map('map', {
         center: bounds.getCenter(),
         //center:[19.3262492550136, -99.17620429776193],//coordenadas CU
         zoomSnap: 0.1,
-        zoom: 5.6,
+        zoom: 5.0,
         minZoom:5,
         maxZoom:20,
-        layers: [ back_layer, ],
+        layers: [ back_layer, layerT_mensual ],
         maxBounds: bounds,
         maxBoundsViscosity: 1,
         });
-L.control.layers(base_layers, ).addTo(map);
 //menu de capas leaflet
-//layer_control=L.control.layers(base_layers,)
-    //.addTo(map);
-
-//map.flyTo(bounds.getCenter(), 5.6);
+L.control.layers(base_layers, ).addTo(map);
+var active_layer= "atlas_mensuales/T2";
+const rtype= "GetTimeseries";
+const time="2018-01-01T00:00:00.000Z/2018-12-31T00:00:00.000Z";
 var popup = L.popup()
 
-const rtype= "GetTimeseries";
-var active_layer= "";
-const time="2018-01-01T00:00:00.000Z/2018-12-31T00:00:00.000Z";
-
-function readTextFile(file)
-{
-	/*
-	jQuery.getJSON(file,function (csvdata) {
-  console.log(csvdata.csvToArray());
-		console.log('yei!', csvdata);
-});
-    */
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function ()
-    {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
-                var allText = rawFile.responseText;
-                alert(allText);
-            }
+function plot(series, legend){
+    var chartDom = document.getElementById('main');
+    var myChart = echarts.init(chartDom);
+    var option = {
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            animation: false
         }
+    },
+    title:{
+            text:'Series de tiempo',
+            subtext:'Temperatura a 2m'
+    },
+    legend:{
+            type: 'scroll',
+            bottom: 10,
+            data: legend
+    },
+    xAxis: {
+        type: 'time',
+        boundaryGap: false,
+        //data: date
+    },
+    yAxis: {
+        type: 'value',
+        min: 'dataMin'
+        //min:10,
+        //max:35
+        //data: output
+    },
+    series: series
+    };
+
+    option && myChart.setOption(option);
+}
+//get and parse data
+var parse_data={};
+function get_data(url){
+    return new Promise((resolve, reject) =>{
+        Papa.parse(url, {
+            download: true,
+            header: true,
+            comments: '#',
+            dynamicTyping: true,
+            complete: function(results) {
+                //console.log(results);
+                resolve(results.data)
+            },
+            error (err){
+                reject(err)
+            }
+        })
+    })
+}
+async function get_csv(url_list){
+    var series=[];
+    var output = [];
+    var i=0;
+    for (const url of url_list){
+        output=[];
+        console.log('url:', i,  name_layers[i],url);
+        try{
+            var data=await get_data(url);
+            for (let row of data){
+                output.push([row["Time (UTC)"],
+                        row["Air temperature (C)"]]);
+            }
+            series.push({'name': name_layers[i],
+                'type': 'line',
+                'symbol':'circle',
+                'data': output,
+            });
+        } catch (err){
+            console.error('parse error', err)
+        }
+        i=i+1;
     }
-	rawFile.setRequestHeader("Content-Type", "text/plain");
-	//rawFile.setRequestHeader("Content-Type", "text/plain; charset='utf-8'");
-	//rawFile.withCredentials = true;
-    rawFile.send(null);
+    console.log('series:', series);
+    plot(series, name_layers);
 }
 
 function onMapClick(e) {
-        //readTextFile('https://pronosticos.atmosfera.unam.mx/AGMseries/temperatura/README.md');
-        lat= e.latlng['lat'];
-        lon= e.latlng['lng'];
-        if (active_layer==''){
-                popup
-                    .setLatLng(e.latlng)
-                    .setContent('Posición: (' + lat+','+ lon +')<br>'+
-                        "Seleccione una capa para ver su serie de tiempo")
-                    .openOn(map);
-                return 0;
-        }
-        var btn_series = L.DomUtil.create('button', );
-        btn_series.setAttribute('type','button');
-        btn_series.innerHTML="Serie de tiempo";
-        req_plot= get_request(urlbase, rtype, active_layer, time, lon, lat,
-                format='image/png');
-        req_down= get_request(urlbase, rtype, active_layer, time, lon, lat,
-                format='text/csv');
-	url_test="https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/wms?REQUEST=GetTimeseries&LAYERS=atlas_maxs_abs_diarios/T2&QUERY_LAYERS=atlas_maxs_abs_diarios/T2&TIME=2018-01-01T00:00:00.000Z/2018-12-31T00:00:00.000Z&I=554&J=269&BBOX=-99.56926749939244,16.4910888671875,-78.51112343078334,32.44792175292969&CRS=CRS:84&HEIGHT=600&WIDTH=750&STYLES=default/default&VERSION=1.3.0&INFO_FORMAT=text/csv";
-	//url_test="https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/wms?SERVICE=WMS&REQUEST=GetMap&LAYERS=atlas_diario/T2&STYLES=default-scalar/tempatlas&FORMAT=image/png&TRANSPARENT=true&VERSION=1.3.0&TIME=2018-01-01T00:00:00.000Z&COLORSCALERANGE=-15.5,49.5&BELOWMINCOLOR=extend&ABOVEMAXCOLOR=extend&NUMCOLORBANDS=65&WIDHT=256&HEIGHT=256&WIDTH=256&CRS=EPSG:3857&BBOX=-11271098.44281895,3757032.8142729844,-10644926.307106787,4383204.949985149";
+    lat= e.latlng['lat'];
+    lon= e.latlng['lng'];
+    var btn_series = L.DomUtil.create('button', );
+    btn_series.setAttribute('type','button');
+    btn_series.innerHTML="Serie de tiempo";
+    req_plot= get_request(urlbase, rtype, active_layer, time, lon, lat,
+        format='image/png');
+    req_down= get_request(urlbase, rtype, active_layer, time, lon, lat,
+        format='text/csv');
+    let req_list=[];
+    name_layers.forEach(function(layer){
+            req_list.push(get_request(urlbase, rtype, layer, time, lon, lat,
+                format='text/csv'));
+    });
+    console.log('list:', req_list);
 
-	console.log(url_test);
-	readTextFile(url_test);
-        if (lat>lat_min && lat<lat_max && lon>lon_min && lon<lon_max){
-                popup
-                        .setLatLng(e.latlng)
-                        .setContent('Posición: (' + lat+','+ lon +')<br>'+
-                                "Serie de tiempo: "+
-                                "<input type='button' value='Descargar'"+
-                                "onclick=location.href='"+req_down + "' />"+
-                                "<input type='button' value='Plot'"+
-                                "onclick=location.href='"+req_plot + "' />")
-                        .openOn(map);
-        }
+
+    get_csv(req_list);
+
+    if (lat>lat_min && lat<lat_max && lon>lon_min && lon<lon_max){
+        popup
+            .setLatLng(e.latlng)
+            .setContent('Posición: (' + lat+','+ lon +')<br>'+
+                    "Serie de tiempo: "+
+                    "<input type='button' value='Descargar'"+
+                    "onclick=location.href='"+req_down + "' />"+
+                    "<input type='button' value='Plot'"+
+                    "onclick=location.href='"+req_plot + "' />")
+            .openOn(map);
+    }
 }
 
 map.on('click', onMapClick);
