@@ -102,34 +102,47 @@ function plot(series, legend){
     var chartDom = document.getElementById('main');
     var myChart = echarts.init(chartDom);
     var option = {
-    tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-            animation: false
-        }
-    },
-    title:{
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                animation: false
+            }
+        },
+        title:{
             text:'Series de tiempo',
             subtext:'Temperatura a 2m'
-    },
-    legend:{
+        },
+        legend:{
             type: 'scroll',
             bottom: 10,
             data: legend
-    },
-    xAxis: {
-        type: 'time',
-        boundaryGap: false,
-        //data: date
-    },
-    yAxis: {
-        type: 'value',
-        min: 'dataMin'
-        //min:10,
-        //max:35
-        //data: output
-    },
-    series: series
+        },
+        xAxis: {
+            type: 'time',
+            boundaryGap: false,
+            //data: date
+        },
+        yAxis: {
+            type: 'value',
+            min: 'dataMin'
+            //min:10,
+            //max:35
+            //data: output
+        },
+        series: series,
+        toolbox: {
+            show: true,
+            feature:{
+                dataZoom:{
+                    show: true
+                },
+                dataView:{
+                    readOnly: false
+                },
+                restore:{},
+                saveAsImage:{}
+            }
+        }
     };
 
     option && myChart.setOption(option);
