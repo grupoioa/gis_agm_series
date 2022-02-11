@@ -16,9 +16,30 @@
 </head>
 <body>
 	<div class="contenedor">
-        <div id="map" style="width: 500px; height: 450px;"></div>
+        <div>
+            <div> Seleccione el punto para despliegue/descarga </div>
+            <div> <select name="sel_var">
+                <option value="Temperatura" selected > Temperatura </option>
+                <option value="Viento" > Viento  </option>
+                <option value="Precipitacion" > Precipitación </option>
+                </select>
+                <label><input type="checkbox" value="Promedio mensual" checked > Promedio mensual</label>
+                <label><input type="checkbox" value="Promedio horario" checked> Promedio horario</label>
+                <label><input type="checkbox" value="Maximo abs" checked> Máximo absoluto diario </label>
+                <label><input type="checkbox" value="Max abs mensual" checked> Máximo absolut mensual</label>
+                <label><input type="checkbox" value="Max prom" checked> Máximo promedio </label>
+                <label><input type="checkbox" value="Min abs " checked> Mínimo abs mensual</label>
+                <label><input type="checkbox" value="Min prom" checked> Mínimo prom mensual</label>
+            </div>
+            <div>
+                <button name="add"> Agregar punto</button>
+                <button name="plot"> Desplegar </button>
+                <button name="download"> Descargar CSV </button>
+            </div>
+            <div id="map" style="width: 500px; height: 450px;"></div>
+        </div>
         <!--echarts-->
-        <div id="main" style="width: 600px;height:600px;"></div>
+        <div id="main" style="width: 700px;height:600px;"></div>
 	</div>
 </body>
 </html>
