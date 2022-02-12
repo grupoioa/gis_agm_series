@@ -9,14 +9,16 @@
     <script defer src="lib/leaflet.js"></script>
     <link rel="stylesheet" href="css/series.css" />
     <script defer src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script defer src='lib/papaparse.js'></script>
+    <script defer src='lib/echarts.min.js'></script>
     <script defer src='lib/series_lib.js'></script>
     <script defer src='series.js'></script>
 </head>
 <body>
-        <div id="layercontrol" class='overlay'>
-                <div> <span> Tipo: </span><span><select id="menu_t" >  </select> </span></div>
-                <span> Variable: </span> <select id="menu_var" >   </select>
-        </div>
-        <div id="map" style="width: 700px; height: 600px;"></div>
+	<div class="contenedor">
+        <div id="map" style="width: 500px; height: 450px;"></div>
+        <!--echarts-->
+        <div id="main" style="width: 600px;height:600px;"></div>
+	</div>
 </body>
 </html>
