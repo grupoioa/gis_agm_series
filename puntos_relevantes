@@ -1,0 +1,278 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.5990146,
+          20.9653478,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Mérida",
+        "styleUrl": "#icon-1899-F9A825-labelson",
+        "styleHash": "-89eff5e",
+        "description": "descripción: <br>Lat: ",
+        "descripción": null,
+        "Lat": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -91.801041,
+          18.6416834,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Ciudad del Carmen",
+        "styleUrl": "#icon-1899-F9A825-labelson",
+        "styleHash": "-89eff5e",
+        "description": "descripción: <br>Lat: ",
+        "descripción": null,
+        "Lat": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -94.462479,
+          18.128226,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Coatzacoalcos",
+        "styleUrl": "#icon-1899-F9A825-labelson",
+        "styleHash": "-89eff5e",
+        "description": "descripción: <br>Lat: ",
+        "descripción": null,
+        "Lat": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.1345463,
+          19.1743885,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Veracruz",
+        "styleUrl": "#icon-1899-F9A825-labelson",
+        "styleHash": "-89eff5e",
+        "description": "descripción: <br>Lat: ",
+        "descripción": null,
+        "Lat": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -92.94391,
+          17.9833731,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Villahermosa",
+        "styleUrl": "#icon-1899-F9A825-labelson",
+        "styleHash": "-89eff5e",
+        "description": "descripción: <br>Lat: ",
+        "descripción": null,
+        "Lat": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.4665325,
+          20.5290082,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Poza Rica\n",
+        "styleUrl": "#icon-1899-F9A825-labelson",
+        "styleHash": "-89eff5e",
+        "description": "descripción: <br>Lat: ",
+        "descripción": null,
+        "Lat": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.8638104,
+          22.2399148,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Tampico",
+        "styleUrl": "#icon-1899-F9A825-labelson",
+        "styleHash": "-89eff5e",
+        "description": "descripción: <br>Lat: ",
+        "descripción": null,
+        "Lat": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.5101406,
+          25.8626142,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Heroica de Matamoros",
+        "styleUrl": "#icon-1899-F9A825-labelson",
+        "styleHash": "-89eff5e",
+        "description": "descripción: <br>Lat: ",
+        "descripción": null,
+        "Lat": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.5321201,
+          19.8371149,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Campeche",
+        "styleUrl": "#icon-1899-F9A825-labelson",
+        "styleHash": "-89eff5e",
+        "description": "descripción: <br>Lat: ",
+        "descripción": null,
+        "Lat": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -95.0162,
+          25.9709,
+          0
+        ]
+      },
+      "properties": {
+        "name": "gom_pemex_6points.1",
+        "styleUrl": "#icon-1899-0288D1-labelson",
+        "styleHash": "565d3cc2",
+        "description": "gom_pemex_6points        <br>- Latitude: 25.9709   <br>- Longitude: -95.0162   <br>- NAME: 1"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -95.2581,
+          25.3611,
+          0
+        ]
+      },
+      "properties": {
+        "name": "gom_pemex_6points.2",
+        "styleUrl": "#icon-1899-0288D1-labelson",
+        "styleHash": "565d3cc2",
+        "description": "gom_pemex_6points        <br>- Latitude: 25.3611   <br>- Longitude: -95.2581   <br>- NAME: 2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.5649,
+          24.7515,
+          0
+        ]
+      },
+      "properties": {
+        "name": "gom_pemex_6points.3",
+        "styleUrl": "#icon-1899-0288D1-labelson",
+        "styleHash": "565d3cc2",
+        "description": "gom_pemex_6points        <br>- Latitude: 24.7515   <br>- Longitude: -96.5649   <br>- NAME: 3"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.8252,
+          23.5122,
+          0
+        ]
+      },
+      "properties": {
+        "name": "gom_pemex_6points.4",
+        "styleUrl": "#icon-1899-0288D1-labelson",
+        "styleHash": "565d3cc2",
+        "description": "gom_pemex_6points        <br>- Latitude: 23.5122   <br>- Longitude: -96.8252   <br>- NAME: 4"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.7157,
+          20.9709,
+          0
+        ]
+      },
+      "properties": {
+        "name": "gom_pemex_6points.5",
+        "styleUrl": "#icon-1899-0288D1-labelson",
+        "styleHash": "565d3cc2",
+        "description": "gom_pemex_6points        <br>- Latitude: 20.9709   <br>- Longitude: -96.7157   <br>- NAME: 5"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -94.7673,
+          20.0405,
+          0
+        ]
+      },
+      "properties": {
+        "name": "gom_pemex_6points.6",
+        "styleUrl": "#icon-1899-0288D1-labelson",
+        "styleHash": "565d3cc2",
+        "description": "gom_pemex_6points        <br>- Latitude: 20.0405   <br>- Longitude: -94.7673   <br>- NAME: 6"
+      }
+    }
+  ]
+}
