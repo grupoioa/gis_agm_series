@@ -95,6 +95,22 @@ var map = L.map('map', {
 L.rectangle(bounds, {color: "#caf0f8", weight:1}).addTo(map);
 //menu de capas leaflet
 //L.control.layers(base_layers, ).addTo(map);
+L.geoJSON(pts_interes,{
+    pointToLayer: function( geoJsonPoint, latlng){
+        return L.marker(latlng,
+{
+    icon: new L.DivIcon({
+        className: 'my-div-icon',
+        html: '<img class="my-div-image" src="http://png-3.vector.me/files/images/4/0/402272/aiga_air_transportation_bg_thumb"/>'+
+              '<span class="my-div-span">RAF Banff Airfield</span>'
+    })
+}
+	);
+	}
+}).bindTooltip(function (layer){
+	return layer.feature.properties.name;
+}).addTo(map);
+
 var active_layer= "atlas_mensuales/T2";
 const rtype= "GetTimeseries";
 const time="2018-01-01T00:00:00.000Z/2018-12-31T00:00:00.000Z";
