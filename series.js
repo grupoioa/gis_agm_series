@@ -24,7 +24,8 @@ var plantilla_temp={
         height:256,
 };
 
-const name_layers=["atlas_mensuales/T2",
+let name_layers=[];
+const name_layersT=["atlas_mensuales/T2",
         "atlas_diario/T2",
         "atlas_maxs_abs_mensuales/T2",
         "atlas_maxs_abs_diarios/T2",
@@ -125,7 +126,7 @@ function plot(series, legend){
         },
         yAxis: {
             type: 'value',
-            min: 'dataMin'
+            //min: 'dataMin'
             //min:10,
             //max:35
             //data: output
@@ -146,7 +147,7 @@ function plot(series, legend){
         }
     };
 
-    option && myChart.setOption(option);
+    option && myChart.setOption(option, {notMerge: true});
 }
 //get and parse data
 var parse_data={};
@@ -154,7 +155,7 @@ function get_data(url){
     return new Promise((resolve, reject) =>{
         Papa.parse(url, {
             download: true,
-            header: true,
+            //header: true,
             comments: '#',
             dynamicTyping: true,
             complete: function(results) {
@@ -177,8 +178,8 @@ async function get_csv(url_list){
         try{
             var data=await get_data(url);
             for (let row of data){
-                output.push([row["Time (UTC)"],
-                        row["Air temperature (C)"]]);
+                output.push([row[0],
+                        row[1]]);
             }
             series.push({'name': name_layers[i],
                 'type': 'line',
@@ -202,22 +203,9 @@ function onMapClick(e) {
     var btn_series = L.DomUtil.create('button', );
     btn_series.setAttribute('type','button');
     btn_series.innerHTML="Serie de tiempo";
-    req_plot= get_request(urlbase, rtype, active_layer, time, lon, lat,
-        format='image/png');
-    req_down= get_request(urlbase, rtype, active_layer, time, lon, lat,
-        format='text/csv');
-    let req_list=[];
-    name_layers.forEach(function(layer){
-            req_list.push(get_request(urlbase, rtype, layer, time, lon, lat,
-                format='text/csv'));
-    });
-    console.log('list:', req_list);
-
-
-    get_csv(req_list);
 
     if (lat>lat_min && lat<lat_max && lon>lon_min && lon<lon_max){
-        str_in= "<button onclick=\"add_vars(vars, \'#div_puntos\', \'pt-\'+npoints+\': \'+lat+\',\'+lon)\" > "+
+        str_in= "<button onclick=\"add_vars(vars, \'#div_puntos\', \'punto-\'+npoints+\': \'+lat+\',\'+lon)\" > "+
                     "Agregar punto </button>";
         console.log(str_in);
         popup
@@ -322,6 +310,7 @@ function add_vars(vars, root, title='titulo'){
     for (const var_obj in vars){
         add_chkbox(vars[var_obj], var_obj, div_main, nid);
     }
+    npoints+=1;
 }
 //add_vars(vars, "#div_puntos");
 //add_chkbox(vars.Temperatura, 'Temperatura', "#div_puntos");
@@ -341,12 +330,20 @@ function plot_btn(){
         el_check.push($(this).attr('id'));
     });
     console.log('check:', el_check);
+    var req_list=[];
+    name_layers=[];
     el_check.forEach(function(idname){
-        info = idname.split('*');
+        var info = idname.split('*');
         var layer=info[2];
-        var lon=info[1].split[1];
-        var lat=info[1].split[0];
+        var lon=parseFloat(info[1].split(',')[1]);
+        var lat=parseFloat(info[1].split(',')[0]);
+        //for nvar in vars
+        //var name_key= Object.keys(vars).find(key => vars[key] == info[2]);
+        var name_key=info[2].slice(6,-1);
+        name_layers.push(info[0]+'_'+name_key);
         req_list.push(get_request(urlbase, rtype, layer, time, lon, lat,
             format='text/csv'));
     });
+    console.log('req:', req_list);
+    get_csv(req_list);
 }
