@@ -87,12 +87,13 @@ var map = L.map('map', {
         zoom: 5.0,
         minZoom:5,
         maxZoom:20,
-        layers: [ back_layer, layerT_mensual ],
+        layers: [ back_layer, ],
         maxBounds: bounds,
         maxBoundsViscosity: 1,
         });
+L.rectangle(bounds, {color: "#caf0f8", weight:1}).addTo(map);
 //menu de capas leaflet
-L.control.layers(base_layers, ).addTo(map);
+//L.control.layers(base_layers, ).addTo(map);
 var active_layer= "atlas_mensuales/T2";
 const rtype= "GetTimeseries";
 const time="2018-01-01T00:00:00.000Z/2018-12-31T00:00:00.000Z";
@@ -193,6 +194,8 @@ async function get_csv(url_list){
     plot(series, name_layers);
 }
 
+let points=[];
+let npoints=0;
 function onMapClick(e) {
     lat= e.latlng['lat'];
     lon= e.latlng['lng'];
@@ -214,14 +217,12 @@ function onMapClick(e) {
     get_csv(req_list);
 
     if (lat>lat_min && lat<lat_max && lon>lon_min && lon<lon_max){
+        str_in= "<button onclick=\"add_vars(vars, \'#div_puntos\', \'pt-\'+npoints+\': \'+lat+\',\'+lon)\" > "+
+                    "Agregar punto </button>";
+        console.log(str_in);
         popup
             .setLatLng(e.latlng)
-            .setContent('Posición: (' + lat+','+ lon +')<br>'+
-                    "Serie de tiempo: "+
-                    "<input type='button' value='Descargar'"+
-                    "onclick=location.href='"+req_down + "' />"+
-                    "<input type='button' value='Plot'"+
-                    "onclick=location.href='"+req_plot + "' />")
+            .setContent('Posición<br>lat: ' + lat+'<br>lon: '+ lon +')<br>'+str_in)
             .openOn(map);
     }
 }
@@ -252,10 +253,100 @@ var var_list=[
         'Capa límite',
 ]
 
+        
+        
+        
+        
+var vars={'Temperatura':{
+        'Promedio Mensual':"atlas_mensuales/T2",
+        'Promedio Diario':"atlas_diario/T2",
+        'Máxima Absoluta Diaria':"atlas_maxs_abs_diarios/T2",
+        'Máxima Absoluta por Mes':"atlas_maxs_abs_mensuales/T2",
+        'Promedio de Máximos Absolutos Mensuales':"atlas_promedios_maxs_abs_mensuales/T2",
+        'Promedio Mensual de Mínimas':"atlas_promedios_mins_mensuales/T2",
+        'Minima Absoluta por Mes':"atlas_mins_abs_mensuales/T2"
+    },
+    'Viento':{
+        'Promedio Mensual':"atlas_mensuales/U10:V10-mag",
+        'Promedio Diario':"atlas_diario/U10:V10-mag",
+        'Máxima Absoluta Diaria':"atlas_maxs_abs_diarios/U10:V10-mag",
+        'Máxima Absoluta por Mes':"atlas_maxs_abs_mensuales/U10:V10-mag",
+        'Promedio de Máximos Absolutos Mensuales':"atlas_promedios_maxs_abs_mensuales/U10:V10-mag",
+    },
+    'Precipitación':{
+        'Promedio Mensual':"atlas_mensuales/PREC2",
+        'Promedio Diario':"atlas_diario/PREC2",
+        'Máxima Absoluta Diaria':"atlas_maxs_abs_diarios/PREC2",
+        'Máxima Absoluta por Mes':"atlas_maxs_abs_mensuales/PREC2",
+        'Promedio de Máximos Absolutos Mensuales':"atlas_promedios_maxs_abs_mensuales/PREC2",
+    }
+}
+
+console.log('vars:', Object.keys(vars));
+//var_list - lista con variables 
+//var_prop - objeto de variables
+//div - div para colocar
+function add_select(var_list, id, root){
+    let div = $('<div id= ' + id + ' > </div>').prependTo(root);
+    let sel=  $('<select name= "sel_var" > </select>').appendTo(div);
+
+    var_list.forEach(function(vname){
+        let option = $('<option value="' + vname + '">'+ vname + '</option>');
+        option.appendTo(sel);
+    })
+}
+
+function add_chkbox(var_prop, varname, root, id ){
+    let div = $('<div > <p>'+ varname+': </p></div>').appendTo(root);
+    let idfull=''
+    for (const var_obj in var_prop){
+        id_full=id+'*'+var_prop[var_obj];
+            console.log('id;', id_full);
+        let chkbox= $('<label><input type="checkbox" class="chk_var" id="'
+                +id_full+'" value="' + var_obj +
+                '" >'+ var_obj + ' </label> <br>');
+        chkbox.appendTo(div);
+    }
+}
+
+function add_vars(vars, root, title='titulo'){
+        console.log('titulo:', title);
+        var nid=title.replace(' ','');
+        nid=nid.replace(':','*');
+
+    let div_main = $('<div  > </div>').prependTo(root);
+    let div = $('<div>  <p>'+ title+': </p></div>').appendTo(div_main);
+    let btn = $('<p><button > Eliminar punto </button></p>');
+    btn.appendTo(div);
+    let div_vars = $('<div>  </div>').appendTo(div_main);
+    for (const var_obj in vars){
+        add_chkbox(vars[var_obj], var_obj, div_main, nid);
+    }
+}
+//add_vars(vars, "#div_puntos");
+//add_chkbox(vars.Temperatura, 'Temperatura', "#div_puntos");
+
 function add_layers_div(layers, div){
         layers.forEach(function(lname, indx, array){
                 let option = $('<option value="'+ lname +
                 '"> '+ lname + '</option> ');
         option.appendTo(div);
     })
+}
+
+function plot_btn(){
+
+    var el_check=[];
+    $("input:checkbox[class=chk_var]:checked").each(function(){
+        el_check.push($(this).attr('id'));
+    });
+    console.log('check:', el_check);
+    el_check.forEach(function(idname){
+        info = idname.split('*');
+        var layer=info[2];
+        var lon=info[1].split[1];
+        var lat=info[1].split[0];
+        req_list.push(get_request(urlbase, rtype, layer, time, lon, lat,
+            format='text/csv'));
+    });
 }
