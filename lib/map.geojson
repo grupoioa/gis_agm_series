@@ -1,0 +1,254 @@
+function onEachFeature(feature, layer) {
+    // does this feature have a property named popupContent?
+    if (feature.properties && feature.properties.popupContent) {
+        layer.bindPopup(feature.properties.popupContent);
+    }
+}
+
+var geojsonFeature = {
+    "type": "Feature",
+    "properties": {
+        "name": "Merida",
+        "amenity": "Localidad",
+        "popupContent": "Merida"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [-89.5990146,20.9653478]
+    }
+};
+
+L.geoJSON(geojsonFeature, {
+    onEachFeature: onEachFeature
+}).addTo(map);
+
+
+var geojsonFeature = {
+    "type": "Feature",
+    "properties": {
+        "name": "Ciudad del Carmen",
+        "amenity": "Localidad",
+        "popupContent": "Ciudad del Carmen"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [-91.801041,18.6416834]
+    }
+};
+
+L.geoJSON(geojsonFeature, {
+    onEachFeature: onEachFeature
+}).addTo(map);
+
+
+var geojsonFeature = {
+    "type": "Feature",
+    "properties": {
+        "name": "Coatzacoalcos",
+        "amenity": "Localidad",
+        "popupContent": "Coatzacoalcos"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [-94.462479,18.128226]
+    }
+};
+
+L.geoJSON(geojsonFeature, {
+    onEachFeature: onEachFeature
+}).addTo(map);
+
+
+var geojsonFeature = {
+    "type": "Feature",
+    "properties": {
+        "name": "Veracruz",
+        "amenity": "Localidad",
+        "popupContent": "Veracruz"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [-96.1345463,19.1743885]
+    }
+};
+
+L.geoJSON(geojsonFeature, {
+    onEachFeature: onEachFeature
+}).addTo(map);
+
+var geojsonFeature = {
+    "type": "Feature",
+    "properties": {
+        "name": "Villahermosa",
+        "amenity": "Localidad",
+        "popupContent": "Villahermosa"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [-92.94391,17.9833731]
+    }
+};
+
+L.geoJSON(geojsonFeature, {
+    onEachFeature: onEachFeature
+}).addTo(map);
+
+
+var geojsonFeature = {
+    "type": "Feature",
+    "properties": {
+        "name": "Poza Rica",
+        "amenity": "Localidad",
+        "popupContent": "Poza Rica"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [-97.4665325,20.5290082]
+    }
+};
+
+L.geoJSON(geojsonFeature, {
+    onEachFeature: onEachFeature
+}).addTo(map);
+
+var geojsonFeature = {
+    "type": "Feature",
+    "properties": {
+        "name": "Tampico",
+        "amenity": "Localidad",
+        "popupContent": "Tampico"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [-97.8638104,22.2399148]
+    }
+};
+
+L.geoJSON(geojsonFeature, {
+    onEachFeature: onEachFeature
+}).addTo(map);
+
+
+var geojsonFeature = {
+    "type": "Feature",
+    "properties": {
+        "name": "Matamoros		",
+        "amenity": "Localidad",
+        "popupContent": "Matamoros"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [-97.5101406,25.8626142]
+    }
+};
+
+
+L.geoJSON(geojsonFeature, {
+    onEachFeature: onEachFeature
+}).addTo(map);
+
+
+var geojsonFeature = {
+    "type": "Feature",
+    "properties": {
+        "name": "gom_pemex1",
+        "amenity": "Localidad",
+        "popupContent": "gom_pemex1"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [ -95.0162,25.9709]
+    }
+};
+
+
+L.geoJSON(geojsonFeature, {
+    onEachFeature: onEachFeature
+}).addTo(map);
+
+
+var geojsonFeature = {
+    "type": "Feature",
+    "properties": {
+        "name": "gom_pemex2",
+        "amenity": "Localidad",
+        "popupContent": "gom_pemex2"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [ -95.2581, 25.3611]
+    }
+};
+L.geoJSON(geojsonFeature, {
+    onEachFeature: onEachFeature
+}).addTo(map);
+
+
+var geojsonFeature = {
+    "type": "Feature",
+    "properties": {
+        "name": "gom_pemex3",
+        "amenity": "Localidad",
+        "popupContent": "gom_pemex3"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [ -96.5649,24.7515]
+    }
+};
+L.geoJSON(geojsonFeature, {
+    onEachFeature: onEachFeature
+}).addTo(map);
+
+
+var geojsonFeature = {
+    "type": "Feature",
+    "properties": {
+        "name": "gom_pemex4",
+        "amenity": "Localidad",
+        "popupContent": "gom_pemex4"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [-96.8252,23.5122]
+    }
+};
+L.geoJSON(geojsonFeature, {
+    onEachFeature: onEachFeature
+}).addTo(map);
+
+
+var geojsonFeature = {
+    "type": "Feature",
+    "properties": {
+        "name": "gom_pemex5",
+        "amenity": "Localidad",
+        "popupContent": "gom_pemex5"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [-96.7157, 20.9709]
+    }
+};
+L.geoJSON(geojsonFeature, {
+    onEachFeature: onEachFeature
+}).addTo(map);
+
+
+var geojsonFeature = {
+    "type": "Feature",
+    "properties": {
+        "name": "gom_pemex6",
+        "amenity": "Localidad",
+        "popupContent": "gom_pemex6"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [-94.7673, 20.040]
+    }
+};
+
+
+L.geoJSON(geojsonFeature, {
+    onEachFeature: onEachFeature
+}).addTo(map);
