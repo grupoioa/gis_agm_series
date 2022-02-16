@@ -1,5 +1,4 @@
 function onEachFeature(feature, layer) {
-    // does this feature have a property named popupContent?
     if (feature.properties && feature.properties.popupContent) {
         layer.bindPopup(feature.properties.popupContent);
     }
@@ -153,7 +152,7 @@ var geojsonFeature = {
     "properties": {
         "name": "gom_pemex1",
         "amenity": "Localidad",
-        "popupContent": "gom_pemex1"
+        "popupContent": "Tiaras-1"
     },
     "geometry": {
         "type": "Point",
@@ -172,7 +171,7 @@ var geojsonFeature = {
     "properties": {
         "name": "gom_pemex2",
         "amenity": "Localidad",
-        "popupContent": "gom_pemex2"
+        "popupContent": "Vasto-1001"
     },
     "geometry": {
         "type": "Point",
@@ -189,7 +188,7 @@ var geojsonFeature = {
     "properties": {
         "name": "gom_pemex3",
         "amenity": "Localidad",
-        "popupContent": "gom_pemex3"
+        "popupContent": "Vespa-1"
     },
     "geometry": {
         "type": "Point",
@@ -206,7 +205,7 @@ var geojsonFeature = {
     "properties": {
         "name": "gom_pemex4",
         "amenity": "Localidad",
-        "popupContent": "gom_pemex4"
+        "popupContent": "Caxa-1"
     },
     "geometry": {
         "type": "Point",
@@ -223,7 +222,7 @@ var geojsonFeature = {
     "properties": {
         "name": "gom_pemex5",
         "amenity": "Localidad",
-        "popupContent": "gom_pemex5"
+        "popupContent": "Puskon-1"
     },
     "geometry": {
         "type": "Point",
@@ -240,7 +239,7 @@ var geojsonFeature = {
     "properties": {
         "name": "gom_pemex6",
         "amenity": "Localidad",
-        "popupContent": "gom_pemex6"
+        "popupContent": "Nat-1DL"
     },
     "geometry": {
         "type": "Point",
