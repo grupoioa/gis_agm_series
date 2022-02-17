@@ -1,7 +1,7 @@
 # Documentación
 -*-*-*-*-*-*-*-*-*-*
 
-##**Funcionalidades actuales del sitio creado para la descarga de series de tiempo**
+## **Funcionalidades actuales del sitio creado para la descarga de series de tiempo**
 
 El acceso a la página tiene su panel en el sitio https://pronosticos.atmosfera.unam.mx/atlasmeteorologico.gom/
 
