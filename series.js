@@ -149,9 +149,10 @@ async function get_csv(url_list){
     console.log('series:', series);
     plot(series, name_layers);
 }
-
+//lista de puntos
 let points=[];
 let npoints=0;
+//definición de función al hacer click en el mapa
 function onMapClick(e) {
     lat= e.latlng['lat'];
     lon= e.latlng['lng'];
@@ -162,34 +163,15 @@ function onMapClick(e) {
     if (lat>lat_min && lat<lat_max && lon>lon_min && lon<lon_max){
         str_in= "<button onclick=\"add_vars(vars, \'#div_puntos\', \'punto-\'+npoints+\': \'+lat+\',\'+lon)\" > "+
                     "Agregar punto </button>";
-        console.log(str_in);
         popup
             .setLatLng(e.latlng)
             .setContent('Posición<br>lat: ' + lat+'<br>lon: '+ lon +')<br>'+str_in)
             .openOn(map);
     }
 }
-
 map.on('click', onMapClick);
-var tipo_list=[
-        'Mensual',
-        'Horaria Mensual',
-        'Promedio Mensual de máximas',
-        'Máxima Absoluta por Mes',
-        'Promedio Mensual de Mínimas',
-        'Minima Absoluta por Mes',
-]
-var var_list=[
-        'Temperatura',
-        'Humedad Relativa',
-        'Viento',
-        'Precipitación',
-        'Evaporación',
-        'Rad. Onda Larga',
-        'Rad. Onda Corta',
-        'Capa límite',
-]
 
+//objeto con definición de capas para cada variable
 var vars={'Temperatura':{
         'Promedio Mensual':"atlas_mensuales/T2",
         'Promedio Diario':"atlas_diario/T2",
@@ -218,17 +200,7 @@ var vars={'Temperatura':{
 console.log('vars:', Object.keys(vars));
 //var_list - lista con variables 
 //var_prop - objeto de variables
-//div - div para colocar
-function add_select(var_list, id, root){
-    let div = $('<div id= ' + id + ' > </div>').prependTo(root);
-    let sel=  $('<select name= "sel_var" > </select>').appendTo(div);
-
-    var_list.forEach(function(vname){
-        let option = $('<option value="' + vname + '">'+ vname + '</option>');
-        option.appendTo(sel);
-    })
-}
-
+//root - div para colocar
 function add_chkbox(var_prop, varname, root, id ){
     let div = $('<div > <p>'+ varname+': </p></div>').appendTo(root);
     let idfull=''
