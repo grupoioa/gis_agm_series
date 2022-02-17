@@ -47,7 +47,7 @@ al deplegar la gráfica, en este caso se han seleccionado todos los **Promedios 
 
 y se pueden descargar tales series de datos con el botón **Descargar CSV**.
 
-En caso de que no se deseen los datos en formato CSV, cada gráfica tiene la opción para mostrar los datos graficados en un menú mostrado en la esquina superior derecha,
+En caso de que no se deseen los datos en formato CSV, cada gráfica tiene la opción para mostrar los datos graficados en un menú ubicado en la esquina superior derecha,
 
 ![image](https://user-images.githubusercontent.com/12994884/154340891-2f818b49-aaca-49fd-909d-e0ab41fb3784.png)
 
