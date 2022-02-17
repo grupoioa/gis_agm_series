@@ -7,80 +7,16 @@ var back_layer= L.tileLayer(mbUrl, {id: 'back', attribution: mbAttr});
 //const url_owgis="http://pronosticos.unam.mx:8080/ncWMS_2015/wms"
 const urlbase="https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/";
 const urlbase2="http://132.248.8.238:8080/ncWMS_2015/";
-var plantilla_temp={
-        version:"1.3.0",
-        time: '2018-01-01T00:00:00.000Z',
-        format:'image/png',
-        transparent:true,
-        opacity:0.5,
-        styles:"default-scalar/tempatlas",
-        colorscalerange:"-15.5,49.5",
-        belowmincolor:"extend",
-        abovemaxcolor:"extend",
-        numcolorbands:65,
-        //attribution:'IOA',
-        uppercase:true,
-        widht:256,
-        height:256,
-};
-
 let name_layers=[];
-const name_layersT=["atlas_mensuales/T2",
-        "atlas_diario/T2",
-        "atlas_maxs_abs_mensuales/T2",
-        "atlas_maxs_abs_diarios/T2",
-        "atlas_promedios_maxs_abs_mensuales/T2",
-        "atlas_promedios_mins_mensuales/T2",
-        "atlas_mins_abs_mensuales/T2",
-];
-var t_mensual= {'layers':'atlas_mensuales/T2'};
-var t_horaria= {'layers':'atlas_diario/T2'};
-var t_max_prom= {'layers':'atlas_maxs_abs_mensuales/T2'};
-var t_max_abs= {'layers':'atlas_maxs_abs_diarios/T2'};
-var t_max_abs_m= {'layers':'atlas_promedios_maxs_abs_mensuales/T2'};
-var t_min_prom= {'layers':'atlas_promedios_mins_mensuales/T2'};
-var t_min_abs= {'layers':'atlas_mins_abs_mensuales/T2'};
-
-Object.assign(t_mensual,plantilla_temp);
-Object.assign(t_horaria,plantilla_temp);
-Object.assign(t_max_prom,plantilla_temp);
-Object.assign(t_max_abs,plantilla_temp);
-Object.assign(t_max_abs_m,plantilla_temp);
-Object.assign(t_min_prom,plantilla_temp);
-Object.assign(t_min_abs,plantilla_temp);
-var info_layers={ t_mensual,
-    t_horaria,
-    t_max_prom,
-    t_max_abs,
-    t_max_abs_m,
-    t_min_prom,
-    t_min_abs,
-    };
-console.log(typeof info_layers);
-console.log(info_layers, Object.keys(info_layers));
-var layerT_mensual=L.tileLayer.wms(urlbase+'wms', t_mensual);
-var layerT_hr=L.tileLayer.wms(urlbase+'wms', t_horaria);
-var layerT_max_prom=L.tileLayer.wms(urlbase+'wms', t_max_prom);
-var layerT_max_abs=L.tileLayer.wms(urlbase+'wms', t_max_abs);
-var layerT_max_abs_m=L.tileLayer.wms(urlbase+'wms', t_max_abs_m);
-var layerT_min_prom=L.tileLayer.wms(urlbase+'wms', t_min_prom);
-var layerT_min_abs=L.tileLayer.wms(urlbase+'wms', t_min_abs);
-var base_layers={
-        "Temperatura mensual": layerT_mensual,
-        "Temperatura horaria": layerT_hr,
-        "Temperatura max abs diaria": layerT_max_abs,
-        "Temperatura max abs mensual": layerT_max_abs_m,
-        "Temperatura max promedio": layerT_max_prom,
-        "Temperatura min abs": layerT_min_abs,
-        "Temperatura min promedio": layerT_min_prom,
-    };
 
 //bbox='-99.56926749939244,16.4910888671875,-78.51112343078334,32.44792175292969',
+//define límites
 var lon_max=-78.51112343;
 var lon_min=-99.56926749;
 var lat_min= 16.49108867;
 var lat_max= 32.44792175;
 bounds = new L.LatLngBounds(new L.LatLng(16.491, -78.511), new L.LatLng(32.448, -99.569));
+//crea mapa de leaflet
 var map = L.map('map', {
         center: bounds.getCenter(),
         //center:[19.3262492550136, -99.17620429776193],//coordenadas CU
@@ -92,9 +28,9 @@ var map = L.map('map', {
         maxBounds: bounds,
         maxBoundsViscosity: 1,
         });
+//crea y dibuja área de trabajo
 L.rectangle(bounds, {color: "#caf0f8", weight:1}).addTo(map);
-//menu de capas leaflet
-//L.control.layers(base_layers, ).addTo(map);
+//crea etiquetas de puntos de interés
 L.geoJSON(pts_interes,{
     pointToLayer: function( geoJsonPoint, latlng){
         return L.marker(latlng,
@@ -111,11 +47,14 @@ L.geoJSON(pts_interes,{
 	return layer.feature.properties.name;
 }).addTo(map);
 
-var active_layer= "atlas_mensuales/T2";
+//define parámetros fijos para solicitud
 const rtype= "GetTimeseries";
 const time="2018-01-01T00:00:00.000Z/2018-12-31T00:00:00.000Z";
+
+//crea objeto popup
 var popup = L.popup()
 
+//realiza gráfica
 function plot(series, legend){
     var chartDom = document.getElementById('main');
     var myChart = echarts.init(chartDom);
@@ -232,12 +171,6 @@ function onMapClick(e) {
 }
 
 map.on('click', onMapClick);
-function layer_sel(e){
-        active_layer=e.layer['options']['layers'];
-        console.log('layer:',e.name,active_layer);
-}
-map.on('baselayerchange', layer_sel);
-var mykeys=Object.keys(base_layers);
 var tipo_list=[
         'Mensual',
         'Horaria Mensual',
@@ -257,10 +190,6 @@ var var_list=[
         'Capa límite',
 ]
 
-        
-        
-        
-        
 var vars={'Temperatura':{
         'Promedio Mensual':"atlas_mensuales/T2",
         'Promedio Diario':"atlas_diario/T2",
