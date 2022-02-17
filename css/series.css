@@ -35,7 +35,9 @@
 
 .menu_btn:hover{font-size:14px;}
 
-.my-div-image{
-  height: 10px;
-  width: 10px;
+.my-div-img{
+    position:absolute;
+    bottom: 50%;
+    right: 0%;
+    height: 15px;
  }

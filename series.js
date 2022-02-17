@@ -37,11 +37,13 @@ L.geoJSON(pts_interes,{
 {
     icon: new L.DivIcon({
         className: 'my-div-icon',
-        html: '<img class="my-div-image" src="http://png-3.vector.me/files/images/4/0/402272/aiga_air_transportation_bg_thumb"/>'+
-              '<span class="my-div-span">RAF Banff Airfield</span>'
+        html: '<img src="img/bullseye-solid2.svg"/>'+
+              '<span class="my-div-span">'+
+            //geoJsonPoint.properties.name +
+            '</span>'
     })
 }
-	);
+	).on('click', onMapClick);
 	}
 }).bindTooltip(function (layer){
 	return layer.feature.properties.name;
@@ -67,7 +69,7 @@ function plot(series, legend){
         },
         title:{
             text:'Series de tiempo',
-            subtext:'Temperatura a 2m'
+            //subtext:'Temperatura a 2m'
         },
         legend:{
             type: 'scroll',
@@ -150,7 +152,7 @@ async function get_csv(url_list){
     plot(series, name_layers);
 }
 //lista de puntos
-let points=[];
+let points={};
 let npoints=0;
 //definición de función al hacer click en el mapa
 function onMapClick(e) {
@@ -161,7 +163,7 @@ function onMapClick(e) {
     btn_series.innerHTML="Serie de tiempo";
 
     if (lat>lat_min && lat<lat_max && lon>lon_min && lon<lon_max){
-        str_in= "<button onclick=\"add_vars(vars, \'#div_puntos\', \'punto-\'+npoints+\': \'+lat+\',\'+lon)\" > "+
+        str_in= "<button onclick=\"add_vars(vars, \'#div_puntos\', lat, lon, \'punto-\'+npoints)\" > "+
                     "Agregar punto </button>";
         popup
             .setLatLng(e.latlng)
@@ -214,14 +216,31 @@ function add_chkbox(var_prop, varname, root, id ){
     }
 }
 
-function add_vars(vars, root, title='titulo'){
-        console.log('titulo:', title);
-        var nid=title.replace(' ','');
-        nid=nid.replace(':','*');
+function del_id(id){
+    document.getElementById(id).remove();
+    points[id.split('_')[1]].remove();
+}
 
-    let div_main = $('<div  > </div>').prependTo(root);
+//agrega punto
+function add_vars(vars, root, lat, lon, title='titulo'){
+    map.closePopup();
+    var nid=title+'*'+lat+','+lon;
+    points[title]=L.marker([lat,lon],
+        {
+            icon: new L.DivIcon({
+                className: 'my-div-icon',
+                html: '<img class="my-div-img" src="img/thumbtack-solid2.svg"/>'+
+                    '<span  >'+title.replace('-','_')+'</span>'
+            })
+        }
+  
+    )
+        .addTo(map);
+
+    let idmain='div_'+title;
+    let div_main = $('<div id='+idmain+'> </div>').prependTo(root);
     let div = $('<div>  <p>'+ title+': </p></div>').appendTo(div_main);
-    let btn = $('<p><button > Eliminar punto </button></p>');
+    let btn = $('<p><button onclick=\"del_id(\''+idmain+'\')\"> Eliminar punto </button></p>');
     btn.appendTo(div);
     let div_vars = $('<div>  </div>').appendTo(div_main);
     for (const var_obj in vars){
@@ -229,8 +248,6 @@ function add_vars(vars, root, title='titulo'){
     }
     npoints+=1;
 }
-//add_vars(vars, "#div_puntos");
-//add_chkbox(vars.Temperatura, 'Temperatura', "#div_puntos");
 
 function add_layers_div(layers, div){
         layers.forEach(function(lname, indx, array){
