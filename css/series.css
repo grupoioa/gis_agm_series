@@ -41,3 +41,27 @@
     right: 0%;
     height: 15px;
  }
+
+ button{
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 12px;
+    background: #035369;
+    color: #fff;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline-block;
+  
+ }
+
+body{
+    background-color: #EFEFEF;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+.div_sel{
+  padding: 5px 10px 5px 10px;
+}

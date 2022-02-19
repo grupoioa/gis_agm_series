@@ -12,7 +12,7 @@
     <script defer src='lib/papaparse.js'></script>
     <script defer src='lib/echarts.min.js'></script>
     <script defer src='lib/series_lib.js'></script>
-    <script src="data/PuntosRelevantes.geojson" type="text/javascript"></script>
+    <script defer src='data/PuntosRelevantes.js'></script>
     <script defer src='series.js'></script>
 </head>
 <body>
@@ -23,11 +23,12 @@
         <div > <p> Selecciona variable y estadístico </p>
                 <div id="div_puntos" class='contenedor'> </div>
             <div id="div_button">
-                <button name="plot" onclick="plot_btn()"> Desplegar </button>
-                <button name="download"> Descargar CSV </button>
+                <button class="boton" name="plot" onclick="plot_btn()"> Desplegar </button>
+                <button class="boton" id="download_csv" onclick="gen_csv()"> Generar CSV </button>
             </div>
         </div>
         <!--echarts-->
         <div id="main" style="width: 700px;height:600px;"></div>
+    </div>
 </body>
 </html>

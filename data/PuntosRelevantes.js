@@ -4,7 +4,7 @@ var pts_interes={
     {
       "type": "Feature",
       "properties": {
-        "name": "M�rida"
+        "name": "Mérida"
       },
       "geometry": {
         "type": "Point",
