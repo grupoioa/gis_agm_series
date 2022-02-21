@@ -7,80 +7,16 @@ var back_layer= L.tileLayer(mbUrl, {id: 'back', attribution: mbAttr});
 //const url_owgis="http://pronosticos.unam.mx:8080/ncWMS_2015/wms"
 const urlbase="https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/";
 const urlbase2="http://132.248.8.238:8080/ncWMS_2015/";
-var plantilla_temp={
-        version:"1.3.0",
-        time: '2018-01-01T00:00:00.000Z',
-        format:'image/png',
-        transparent:true,
-        opacity:0.5,
-        styles:"default-scalar/tempatlas",
-        colorscalerange:"-15.5,49.5",
-        belowmincolor:"extend",
-        abovemaxcolor:"extend",
-        numcolorbands:65,
-        //attribution:'IOA',
-        uppercase:true,
-        widht:256,
-        height:256,
-};
-
 let name_layers=[];
-const name_layersT=["atlas_mensuales/T2",
-        "atlas_diario/T2",
-        "atlas_maxs_abs_mensuales/T2",
-        "atlas_maxs_abs_diarios/T2",
-        "atlas_promedios_maxs_abs_mensuales/T2",
-        "atlas_promedios_mins_mensuales/T2",
-        "atlas_mins_abs_mensuales/T2",
-];
-var t_mensual= {'layers':'atlas_mensuales/T2'};
-var t_horaria= {'layers':'atlas_diario/T2'};
-var t_max_prom= {'layers':'atlas_maxs_abs_mensuales/T2'};
-var t_max_abs= {'layers':'atlas_maxs_abs_diarios/T2'};
-var t_max_abs_m= {'layers':'atlas_promedios_maxs_abs_mensuales/T2'};
-var t_min_prom= {'layers':'atlas_promedios_mins_mensuales/T2'};
-var t_min_abs= {'layers':'atlas_mins_abs_mensuales/T2'};
-
-Object.assign(t_mensual,plantilla_temp);
-Object.assign(t_horaria,plantilla_temp);
-Object.assign(t_max_prom,plantilla_temp);
-Object.assign(t_max_abs,plantilla_temp);
-Object.assign(t_max_abs_m,plantilla_temp);
-Object.assign(t_min_prom,plantilla_temp);
-Object.assign(t_min_abs,plantilla_temp);
-var info_layers={ t_mensual,
-    t_horaria,
-    t_max_prom,
-    t_max_abs,
-    t_max_abs_m,
-    t_min_prom,
-    t_min_abs,
-    };
-console.log(typeof info_layers);
-console.log(info_layers, Object.keys(info_layers));
-var layerT_mensual=L.tileLayer.wms(urlbase+'wms', t_mensual);
-var layerT_hr=L.tileLayer.wms(urlbase+'wms', t_horaria);
-var layerT_max_prom=L.tileLayer.wms(urlbase+'wms', t_max_prom);
-var layerT_max_abs=L.tileLayer.wms(urlbase+'wms', t_max_abs);
-var layerT_max_abs_m=L.tileLayer.wms(urlbase+'wms', t_max_abs_m);
-var layerT_min_prom=L.tileLayer.wms(urlbase+'wms', t_min_prom);
-var layerT_min_abs=L.tileLayer.wms(urlbase+'wms', t_min_abs);
-var base_layers={
-        "Temperatura mensual": layerT_mensual,
-        "Temperatura horaria": layerT_hr,
-        "Temperatura max abs diaria": layerT_max_abs,
-        "Temperatura max abs mensual": layerT_max_abs_m,
-        "Temperatura max promedio": layerT_max_prom,
-        "Temperatura min abs": layerT_min_abs,
-        "Temperatura min promedio": layerT_min_prom,
-    };
 
 //bbox='-99.56926749939244,16.4910888671875,-78.51112343078334,32.44792175292969',
+//define límites
 var lon_max=-78.51112343;
 var lon_min=-99.56926749;
 var lat_min= 16.49108867;
 var lat_max= 32.44792175;
 bounds = new L.LatLngBounds(new L.LatLng(16.491, -78.511), new L.LatLng(32.448, -99.569));
+//crea mapa de leaflet
 var map = L.map('map', {
         center: bounds.getCenter(),
         //center:[19.3262492550136, -99.17620429776193],//coordenadas CU
@@ -92,14 +28,35 @@ var map = L.map('map', {
         maxBounds: bounds,
         maxBoundsViscosity: 1,
         });
+//crea y dibuja área de trabajo
 L.rectangle(bounds, {color: "#caf0f8", weight:1}).addTo(map);
-//menu de capas leaflet
-//L.control.layers(base_layers, ).addTo(map);
-var active_layer= "atlas_mensuales/T2";
+//crea etiquetas de puntos de interés
+L.geoJSON(pts_interes,{
+    pointToLayer: function( geoJsonPoint, latlng){
+        return L.marker(latlng,
+{
+    icon: new L.DivIcon({
+        className: 'my-div-icon',
+        html: '<img src="img/bullseye-solid2.svg"/>'+
+              '<span class="my-div-span">'+
+            //geoJsonPoint.properties.name +
+            '</span>'
+    })
+}
+	).on('click', onMapClick);
+	}
+}).bindTooltip(function (layer){
+	return layer.feature.properties.name;
+}).addTo(map);
+
+//define parámetros fijos para solicitud
 const rtype= "GetTimeseries";
-const time="2018-01-01T00:00:00.000Z/2018-12-31T00:00:00.000Z";
+const time="2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z";
+
+//crea objeto popup
 var popup = L.popup()
 
+//realiza gráfica
 function plot(series, legend){
     var chartDom = document.getElementById('main');
     var myChart = echarts.init(chartDom);
@@ -111,12 +68,15 @@ function plot(series, legend){
             }
         },
         title:{
-            text:'Series de tiempo',
-            subtext:'Temperatura a 2m'
+            text:"Climatología 1979-2018",
+            subtext:'Series de tiempo',
         },
         legend:{
             type: 'scroll',
-            bottom: 10,
+            orient: 'horizontal',
+            top: 25,
+            left: 100,
+            right: 100,
             data: legend
         },
         xAxis: {
@@ -168,23 +128,26 @@ function get_data(url){
         })
     })
 }
+var series=[];
 async function get_csv(url_list){
-    var series=[];
-    var output = [];
-    var i=0;
+    let output = [];
+    let i=0;
+    let row_len=0;
+    series=[];
     for (const url of url_list){
         output=[];
-        console.log('url:', i,  name_layers[i],url);
         try{
-            var data=await get_data(url);
+            let data=await get_data(url);
             for (let row of data){
-                output.push([row[0],
-                        row[1]]);
+                output.push([row[0], row[1]]);
             }
+            output.pop();
+            output.shift();
             series.push({'name': name_layers[i],
                 'type': 'line',
                 'symbol':'circle',
                 'data': output,
+                'tooltip':{'valueFormatter':(value) => value.toFixed(1)}
             });
         } catch (err){
             console.error('parse error', err)
@@ -194,9 +157,10 @@ async function get_csv(url_list){
     console.log('series:', series);
     plot(series, name_layers);
 }
-
-let points=[];
+//lista de puntos
+let points={};
 let npoints=0;
+//definición de función al hacer click en el mapa
 function onMapClick(e) {
     lat= e.latlng['lat'];
     lon= e.latlng['lng'];
@@ -204,53 +168,26 @@ function onMapClick(e) {
     btn_series.setAttribute('type','button');
     btn_series.innerHTML="Serie de tiempo";
 
+        console.log('test',lat,lon);
     if (lat>lat_min && lat<lat_max && lon>lon_min && lon<lon_max){
-        str_in= "<button onclick=\"add_vars(vars, \'#div_puntos\', \'punto-\'+npoints+\': \'+lat+\',\'+lon)\" > "+
+        str_in= "<button onclick=\"add_vars(vars, \'#div_puntos\', lat, lon, \'punto-\'+npoints)\" > "+
                     "Agregar punto </button>";
-        console.log(str_in);
         popup
             .setLatLng(e.latlng)
-            .setContent('Posición<br>lat: ' + lat+'<br>lon: '+ lon +')<br>'+str_in)
+            .setContent('Posición<br>lat: ' + lat.toFixed(8)+'<br>lon: '+ lon.toFixed(8) +')<br>'+str_in)
             .openOn(map);
+        console.log('test',lat,lon);
     }
 }
-
 map.on('click', onMapClick);
-function layer_sel(e){
-        active_layer=e.layer['options']['layers'];
-        console.log('layer:',e.name,active_layer);
-}
-map.on('baselayerchange', layer_sel);
-var mykeys=Object.keys(base_layers);
-var tipo_list=[
-        'Mensual',
-        'Horaria Mensual',
-        'Promedio Mensual de máximas',
-        'Máxima Absoluta por Mes',
-        'Promedio Mensual de Mínimas',
-        'Minima Absoluta por Mes',
-]
-var var_list=[
-        'Temperatura',
-        'Humedad Relativa',
-        'Viento',
-        'Precipitación',
-        'Evaporación',
-        'Rad. Onda Larga',
-        'Rad. Onda Corta',
-        'Capa límite',
-]
 
-        
-        
-        
-        
+//objeto con definición de capas para cada variable
 var vars={'Temperatura':{
         'Promedio Mensual':"atlas_mensuales/T2",
-        'Promedio Diario':"atlas_diario/T2",
+        'Promedio Diaria':"atlas_diario/T2",
         'Máxima Absoluta Diaria':"atlas_maxs_abs_diarios/T2",
         'Máxima Absoluta por Mes':"atlas_maxs_abs_mensuales/T2",
-        'Promedio de Máximos Absolutos Mensuales':"atlas_promedios_maxs_abs_mensuales/T2",
+        'Promedio de Máx. Abs. Mensuales':"atlas_promedios_maxs_abs_mensuales/T2",
         'Promedio Mensual de Mínimas':"atlas_promedios_mins_mensuales/T2",
         'Minima Absoluta por Mes':"atlas_mins_abs_mensuales/T2"
     },
@@ -259,31 +196,41 @@ var vars={'Temperatura':{
         'Promedio Diario':"atlas_diario/U10:V10-mag",
         'Máxima Absoluta Diaria':"atlas_maxs_abs_diarios/U10:V10-mag",
         'Máxima Absoluta por Mes':"atlas_maxs_abs_mensuales/U10:V10-mag",
-        'Promedio de Máximos Absolutos Mensuales':"atlas_promedios_maxs_abs_mensuales/U10:V10-mag",
+        'Promedio de Máx. Abs. Mensuales':"atlas_promedios_maxs_abs_mensuales/U10:V10-mag",
     },
     'Precipitación':{
-        'Promedio Mensual':"atlas_mensuales/PREC2",
-        'Promedio Diario':"atlas_diario/PREC2",
+        'Promedio Acumulada Mensual':"atlas_mensuales/PREC2",
+        'Promedio Acumulada Diaria':"atlas_diario/PREC2",
         'Máxima Absoluta Diaria':"atlas_maxs_abs_diarios/PREC2",
         'Máxima Absoluta por Mes':"atlas_maxs_abs_mensuales/PREC2",
-        'Promedio de Máximos Absolutos Mensuales':"atlas_promedios_maxs_abs_mensuales/PREC2",
+        'Promedio de Máx. Abs. Mensuales':"atlas_promedios_maxs_abs_mensuales/PREC2",
     }
+}
+//etiquetas por capa
+var labels={
+        "atlas_mensuales/T2":"T2M",
+        "atlas_diario/T2":"T2D",
+        "atlas_maxs_abs_diarios/T2":"T2maxD",
+        "atlas_maxs_abs_mensuales/T2":"T2maxM",
+        "atlas_promedios_maxs_abs_mensuales/T2":"T2pmaxM",
+        "atlas_promedios_mins_mensuales/T2":"T2pminM",
+        "atlas_mins_abs_mensuales/T2":"T2minM",
+        "atlas_mensuales/U10:V10-mag":"WSM",
+        "atlas_diario/U10:V10-mag":"WSD",
+        "atlas_maxs_abs_diarios/U10:V10-mag":"WSmaxD",
+        "atlas_maxs_abs_mensuales/U10:V10-mag":"WSmaxM",
+        "atlas_promedios_maxs_abs_mensuales/U10:V10-mag":"WSpmaxM",
+        "atlas_mensuales/PREC2":"RNM",
+        "atlas_diario/PREC2":"RND",
+        "atlas_maxs_abs_diarios/PREC2": "RNmaxD",
+        "atlas_maxs_abs_mensuales/PREC2": "RNmaxM",
+        "atlas_promedios_maxs_abs_mensuales/PREC2": "RNpmaxM"
 }
 
 console.log('vars:', Object.keys(vars));
 //var_list - lista con variables 
 //var_prop - objeto de variables
-//div - div para colocar
-function add_select(var_list, id, root){
-    let div = $('<div id= ' + id + ' > </div>').prependTo(root);
-    let sel=  $('<select name= "sel_var" > </select>').appendTo(div);
-
-    var_list.forEach(function(vname){
-        let option = $('<option value="' + vname + '">'+ vname + '</option>');
-        option.appendTo(sel);
-    })
-}
-
+//root - div para colocar
 function add_chkbox(var_prop, varname, root, id ){
     let div = $('<div > <p>'+ varname+': </p></div>').appendTo(root);
     let idfull=''
@@ -297,14 +244,48 @@ function add_chkbox(var_prop, varname, root, id ){
     }
 }
 
-function add_vars(vars, root, title='titulo'){
-        console.log('titulo:', title);
-        var nid=title.replace(' ','');
-        nid=nid.replace(':','*');
+function del_id(id){
+    document.getElementById(id).remove();
+    points[id.split('_')[1]].remove();
+}
 
-    let div_main = $('<div  > </div>').prependTo(root);
-    let div = $('<div>  <p>'+ title+': </p></div>').appendTo(div_main);
-    let btn = $('<p><button > Eliminar punto </button></p>');
+function update_marker(e){
+        idpoint= e.path[0].id.split('_')[1];
+        new_lat=document.getElementById("inlat_"+idpoint).value;
+        new_lon=document.getElementById("inlon_"+idpoint).value;
+        if (new_lat> lat_min && new_lat<=lat_max && new_lon>lon_min && new_lon<lon_max){
+            points[idpoint].setLatLng([new_lat, new_lon]);
+        }
+}
+//agrega punto
+function add_vars(vars, root, lat, lon, title='titulo'){
+    map.closePopup();
+    var nid=title+'*'+lat+','+lon;
+    points[title]=L.marker([lat,lon],
+        {
+            icon: new L.DivIcon({
+                className: 'my-div-icon',
+                html: '<img class="my-div-img" src="img/thumbtack-solid2.svg"/>'+
+                    '<span  >'+title.replace('-','_')+'</span>'
+            })
+        }
+  
+    )
+        .addTo(map);
+
+    let idmain='div_'+title;
+    let div_main = $('<div id='+idmain+' class="div_sel" > </div>').prependTo(root);
+    let div = $('<div >   <p>'+ title+': </p></div>').appendTo(div_main);
+    let in_lat = $('<label for=inlat_'+title+'> Lat: </label>'+
+            '<input min=\"'+lat_min+'\" max= \"'+lat_max+'\" id=\"inlat_'+title+'\" type=\"number\" value=\"'+
+            lat+'\" step=0.001><br>').appendTo(div);
+    let in_lon = $('<label for=inlon_'+title+'> Lon: </label>'+
+            '<input min=\"'+lon_min+'\" max= \"'+lon_max+'\" id=\"inlon_'+title+'\" type=\"number\" value=\"'+
+            lon+'\" step=0.001>').appendTo(div);
+    document.getElementById("inlat_"+title).addEventListener('change', update_marker);
+    document.getElementById("inlon_"+title).addEventListener('change', update_marker);
+    //in_lon.addEventListener('change', update_marker);
+    let btn = $('<p><button onclick=\"del_id(\''+idmain+'\')\"> Eliminar punto </button></p>');
     btn.appendTo(div);
     let div_vars = $('<div>  </div>').appendTo(div_main);
     for (const var_obj in vars){
@@ -312,8 +293,6 @@ function add_vars(vars, root, title='titulo'){
     }
     npoints+=1;
 }
-//add_vars(vars, "#div_puntos");
-//add_chkbox(vars.Temperatura, 'Temperatura', "#div_puntos");
 
 function add_layers_div(layers, div){
         layers.forEach(function(lname, indx, array){
@@ -329,21 +308,76 @@ function plot_btn(){
     $("input:checkbox[class=chk_var]:checked").each(function(){
         el_check.push($(this).attr('id'));
     });
-    console.log('check:', el_check);
     var req_list=[];
     name_layers=[];
     el_check.forEach(function(idname){
         var info = idname.split('*');
         var layer=info[2];
-        var lon=parseFloat(info[1].split(',')[1]);
-        var lat=parseFloat(info[1].split(',')[0]);
-        //for nvar in vars
-        //var name_key= Object.keys(vars).find(key => vars[key] == info[2]);
-        var name_key=info[2].slice(6,-1);
+        var latlon=points[info[0]].getLatLng();
+        console.log('latlon:', latlon);
+        var lon= latlon['lng'];
+        var lat= latlon['lat'];
+        var name_key= labels[info[2]];//.slice(6,-1);
         name_layers.push(info[0]+'_'+name_key);
         req_list.push(get_request(urlbase, rtype, layer, time, lon, lat,
             format='text/csv'));
     });
-    console.log('req:', req_list);
     get_csv(req_list);
+}
+
+function gen_csv(){
+    let meses=[["Enero"], ["Febrero"], ["Marzo"], ["Abril"],
+        ["Mayo"], ["Junio"], ["Julio"], ["Agosto"],
+        ["Septiembre"], ["Octubre"], ["Noviembre"], ["Diciembre"]];
+    let csv_obj={
+        'mensuales':{
+            "fields": ['mes'] ,
+            "data" : meses},
+        'diarios':{
+            "fields": ['Dia juliano'],
+            "data" : []}
+    }
+        let dias=[];
+        dias.length=365;
+        for (let n=0; n<365;n++){
+            dias[n]=[n+1];
+        }
+    csv_obj.diarios.data= dias;
+    let ndia=1;
+    let nmens=1;
+
+    series.forEach(function(e_serie){
+        if (e_serie.data.length==12){
+            csv_obj.mensuales.fields.push(e_serie.name);
+            meses.forEach(function (mes, k){
+                csv_obj.mensuales.data[k][nmens]=e_serie.data[k][1];
+            });
+            nmens+=1;
+        }
+        else if (e_serie.data.length==365){
+            csv_obj.diarios.fields.push(e_serie.name);
+            dias.forEach(function( dia, k){
+                csv_obj.diarios.data[k][ndia]= e_serie.data[k][1];
+            });
+            ndia+=1;
+        }
+    });
+    let header='';
+    for (escala in csv_obj){
+        if (csv_obj[escala].data[0].length>1){
+            header="# Grupo Interacción Océano-Atmósfera\n";
+            header+="# Atlas Meteorológico del Golfo de México\n";
+            header+= "# Series de tiempo correspondientes a datos "+ escala + "\n";
+            var csv= Papa.unparse(csv_obj[escala]);
+            let link = document.createElement('a');
+            link.download = "AMGM_series_"+escala+".csv";
+            let blob = new Blob([header+csv], {type:'text/plain'});
+            //var link= document.getElementById('download_csv');
+            //link.href = csv_file;
+            link.href = URL.createObjectURL(blob);
+            link.click();
+            URL.revokeObjectURL(link.href);
+        }
+    }
+
 }
