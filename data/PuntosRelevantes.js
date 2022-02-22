@@ -121,7 +121,7 @@ var pts_interes={
     {
       "type": "Feature",
       "properties": {
-        "name": "gom_pemex"
+        "name": "Tiaras-1"
       },
       "geometry": {
         "type": "Point",
@@ -134,7 +134,7 @@ var pts_interes={
     {
       "type": "Feature",
       "properties": {
-        "name": "gom_pemex"
+        "name": "Vasto-1001"
       },
       "geometry": {
         "type": "Point",
@@ -147,7 +147,7 @@ var pts_interes={
     {
       "type": "Feature",
       "properties": {
-        "name": "gom_pemex"
+        "name": "Vespa-1"
       },
       "geometry": {
         "type": "Point",
@@ -160,7 +160,7 @@ var pts_interes={
     {
       "type": "Feature",
       "properties": {
-        "name": "gom_pemex"
+        "name": "Caxa-1"
       },
       "geometry": {
         "type": "Point",
@@ -173,7 +173,7 @@ var pts_interes={
     {
       "type": "Feature",
       "properties": {
-        "name": "gom_pemex"
+        "name": "Puskon-1"
       },
       "geometry": {
         "type": "Point",
@@ -186,7 +186,7 @@ var pts_interes={
     {
       "type": "Feature",
       "properties": {
-        "name": "gom_pemex"
+        "name": "Nat-1DL"
       },
       "geometry": {
         "type": "Point",
