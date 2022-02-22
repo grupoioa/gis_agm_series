@@ -1,5 +1,8 @@
-# Documentación
--*-*-*-*-*-*-*-*-*-*
+[# Documentación] :#
+# Manual de usuario del Sitio Web: Subproyecto 3.3 del Atlas Meteorológico del Golfo de México para plantear escenarios de derrames 
+
+## Introducción
+Este manual describe la funcionalidad, navegación y contenido del sitio web, para la descarga de series de datos que forman parte de la climatología del Atlas Meteorológico del Golfo de México para plantear escenarios de derrame. El usuario puede consultarlo para familiarizarse con el sitio, así como hallar información detallada de interés. El contenido del sitio web que se describe a continuación forma parte del subproyecto 3.3 (Modelación numérica regional de la atmósfera sobre el Golfo de México) de la Línea 3 de tal proyecto.
 
 ## **Funcionalidades actuales del sitio creado para la descarga de series de tiempo**
 
