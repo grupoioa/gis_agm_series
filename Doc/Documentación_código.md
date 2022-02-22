@@ -8,3 +8,16 @@
 ## Partes
 
 
+- css
+
+- data
+
+- img
+
+- lib
+
+README.md
+
+agm_series.html
+
+series.js
