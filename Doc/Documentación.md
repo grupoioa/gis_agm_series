@@ -40,6 +40,8 @@ De igual manera, al posicionarse en algún punto de la gráfica, automáticament
 
 ![imagen](https://user-images.githubusercontent.com/12994884/155215143-d26da59b-7002-41ce-8173-f58386fc6ab0.png)
 
+Se debe tener en cuenta que al modificar manualmente algún punto (la coordenada) se debe presionar el botón de **Desplegar** de nuevo para que la gráfica se actualice.
+
 5. La descarga de los datos que se seleccionaron en el punto 3 se realiza al presionar botón que aparece junto al despliegue de datos, ![imagen](https://user-images.githubusercontent.com/12994884/155215229-db36eecd-5c3c-42a9-9fa3-b2b1a165b547.png), la cuál se realiza en un formato CSV. El formato CSV es posible visulizarlo en un procesador de textos o editor de hojas de cálculo,
 
 ![imagen](https://user-images.githubusercontent.com/12994884/155216460-defdd673-e3f7-4e4b-9048-30caee5e3dfb.png)
@@ -53,7 +55,7 @@ al deplegar la gráfica, en este caso se han seleccionado todos los **Promedios 
 ![imagen](https://user-images.githubusercontent.com/12994884/155217938-0e827b8e-3d3d-466f-98d8-df43fa806e47.png)
 
 
-Las series de datos seleccionadas se pueden descargar con el botón **Descargar CSV**. Los nombres de los archivos descargados contarán con el prefijo: **AMGM_series_** seguido por la palabra *diarios* o *mensuales*.csv. Dependiendo de las características de la variable deseada, es donde se ubicará dentro de los archivos.
+Las series de datos seleccionadas se pueden descargar con el botón **Generar CSV**. Los nombres de los archivos descargados contarán con el prefijo: **AMGM_series_** seguido por la palabra *diarios* o *mensuales*.csv. Dependiendo de las características de la variable deseada, es donde se ubicará dentro de los archivos.
 
 ![imagen](https://user-images.githubusercontent.com/12994884/155218186-c5e96e44-4682-42fd-8f8b-cc8b6be73159.png)
 
