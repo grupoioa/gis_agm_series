@@ -249,8 +249,7 @@ function del_id(id){
     points[id.split('_')[1]].remove();
 }
 
-function update_marker(e){
-        idpoint= e.path[0].id.split('_')[1];
+function update_marker(idpoint){
         new_lat=document.getElementById("inlat_"+idpoint).value;
         new_lon=document.getElementById("inlon_"+idpoint).value;
         if (new_lat> lat_min && new_lat<=lat_max && new_lon>lon_min && new_lon<lon_max){
@@ -282,8 +281,8 @@ function add_vars(vars, root, lat, lon, title='titulo'){
     let in_lon = $('<label for=inlon_'+title+'> Lon: </label>'+
             '<input min=\"'+lon_min+'\" max= \"'+lon_max+'\" id=\"inlon_'+title+'\" type=\"number\" value=\"'+
             lon+'\" step=0.001>').appendTo(div);
-    document.getElementById("inlat_"+title).addEventListener('change', update_marker);
-    document.getElementById("inlon_"+title).addEventListener('change', update_marker);
+    document.getElementById("inlat_"+title).addEventListener('change', function(){update_marker(title)});
+    document.getElementById("inlon_"+title).addEventListener('change', function(){update_marker(title)});
     //in_lon.addEventListener('change', update_marker);
     let btn = $('<p><button onclick=\"del_id(\''+idmain+'\')\"> Eliminar punto </button></p>');
     btn.appendTo(div);
