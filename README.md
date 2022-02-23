@@ -16,3 +16,6 @@ El repositorio cuenta con los siguientes archivos y carpetas:
 
 
 ## Colaboradores [Estadísticas](https://www.github.com/ma-robles/gis_agm_series/graphs/contributors)
+
+- Mayra Cuellar Urbano
+- Miguel Ángel Robles Roldán  
