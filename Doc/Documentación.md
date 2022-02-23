@@ -1,4 +1,5 @@
 [# Documentación] :#
+
 # Manual de usuario del Sitio Web: Subproyecto 3.3 del Atlas Meteorológico del Golfo de México para plantear escenarios de derrames 
 
 ## Introducción
@@ -13,6 +14,7 @@ El acceso a la página tiene su panel en el sitio https://pronosticos.atmosfera.
 1. Al hacer click, cambia de ventana a una donde se puede observar el mapa base de Google Earth. Con un recuadro se indica toda el área de donde es posible descargar datos.
 
 ![imagen](https://user-images.githubusercontent.com/12994884/155207973-1d681936-f666-40d9-b79f-ce9f40bfb13d.png)
+
 Este mapa tiene la opción de acercar o alejar la imagen a través de un control ubicado en la esquina superior izquierda ![imagen](https://user-images.githubusercontent.com/12994884/155246977-b5b1ba9e-148e-4aa4-9fce-106120b57155.png).
 
 2. Para comenzar, se debe hacer click en cualquier lugar del mapa. Se ha habilitado la opción de escoger más de un punto para desplegar los parámetros deseados (por punto),
@@ -67,7 +69,7 @@ Al hacer click en **Data View**, se despliegan los datos con un formato plano qu
 
 ![imagen](https://user-images.githubusercontent.com/12994884/155218752-a6f0ce14-7f65-4cf9-ba8f-debd38db1b55.png)
 
-7. Para descargar el gráfico, se da click en el menú ubicado en la esquina superior derecham junto a Data View, en *Save as* ![imagen](https://user-images.githubusercontent.com/12994884/155246480-eb92159b-ee0c-4d14-a956-f9ccc3f2779f.png). En esta opción se obtiene un archivo denominado automáticamente como '*Climatología 1979-2018*', en formato PNG.
+7. Para descargar el gráfico, se da click en el menú ubicado en la esquina superior derecha junto a Data View, en *Save as* ![imagen](https://user-images.githubusercontent.com/12994884/155246480-eb92159b-ee0c-4d14-a956-f9ccc3f2779f.png), con esta opción se obtiene un archivo denominado automáticamente '*Climatología 1979-2018*' y tiene formato de imagen PNG.
 
 
 
