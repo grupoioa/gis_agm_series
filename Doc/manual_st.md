@@ -45,13 +45,13 @@ y se presiona el botón ![boton desplegar](img/btn_desplegar.png) para que se mu
 
 De igual manera, al posicionarse en algún punto de la gráfica, automáticamente se pueden visualizar los datos relacionados a ese punto en específico,
 
-![leyenda y valores](leyenda.png)
+![leyenda y valores](img/leyenda.png)
 
 Se debe tener en cuenta que al modificar manualmente algún punto (la coordenada) se debe presionar el botón de **Desplegar** de nuevo para que la gráfica se actualice.
 
 5. La descarga de los datos que se seleccionaron en el punto 3 se realiza al presionar botón que aparece junto al despliegue de datos, ![Botón genera CSV](img/btn_genera.png),la cuál se realiza en un formato CSV. El formato CSV es posible visualizarlo en un procesador de textos o editor de hojas de cálculo,
 
-![Archivo CSV](img/archivoCSV)
+![Archivo CSV](img/archivoCSV.png)
 
 6. En el caso de elegir varios puntos, se colocan las marcas correspodientes sobre el mapa y los páneles con parámetros se verían así para *tres* puntos seleccionados,
 
