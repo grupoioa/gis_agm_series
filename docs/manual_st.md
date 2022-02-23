@@ -5,7 +5,7 @@ Este manual describe la funcionalidad, navegación y contenido del sitio web, pa
 
 ## **Funcionalidades actuales del sitio creado para la descarga de series de tiempo**
 
-El acceso a la página tiene su panel en el sitio https://pronosticos.atmosfera.unam.mx/atlasmeteorologico.gom/
+El acceso a la página tiene su panel en el sitio [https://pronosticos.atmosfera.unam.mx/atlasmeteorologico.gom/](https://pronosticos.atmosfera.unam.mx/atlasmeteorologico.gom/)
 
 ![main atlas](img/main_atlas.png)
 
