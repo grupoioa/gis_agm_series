@@ -10,7 +10,7 @@ Este manual describe la funcionalidad, navegación y contenido del sitio web, pa
 
 El acceso a la página tiene su panel en el sitio https://pronosticos.atmosfera.unam.mx/atlasmeteorologico.gom/
 
-![image](https://user-images.githubusercontent.com/12994884/154331341-15c19c89-1ba5-49d2-ab19-4e74beedd2c0.png)
+![image](img/main_atlas.png)
 
 1. Al hacer click, cambia de ventana a una donde se puede observar el mapa base de Google Earth. Con un recuadro se indica toda el área de donde es posible descargar datos.
 
