@@ -1,6 +1,3 @@
-[# Documentación] :#
-
-
 # Manual de usuario del Sitio Web: Subproyecto 3.3 del Atlas Meteorológico del Golfo de México para plantear escenarios de derrames 
 
 ## Introducción
