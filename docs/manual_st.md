@@ -25,7 +25,7 @@ Este mapa tiene la opción de acercar o alejar la imagen a través de un control
 
 ![info punto](img/punto.png)
   
-  En la parte superior de  este menú, se despliega un campo editable con la coordenada elegida ![coordenadas del punto](img/latlon1.png). la coordenada elegida no es la deseada, en el campo editable se pueden modificar los valores de latitud y longitud, ya sea directamente de manera manual o haciendo click en las flechas que indican hacia arriba o abajo,
+  En la parte superior de  este menú, se despliega un campo editable con la coordenada elegida ![coordenadas del punto](img/latlon1.png). Si la coordenada elegida no es la deseada, en el campo editable se pueden modificar los valores de latitud y longitud, ya sea directamente de manera manual o haciendo click en las flechas que indican hacia arriba o abajo,
   ![edición del punto](img/latlon2.png)
 
 En ese caso, se despliega un recuadro indicando la siguiente leyenda: *Introduce un valor válido. Los dos valores válidos más aproximados son: num y num*. Es posible tomar esos valores o unos que se ajusten más a las necesidades requeridas
@@ -46,7 +46,7 @@ De igual manera, al posicionarse en algún punto de la gráfica, automáticament
 
 Se debe tener en cuenta que al modificar manualmente algún punto (la coordenada) se debe presionar el botón de **Desplegar** de nuevo para que la gráfica se actualice.
 
-5. La descarga de los datos que se seleccionaron en el punto 3 se realiza al presionar botón que aparece junto al despliegue de datos, ![Botón genera CSV](img/btn_genera.png),la cuál se realiza en un formato CSV. El formato CSV es posible visualizarlo en un procesador de textos o editor de hojas de cálculo,
+5. La descarga de los datos que se seleccionaron en el punto 3 se realiza al presionar botón que aparece junto al despliegue de datos, ![Botón genera CSV](img/btn_genera.png),la cuál se realiza en un formato CSV. El formato CSV, *valores separados por comas* o '*comma separated values*' por sus siglas en inglés, es posible visualizarlo en un procesador de textos o editor de hojas de cálculo,
 
 ![Archivo CSV](img/archivoCSV.png)
 
@@ -58,7 +58,7 @@ Al deplegar la gráfica, en este caso se han seleccionado todos los **Promedios 
 
 ![Ejemplo graficación](img/ejemplo_plot.png)
 
-Las series de datos seleccionadas se pueden descargar con el botón **Generar CSV**. Los nombres de los archivos descargados contarán con el prefijo: **AMGM_series_** seguido por la palabra *diarios* o *mensuales*.csv. Dependiendo de las características de la variable deseada, es donde se ubicará dentro de los archivos.
+Las series de datos seleccionadas se pueden descargar con el botón **Generar CSV**. Los nombres de los archivos descargados contarán con el prefijo: *AMGM_series_*, seguido por la palabra *diarios* o *mensuales*.csv. Dependiendo de las características de la variable deseada, es donde se ubicarán los datos dentro de los archivos csv.
 
 ![Ejemplo CSV](img/ejemplo_CSV.png)
 
