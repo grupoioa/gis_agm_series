@@ -26,15 +26,20 @@ Señalar cuales son los elementos con los que se ha constuido el sitio web para 
 
 - lib
 
-
       Directorio de  implementación de todos los estadísticos de las series de datos, archivos para cargar módulos y archivos JavaScript (JS). Las leyendas corresponden a los nombres de las capas.
        
        - images : carpeta con imágenes de simbología utilizada en la página web
+       
        echarts.min.js : E-Charts es una biblioteca de visualización JavaScript de código abierto basada en web (fuente: https://echarts.apache.org/en/index.html)
+       
        leaflet.css : Hoja de estilo de Leaflet.
+       
        leaflet.js  : Leaflet es una biblioteca JavaScript de código abierto para mapas interactivos compatibles con dispositivos móviles. (fuente: https://leafletjs.com/SlavaUkraini/)
+       
        papaparse.js  : Analizador CSV integrado en el navegador para Java Script.
+       
        papaparse.min.js 
+       
        series_lib.js 
        
 - README.md
