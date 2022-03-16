@@ -1,38 +1,76 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang='es'>
 <head>
-	
 	<title>GoM Series de tiempo - Atlas Meteorológico</title>
+
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="lib/leaflet.css" />
     <script defer src="lib/leaflet.js"></script>
-    <link rel="stylesheet" href="css/series.css" />
+     <link rel="stylesheet" href="css/series.css" /> 
     <script defer src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script defer src='lib/papaparse.js'></script>
     <script defer src='lib/echarts.min.js'></script>
     <script defer src='lib/series_lib.js'></script>
     <script defer src='data/PuntosRelevantes.js'></script>
     <script defer src='series.js'></script>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="crossorigin=""/>
+  
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Favicon –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="https://pronosticos.atmosfera.unam.mx/CCAMain/favicon.ico">
+    <!-- estilos para el template  -->
+    <link href="css/jumbotron.css" rel="stylesheet">
+    <!-- IE10 viewport hack a  Surface/desktop Windows 8 bug -->
+    <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="crossorigin=""></script>
+
 </head>
 <body>
-	<h1>Página para descargar las series de tiempo del AMGM</h1>
-
-    <a href="docs/manual.html"> Manual de Usuario </a>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="contenedor">
+        <div class="navbar-header">
+          Series de tiempo del  AMGM 
+        </div>
+      </div>
+    </nav>
+     <br/>  
+     <br/><a href="docs/manual.html"> Manual de Usuario </a> 
 	<div class="contenedor">
-        <div> <p> Selecciona un punto: </p>
-            <div id="map" style="width: 500px; height: 450px;"> </div>
+        <div>
+	         
+		 <p> Selecciona un punto: </p>
+		 
+            <div id="map" style="width: 500px; height: 450px;"> </div> 
+          
         </div>
         <div > <p> Selecciona variable y estadístico </p>
-                <div id="div_puntos" class='contenedor'> </div>
+                <div id="div_puntos" class="contenedor"> </div>
             <div id="div_button">
-                <button class="boton" name="plot" onclick="plot_btn()"> Desplegar </button>
-                <button class="boton" id="download_csv" onclick="gen_csv()"> Generar CSV </button>
+                <button  class="btn btn-primary btns" name="plot" onclick="plot_btn()"> Desplegar </button>
+                <button  class="btn btn-primary btns" id="download_csv" onclick="gen_csv()"> Generar CSV </button>
             </div>
         </div>
         <!--echarts-->
         <div id="main" style="width: 700px;height:600px;"></div>
 
     </div>
+
+
+<!-- Bootstrap core JavaScript ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+    
+
+
 </body>
 </html>

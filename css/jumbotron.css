@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css?family=Heebo');
+
+/* Mueva el contenido hacia abajo porque tenemos una barra de navegación fija de 50 px de alto */
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+  font-family: 'Heebo', sans-serif;
+}
+
+nav.navbar.navbar-inverse.navbar-fixed-top {
+    background-image: url("https://pronosticos.atmosfera.unam.mx/rosasdevientos/images/encabezado.jpg");
+    border: none;
+}
+
+.navbar-header {
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 3rem;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+#mapid{
+	height: 45em;
+}
+/*Custom animacion buttons*/
+.material-icons {
+	font-size: 20px;
+}
+.btn{
+	padding: .2rem 0.2rem;
+}
+.btn-custom{
+	border-bottom:2px solid #ccc;
+ 	position:relative;
+}
+.btn-custom:hover {
+    top:1px;
+    border-bottom-width:1px;
+}
+.btn-custom:active {
+    top:2px;
+    border-bottom:0;
+}
+.btn_rev_pressed{
+    top:1px;
+    border-bottom-width:1px;
+    
+    color: #111;
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+}
+
+.btns{
+    background-color: #387C66;
+    border: none;
+    padding: 5px;
+}
+button#submit_btn{
+    background-color: #387C66;
+    border: none;
+    padding: 5px;
+}
+
+/* Customize container */
+.loader {
+    /*
+    border: 8px solid #f3f3f3; 
+    border-top: 8px solid #555;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+
+    margin-left: auto;
+    margin-right: auto;
+    */
+    background-image: url('../logo/loading.gif');
+    background-repeat: none;
+    background-position: center center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+.mycenter{
+	width:100%; 
+	display:block; 
+	text-align: center;
+}
+
+.nav_logo_min {
+    width: 50px;
+}
+
+div#vars, div#anim {
+    margin-top: 2em;
+}
+
+body > .container {
+    margin-top: 1.2em;
+}
+
+.card-body{
+    margin: 0 auto;
+    text-align: center;
+}
+
+.btn-custom{
+background-color: #dddddd;
+padding: .2rem 0.2rem;
+font-size: 14px;
+line-height: 1.6;
+color: #777;
+cursor: pointer;
+border: 1px solid transparent;
+/*sombra*/
+border-bottom:2px solid #ccc;
+text-align: center;
+vertical-align: middle;
+position:relative;
+border-radius: 0;
+}
+.btn-custom:hover {
+top:1px;
+border-bottom-width:1px;
+}
+.btn-custom:active {
+top:2px;
+border-bottom:0;
+}
+
+/* Mobile first queries */
+@media (max-width: 400px) {
+    #mapid{
+        height: 20em;
+    }
+
+    #escenarios_canvas{
+        width: 100%;
+    }
+
+    nav.navbar.navbar-inverse.navbar-fixed-top {
+        /*display: none;*/
+        min-height: 25px !important;
+        margin-bottom: 0px;
+    }
+
+    .navbar-header {
+        font-size: 1em !important;
+    }
+
+    body {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    ul.nav.nav-tabs {
+        display: none;
+    }
+
+    div#vars, div#anim {
+        margin-top: 0;
+    }
+
+    body > .container {
+        /*margin-top: 0;*/
+        margin-top: 25px;
+    }
+}
+
+/*
+#escenarios_canvas{
+    width: 100%;
+}
+*/
