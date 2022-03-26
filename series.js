@@ -57,10 +57,13 @@ const time="2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z";
 var popup = L.popup()
 
 //realiza gráfica
-function plot(series, legend){
     var chartDom = document.getElementById('main');
     var myChart = echarts.init(chartDom);
-    var option = {
+myChart.resize({
+    width: 'auto',
+    height: '600px'
+});
+myChart.setOption({
         tooltip: {
             trigger: 'axis',
             axisPointer: {
@@ -71,27 +74,14 @@ function plot(series, legend){
             text:"Climatología 1979-2018",
             subtext:'Series de tiempo',
         },
-        legend:{
-            type: 'scroll',
-            orient: 'horizontal',
-            top: 25,
-            left: 100,
-            right: 100,
-            data: legend
-        },
         xAxis: {
             type: 'time',
             boundaryGap: false,
-            //data: date
         },
         yAxis: {
             type: 'value',
-            //min: 'dataMin'
-            //min:10,
-            //max:35
-            //data: output
         },
-        series: series,
+        series: [],
         toolbox: {
             show: true,
             feature:{
@@ -105,9 +95,26 @@ function plot(series, legend){
                 saveAsImage:{}
             }
         }
+
+},{notMerge: true});
+
+window.onresize = function(){
+    myChart.resize();
+};
+function plot(series, legend){
+    var option = {
+        legend:{
+            type: 'scroll',
+            orient: 'horizontal',
+            top: 25,
+            left: 100,
+            right: 100,
+            data: legend
+        },
+        series: series,
     };
 
-    option && myChart.setOption(option, {notMerge: true});
+    myChart.setOption(option, );
 }
 //get and parse data
 var parse_data={};
@@ -167,8 +174,6 @@ function onMapClick(e) {
     var btn_series = L.DomUtil.create('button', );
     btn_series.setAttribute('type','button');
     btn_series.innerHTML="Serie de tiempo";
-
-        console.log('test',lat,lon);
     if (lat>lat_min && lat<lat_max && lon>lon_min && lon<lon_max){
         str_in= "<button onclick=\"add_vars(vars, \'#div_puntos\', lat, lon, \'punto-\'+npoints)\" > "+
                     "Agregar punto </button>";
@@ -232,14 +237,15 @@ console.log('vars:', Object.keys(vars));
 //var_prop - objeto de variables
 //root - div para colocar
 function add_chkbox(var_prop, varname, root, id ){
-    let div = $('<div > <p>'+ varname+': </p></div>').appendTo(root);
+    let div = $('<div > <ul>'+ varname+': </ul></div>').appendTo(root);
     let idfull=''
+
     for (const var_obj in var_prop){
         id_full=id+'*'+var_prop[var_obj];
             console.log('id;', id_full);
-        let chkbox= $('<label><input type="checkbox" class="chk_var" id="'
+        let chkbox= $('<li><label><input type="checkbox" class="chk_var" id="'
                 +id_full+'" value="' + var_obj +
-                '" >'+ var_obj + ' </label> <br>');
+                '" >'+ var_obj + ' </label> <br></li>');
         chkbox.appendTo(div);
     }
 }
@@ -322,6 +328,14 @@ function plot_btn(){
             format='text/csv'));
     });
     get_csv(req_list);
+    document.getElementById("overlay").style.display = "none";
+}
+function show_map(){
+    document.getElementById("overlay").style.display = "block";
+    map.setView(bounds.getCenter(), 5.0);
+}
+function hide_map(){
+    document.getElementById("overlay").style.display = "none";
 }
 
 function gen_csv(){

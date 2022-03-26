@@ -17,20 +17,25 @@
 </head>
 <body>
     <a href="docs/manual.html"> Manual de Usuario </a>
-	<div class="contenedor">
-        <div> <p> Selecciona un punto: </p>
+    <!--echarts-->
+    <div id="main" style="width: 100%; height: 600px;"></div>
+
+    <button class="boton" id="btn_add" onclick="show_map()">+</button>
+
+    <div id="overlay" class="contenedor" style="width: 100%; height: 800px;">
+        <div style="width: 550px; height: 500px;" >  
+            <p> Selecciona un ubicación: </p>
             <div id="map" style="width: 500px; height: 450px;"> </div>
         </div>
-        <div > <p> Selecciona variable y estadístico </p>
-                <div id="div_puntos" class='contenedor'> </div>
+        <div >
+            <p> Selecciona variable y estadístico </p>
+            <div id="div_puntos" class='contenedor' style="width: 500px; height:250px; overflow-y: scroll;"> </div>
             <div id="div_button">
                 <button class="boton" name="plot" onclick="plot_btn()"> Desplegar </button>
                 <button class="boton" id="download_csv" onclick="gen_csv()"> Generar CSV </button>
+                <button class="boton" id="hide_map" onclick="hide_map()"> Cerrar </button>
             </div>
         </div>
-        <!--echarts-->
-        <div id="main" style="width: 700px;height:600px;"></div>
-
     </div>
 </body>
 </html>
