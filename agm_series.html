@@ -17,16 +17,11 @@
 </head>
 <body>
     <a href="docs/manual.html"> Manual de Usuario </a>
-    <!--echarts-->
-    <div id="main" style="width: 100%; height: 600px;"></div>
-
-    <button class="boton" id="btn_add" onclick="show_map()">+</button>
-
-    <div id="overlay" class="contenedor" style="width: 100%; height: 800px;">
-        <div style="width: 550px; height: 500px;" >  
-            <p> Selecciona un ubicación: </p>
-            <div id="map" style="width: 500px; height: 450px;"> </div>
-        </div>
+    <div id="cmap" class="overlay" style="width: 550px; height: 500px;" >  
+        <p> Selecciona un ubicación: </p>
+        <div id="map" style="width: 450px; height: 400px;"> </div>
+    </div>
+    <div id="csel" class="overlay contenedor" style="width: 100%; height: 800px;">
         <div >
             <p> Selecciona variable y estadístico </p>
             <div id="div_puntos" class='contenedor' style="width: 500px; height:250px; overflow-y: scroll;"> </div>
@@ -37,5 +32,11 @@
             </div>
         </div>
     </div>
+    <!--echarts-->
+    <div id="cmain" class="plot">
+        <div id="main" class="plot"></div>
+        <button class="boton" id="btn_add" onclick="show_map()">+</button>
+    </div>
+
 </body>
 </html>

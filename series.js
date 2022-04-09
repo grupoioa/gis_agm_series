@@ -104,11 +104,13 @@ window.onresize = function(){
 function plot(series, legend){
     var option = {
         legend:{
-            type: 'scroll',
+            //type: 'scroll',
             orient: 'horizontal',
             top: 25,
-            left: 100,
-            right: 100,
+            //left: 100,
+            right: -10,
+            height: 500,
+            width: 200,
             data: legend
         },
         series: series,
@@ -331,11 +333,11 @@ function plot_btn(){
     document.getElementById("overlay").style.display = "none";
 }
 function show_map(){
-    document.getElementById("overlay").style.display = "block";
+    document.getElementById("cmap").style.display = "block";
     map.setView(bounds.getCenter(), 5.0);
 }
 function hide_map(){
-    document.getElementById("overlay").style.display = "none";
+    document.getElementById("cmap").style.display = "none";
 }
 
 function gen_csv(){
