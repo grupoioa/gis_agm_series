@@ -16,26 +16,38 @@
     <script defer src='series.js'></script>
 </head>
 <body>
-    <a href="docs/manual.html"> Manual de Usuario </a>
-    <div id="cmap" class="overlay" style="width: 550px; height: 500px;" >  
-        <p> Selecciona un ubicación: </p>
-        <div id="map" style="width: 450px; height: 400px;"> </div>
+    <div id="header" class="claro">
+        <h1> COATL </h1>
+        <h2> Sistema de Descarga y Visualización de Series de Tiempo </h2>
+        <a class="a_header" href="docs/manual.html"> Manual de Usuario </a>
     </div>
-    <div id="csel" class="overlay contenedor" style="width: 100%; height: 800px;">
+    <div id="body">
+    <div id="cmap" class="overlay" style="width: 400px; height: 500px;" >  
+        <H3> Selecciona una ubicación: </H3>
+        <div id="div_button_map">
+            <button class="boton" id="hide_map2" onclick="hide_map()"> Cerrar Mapa </button>
+        </div>
+        <div id="map" style="width: 350px; height: 400px;"> </div>
+    </div>
+    <div id="csel" class="overlay contenedor" style="width: 380px; height: 500px;">
         <div >
-            <p> Selecciona variable y estadístico </p>
-            <div id="div_puntos" class='contenedor' style="width: 500px; height:250px; overflow-y: scroll;"> </div>
+            <h3> Selecciona variable y estadístico </h3>
             <div id="div_button">
                 <button class="boton" name="plot" onclick="plot_btn()"> Desplegar </button>
                 <button class="boton" id="download_csv" onclick="gen_csv()"> Generar CSV </button>
-                <button class="boton" id="hide_map" onclick="hide_map()"> Cerrar </button>
+                <button class="boton" id="hide_map" onclick="hide_sel()"> Cerrar </button>
             </div>
+            <div id="div_puntos" class='contenedor' style="width: 350px; height:400px; overflow-y: scroll; overflow-x: scroll"> </div>
         </div>
     </div>
     <!--echarts-->
     <div id="cmain" class="plot">
         <div id="main" class="plot"></div>
-        <button class="boton" id="btn_add" onclick="show_map()">+</button>
+        <div id="div_button_main">
+            <button class="boton" id="btn_add" onclick="show_map()">+</button><p>
+            <button class="boton" id="btn_sel" onclick="show_sel()">~</button>
+        </div>
+    </div>
     </div>
 
 </body>

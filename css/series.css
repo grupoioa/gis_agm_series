@@ -10,14 +10,18 @@
 
 .overlay{
     position: fixed; /* Sit on top of the page content */
-    top: 30px;
+    top: 130px;
     left: 30px;
     background-color: rgba(255,255,255,0.8); /* Black background with opacity */
     color: black;/*white;*/
     display: none;
 }
 #cmap{
-    z-index: 999; /* Specify a stack order */
+    z-index: 0; 
+}
+#csel{
+    z-index: 0;
+    background-color: rgba(255,255,255,0.9); 
 }
 #layercontrol{
     width: 150px;
@@ -63,10 +67,10 @@
     display: inline-block;
   
  }
-#btn_add{
+#div_button_main{
     position: fixed;
-    top: 100px;
-    right: 20px;
+    top: 200px;
+    left: 20px;
 }
 
 body{
@@ -78,3 +82,18 @@ body{
 .div_sel{
   padding: 5px 10px 5px 10px;
 }
+.claro{
+    background-color:#227c70;
+}
+a:link, a:visited{
+    background-color: transparent;
+}
+.a_header{
+    color: white;
+    font-size: medium;
+}
+
+#header{
+    text-align: center;
+    color: #FFFFFF;
+    background-image: url("https://pronosticos.atmosfera.unam.mx/atlasmeteorologico.gom/img/encabezado.jpg");

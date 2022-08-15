@@ -18,8 +18,9 @@ var lat_max= 32.44792175;
 bounds = new L.LatLngBounds(new L.LatLng(16.491, -78.511), new L.LatLng(32.448, -99.569));
 //crea mapa de leaflet
 var map = L.map('map', {
-        center: bounds.getCenter(),
+        //center: bounds.getCenter(),
         //center:[19.3262492550136, -99.17620429776193],//coordenadas CU
+        center:[ 25.008, -92.153 ],
         zoomSnap: 0.1,
         zoom: 5.0,
         minZoom:5,
@@ -29,7 +30,7 @@ var map = L.map('map', {
         maxBoundsViscosity: 1,
         });
 //crea y dibuja área de trabajo
-L.rectangle(bounds, {color: "#caf0f8", weight:1}).addTo(map);
+//L.rectangle(bounds, {color: "#caf0f8", weight:1}).addTo(map);
 //crea etiquetas de puntos de interés
 L.geoJSON(pts_interes,{
     pointToLayer: function( geoJsonPoint, latlng){
@@ -63,6 +64,29 @@ myChart.resize({
     width: 'auto',
     height: '600px'
 });
+var jdays = [];
+for (let j=1; j<366; j++){
+    jdays.push(j);
+}
+var name_month =[
+    "Ene",
+    "Feb",
+    "Mar",
+    "Abr",
+    "May",
+    "Jun",
+    "Jul",
+    "Ago",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dic",
+];
+function get_1j(jday, m){
+    var days = [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335];
+    return days.includes(jday);
+}
+
 myChart.setOption({
         tooltip: {
             trigger: 'axis',
@@ -71,13 +95,29 @@ myChart.setOption({
             }
         },
         title:{
-            text:"Climatología 1979-2018",
+            text:"Climatología 1980-2016",
             subtext:'Series de tiempo',
         },
-        xAxis: {
-            type: 'time',
-            boundaryGap: false,
-        },
+        xAxis: [{
+            //eje juliano
+            type: 'category',
+            data: jdays,
+            axisLabel:{
+                interval: 14,
+                },
+            splitLine:{
+                show:true,
+                interval: get_1j,
+                },
+            },
+            //eje mes
+            {
+                type: 'category',
+                data: name_month,
+                axisTick: {show : false},
+
+            }
+        ],
         yAxis: {
             type: 'value',
         },
@@ -108,7 +148,7 @@ function plot(series, legend){
             orient: 'horizontal',
             top: 25,
             //left: 100,
-            right: -10,
+            right: 10,
             height: 500,
             width: 200,
             data: legend
@@ -148,16 +188,22 @@ async function get_csv(url_list){
         try{
             let data=await get_data(url);
             for (let row of data){
-                output.push([row[0], row[1]]);
+                //output.push([row[0], row[1]]);
+                output.push( row[1]);
             }
             output.pop();
             output.shift();
             series.push({'name': name_layers[i],
+                'xAxisIndex': 0,
                 'type': 'line',
                 'symbol':'circle',
                 'data': output,
                 'tooltip':{'valueFormatter':(value) => value.toFixed(1)}
             });
+            if (output.length == 12){
+                series[series.length-1].xAxisIndex = 1;
+
+            }
         } catch (err){
             console.error('parse error', err)
         }
@@ -191,7 +237,7 @@ map.on('click', onMapClick);
 //objeto con definición de capas para cada variable
 var vars={'Temperatura':{
         'Promedio Mensual':"atlas_mensuales/T2",
-        'Promedio Diaria':"atlas_diario/T2",
+        'Promedio Diario':"atlas_diario/T2",
         'Máxima Absoluta Diaria':"atlas_maxs_abs_diarios/T2",
         'Máxima Absoluta por Mes':"atlas_maxs_abs_mensuales/T2",
         'Promedio de Máx. Abs. Mensuales':"atlas_promedios_maxs_abs_mensuales/T2",
@@ -202,7 +248,7 @@ var vars={'Temperatura':{
         'Promedio Mensual':"atlas_mensuales/U10:V10-mag",
         'Promedio Diario':"atlas_diario/U10:V10-mag",
         'Máxima Absoluta Diaria':"atlas_maxs_abs_diarios/U10:V10-mag",
-        'Máxima Absoluta por Mes':"atlas_maxs_abs_mensuales/U10:V10-mag",
+        'Máxima Absoluta por Mes':"atlas_maxs_abs_mensuales/U10_MAX:V10_MAX-mag",
         'Promedio de Máx. Abs. Mensuales':"atlas_promedios_maxs_abs_mensuales/U10:V10-mag",
     },
     'Precipitación':{
@@ -330,14 +376,30 @@ function plot_btn(){
             format='text/csv'));
     });
     get_csv(req_list);
-    document.getElementById("overlay").style.display = "none";
+    //document.getElementById("overlay").style.display = "none";//???
 }
 function show_map(){
-    document.getElementById("cmap").style.display = "block";
-    map.setView(bounds.getCenter(), 5.0);
+    sel = document.getElementById("cmap");
+    sel.style.display = "block";
+    sel.style.zIndex = 1;
+    map.invalidateSize()
+    //map.setView(bounds.getCenter(), 5.0);
 }
 function hide_map(){
-    document.getElementById("cmap").style.display = "none";
+    sel = document.getElementById("cmap");
+    sel.style.display = "none";
+    sel.style.zIndex = 0;
+}
+
+function show_sel(){
+    sel = document.getElementById("csel");
+    sel.style.display = "block";
+    sel.style.zIndex=1;
+}
+function hide_sel(){
+    sel = document.getElementById("csel");
+    sel.style.display = "none";
+    sel.style.zIndex=0;
 }
 
 function gen_csv(){
