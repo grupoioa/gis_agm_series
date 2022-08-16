@@ -223,7 +223,7 @@ function onMapClick(e) {
     btn_series.setAttribute('type','button');
     btn_series.innerHTML="Serie de tiempo";
     if (lat>lat_min && lat<lat_max && lon>lon_min && lon<lon_max){
-        str_in= "<button onclick=\"add_vars(vars, \'#div_puntos\', lat, lon, \'punto-\'+npoints)\" > "+
+        str_in= "<button onclick=\"add_vars(vars, \'#div_tabs\', \'#div_puntos\', lat, lon, \'punto-\'+npoints)\" > "+
                     "Agregar punto </button>";
         popup
             .setLatLng(e.latlng)
@@ -235,49 +235,110 @@ function onMapClick(e) {
 map.on('click', onMapClick);
 
 //objeto con definición de capas para cada variable
-var vars={'Temperatura':{
-        'Promedio Mensual':"atlas_mensuales/T2",
-        'Promedio Diario':"atlas_diario/T2",
-        'Máxima Absoluta Diaria':"atlas_maxs_abs_diarios/T2",
-        'Máxima Absoluta por Mes':"atlas_maxs_abs_mensuales/T2",
-        'Promedio de Máx. Abs. Mensuales':"atlas_promedios_maxs_abs_mensuales/T2",
-        'Promedio Mensual de Mínimas':"atlas_promedios_mins_mensuales/T2",
-        'Minima Absoluta por Mes':"atlas_mins_abs_mensuales/T2"
+var vars={
+    'Temperatura':{
+        'Promedio Mensual':{
+            'value':"atlas_mensuales/T2",
+            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
+        },
+        'Promedio Diario':{
+            "value":"atlas_diario/T2",
+            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
+        },
+        'Máxima Absoluta Diaria':{
+            "value":"atlas_maxs_abs_diarios/T2",
+            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
+        },
+        'Máxima Absoluta por Mes':{
+            "value":"atlas_maxs_abs_mensuales/T2",
+            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
+        },
+        'Promedio de Máx. Abs. Mensuales':{
+            "value":"atlas_promedios_maxs_abs_mensuales/T2",
+            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
+        },
+        'Promedio Mensual de Mínimas':{
+            "value":"atlas_promedios_mins_mensuales/T2",
+            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
+        },
+        'Minima Absoluta por Mes':{
+            "value":"atlas_mins_abs_mensuales/T2",
+            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
+        },
+        'Máx. Abs. por mes (1980)':{
+            "value":"atlas_max_anuales/MAXT2",
+            'time':"1980-01-03T00:00:00.000Z/1980-01-14T23:00:00.000Z"
+        },
+        'Máx. Abs. por mes (1981)':{
+            "value":"atlas_max_anuales/MAXT2",
+            'time':"1980-01-14T00:00:00.000Z/1980-01-25T23:00:00.000Z"
+        },
     },
     'Viento':{
-        'Promedio Mensual':"atlas_mensuales/U10:V10-mag",
-        'Promedio Diario':"atlas_diario/U10:V10-mag",
-        'Máxima Absoluta Diaria':"atlas_maxs_abs_diarios/U10:V10-mag",
-        'Máxima Absoluta por Mes':"atlas_maxs_abs_mensuales/U10_MAX:V10_MAX-mag",
-        'Promedio de Máx. Abs. Mensuales':"atlas_promedios_maxs_abs_mensuales/U10:V10-mag",
+        'Promedio Mensual':{
+            "value":"atlas_mensuales/U10:V10-mag",
+            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
+        },
+        'Promedio Diario':{
+            "value":"atlas_diario/U10:V10-mag",
+            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
+        },
+        'Máxima Absoluta Diaria':{
+            "value":"atlas_maxs_abs_diarios/U10:V10-mag",
+            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
+        },
+        'Máxima Absoluta por Mes':{
+            "value":"atlas_maxs_abs_mensuales/U10_MAX:V10_MAX-mag",
+            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
+        },
+        'Promedio de Máx. Abs. Mensuales':{
+            "value":"atlas_promedios_maxs_abs_mensuales/U10:V10-mag",
+            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
+        },
     },
     'Precipitación':{
-        'Promedio Acumulada Mensual':"atlas_mensuales/PREC2",
-        'Promedio Acumulada Diaria':"atlas_diario/PREC2",
-        'Máxima Absoluta Diaria':"atlas_maxs_abs_diarios/PREC2",
-        'Máxima Absoluta por Mes':"atlas_maxs_abs_mensuales/PREC2",
-        'Promedio de Máx. Abs. Mensuales':"atlas_promedios_maxs_abs_mensuales/PREC2",
+        'Promedio Acumulada Mensual':{
+            "value":"atlas_mensuales/PREC2",
+            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
+        },
+        'Promedio Acumulada Diaria':{
+            "value":"atlas_diario/PREC2",
+            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
+        },
+        'Máxima Absoluta Diaria':{
+            "value":"atlas_maxs_abs_diarios/PREC2",
+            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
+        },
+        'Máxima Absoluta por Mes':{
+            "value":"atlas_maxs_abs_mensuales/PREC2",
+            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
+        },
+        'Promedio de Máx. Abs. Mensuales':{
+            "value":"atlas_promedios_maxs_abs_mensuales/PREC2",
+            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
+        },
     }
 }
 //etiquetas por capa
 var labels={
-        "atlas_mensuales/T2":"T2M",
-        "atlas_diario/T2":"T2D",
-        "atlas_maxs_abs_diarios/T2":"T2maxD",
-        "atlas_maxs_abs_mensuales/T2":"T2maxM",
-        "atlas_promedios_maxs_abs_mensuales/T2":"T2pmaxM",
-        "atlas_promedios_mins_mensuales/T2":"T2pminM",
-        "atlas_mins_abs_mensuales/T2":"T2minM",
-        "atlas_mensuales/U10:V10-mag":"WSM",
-        "atlas_diario/U10:V10-mag":"WSD",
-        "atlas_maxs_abs_diarios/U10:V10-mag":"WSmaxD",
-        "atlas_maxs_abs_mensuales/U10:V10-mag":"WSmaxM",
-        "atlas_promedios_maxs_abs_mensuales/U10:V10-mag":"WSpmaxM",
-        "atlas_mensuales/PREC2":"RNM",
-        "atlas_diario/PREC2":"RND",
-        "atlas_maxs_abs_diarios/PREC2": "RNmaxD",
-        "atlas_maxs_abs_mensuales/PREC2": "RNmaxM",
-        "atlas_promedios_maxs_abs_mensuales/PREC2": "RNpmaxM"
+    "atlas_mensuales/T2":"T2M",
+    "atlas_diario/T2":"T2D",
+    "atlas_maxs_abs_diarios/T2":"T2maxD",
+    "atlas_maxs_abs_mensuales/T2":"T2maxM",
+    "atlas_promedios_maxs_abs_mensuales/T2":"T2pmaxM",
+    "atlas_promedios_mins_mensuales/T2":"T2pminM",
+    "atlas_mins_abs_mensuales/T2":"T2minM",
+    "atlas_mensuales/U10:V10-mag":"WSM",
+    "atlas_diario/U10:V10-mag":"WSD",
+    "atlas_maxs_abs_diarios/U10:V10-mag":"WSmaxD",
+    "atlas_maxs_abs_mensuales/U10:V10-mag":"WSmaxM",
+    "atlas_promedios_maxs_abs_mensuales/U10:V10-mag":"WSpmaxM",
+    "atlas_mensuales/PREC2":"RNM",
+    "atlas_diario/PREC2":"RND",
+    "atlas_maxs_abs_diarios/PREC2": "RNmaxD",
+    "atlas_maxs_abs_mensuales/PREC2": "RNmaxM",
+    "atlas_promedios_maxs_abs_mensuales/PREC2": "RNpmaxM",
+    "atlas_max_anuales/MAXT2": "T2maxA",
 }
 
 console.log('vars:', Object.keys(vars));
@@ -285,22 +346,38 @@ console.log('vars:', Object.keys(vars));
 //var_prop - objeto de variables
 //root - div para colocar
 function add_chkbox(var_prop, varname, root, id ){
-    let div = $('<div > <ul>'+ varname+': </ul></div>').appendTo(root);
+    var id_var = root[0].id+'_'+varname;
+    function toggle_opt(ele){
+        console.log('toggle:', var_prop);
+        if (ele.style.display === "block"){
+            ele.style.display = "none";
+        }else {
+            ele.style.display = "block";
+        }
+    }
+    //creando botón de variable
+    let btn_var = $('<button type="button" class="plegable_btn" >'+ varname+ '</button>').appendTo(root)[0];
+    console.log('btn_var:', btn_var);
+    //creando div
+    let div = $('<div class= "plegable" id="'+ id_var +'"> </div>').appendTo(root)[0];
+    btn_var.onclick = function(){toggle_opt(div)};
     let idfull=''
 
     for (const var_obj in var_prop){
-        id_full=id+'*'+var_prop[var_obj];
+        id_full=id+'*'+ varname+'*' +var_obj;//[var_obj]["value"];
             console.log('id;', id_full);
-        let chkbox= $('<li><label><input type="checkbox" class="chk_var" id="'
+        let chkbox= $('<label><input type="checkbox" class="chk_var" id="'
                 +id_full+'" value="' + var_obj +
-                '" >'+ var_obj + ' </label> <br></li>');
+                '" >'+ var_obj + ' </label> <br>');
         chkbox.appendTo(div);
     }
 }
 
 function del_id(id){
     document.getElementById(id).remove();
-    points[id.split('_')[1]].remove();
+    val_id = id.split('_')[1]
+    document.getElementById('tab_'+val_id).remove();
+    points[val_id].remove();
 }
 
 function update_marker(idpoint){
@@ -310,9 +387,20 @@ function update_marker(idpoint){
             points[idpoint].setLatLng([new_lat, new_lon]);
         }
 }
+function tabs_hide(){
+    tabs_all = document.getElementsByClassName('tab-content');
+    for (let i=0; i<tabs_all.length; i++){
+        tabs_all[i].style.display = "none";
+    }
+}
+function tab_show(idtab){
+    tabs_hide();
+    document.getElementById(idtab).style.display = "block";
+}
 //agrega punto
-function add_vars(vars, root, lat, lon, title='titulo'){
+function add_vars(vars, tabs, root, lat, lon, title='titulo'){
     map.closePopup();
+    //crea punto
     var nid=title+'*'+lat+','+lon;
     points[title]=L.marker([lat,lon],
         {
@@ -325,25 +413,45 @@ function add_vars(vars, root, lat, lon, title='titulo'){
   
     )
         .addTo(map);
-
+    tabs_hide();
+    //crea ventana con opciones
     let idmain='div_'+title;
-    let div_main = $('<div id='+idmain+' class="div_sel" > </div>').prependTo(root);
-    let div = $('<div >   <p>'+ title+': </p></div>').appendTo(div_main);
+    let div_main = $('<div id='+idmain+' class="tab-content" > </div>').appendTo(root);
+    //tabs
+    let idtab= 'tab_'+title;
+    let div_tab = $('<button class="tab" type="button" onclick="tab_show(\''+
+        idmain+'\')" '+'id="'+idtab+'">'+ title+ '</button>').appendTo(tabs);
+    let div = $('<div > <h4> Opciones de punto </h4> </div>')
+        .appendTo(div_main);
+    let in_name = $('<label > Nombre:</label>'+
+        '<input value="'+ title+ '"><br>').appendTo(div);
+    //latitud
     let in_lat = $('<label for=inlat_'+title+'> Lat: </label>'+
-            '<input min=\"'+lat_min+'\" max= \"'+lat_max+'\" id=\"inlat_'+title+'\" type=\"number\" value=\"'+
-            lat+'\" step=0.001><br>').appendTo(div);
-    let in_lon = $('<label for=inlon_'+title+'> Lon: </label>'+
-            '<input min=\"'+lon_min+'\" max= \"'+lon_max+'\" id=\"inlon_'+title+'\" type=\"number\" value=\"'+
-            lon+'\" step=0.001>').appendTo(div);
+        '<input min=\"'+lat_min+
+        '\" max= \"'+lat_max+
+        '\" id=\"inlat_'+title+
+        '\" type=\"number\" value=\"'+
+        lat+'\" step=0.001><br>').appendTo(div);
     document.getElementById("inlat_"+title).addEventListener('change', function(){update_marker(title)});
+    //longitud
+    let in_lon = $('<label for=inlon_'+title+'> Lon: </label>'+
+        '<input min=\"'+lon_min+
+        '\" max= \"'+lon_max+
+        '\" id=\"inlon_'+title+
+        '\" type=\"number\" value=\"'+
+        lon+'\" step=0.001>').appendTo(div);
     document.getElementById("inlon_"+title).addEventListener('change', function(){update_marker(title)});
     //in_lon.addEventListener('change', update_marker);
+    //Variables y estadísticos
+    let div_vars = $('<div id="div_vars"> <h4> Selecciona estadístico por variable </h4>  </div>').
+        appendTo(div_main);
+    console.log('vars:', vars);
+    for (const var_obj in vars){
+        console.log('vars_obj', var_obj);
+        add_chkbox(vars[var_obj], var_obj, div_vars, nid);
+    }
     let btn = $('<p><button onclick=\"del_id(\''+idmain+'\')\"> Eliminar punto </button></p>');
     btn.appendTo(div);
-    let div_vars = $('<div>  </div>').appendTo(div_main);
-    for (const var_obj in vars){
-        add_chkbox(vars[var_obj], var_obj, div_main, nid);
-    }
     npoints+=1;
 }
 
@@ -365,14 +473,17 @@ function plot_btn(){
     name_layers=[];
     el_check.forEach(function(idname){
         var info = idname.split('*');
-        var layer=info[2];
+        var varname= info[2];
+        var varsta = info[3];
+        var layer= vars[varname][varsta]['value'];
+        var vtime= vars[varname][varsta]['time'];
         var latlon=points[info[0]].getLatLng();
-        console.log('latlon:', latlon);
+        console.log('latlon:', latlon, layer, info);
         var lon= latlon['lng'];
         var lat= latlon['lat'];
-        var name_key= labels[info[2]];//.slice(6,-1);
+        var name_key= labels[layer];//.slice(6,-1);
         name_layers.push(info[0]+'_'+name_key);
-        req_list.push(get_request(urlbase, rtype, layer, time, lon, lat,
+        req_list.push(get_request(urlbase, rtype, layer, vtime, lon, lat,
             format='text/csv'));
     });
     get_csv(req_list);

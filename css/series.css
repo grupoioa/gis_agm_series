@@ -58,7 +58,8 @@
     padding: 5px 10px;
     font-size: 12px;
     border-radius: 12px;
-    background: #035369;
+    /*background: #035369;*/
+    background: #24667E;
     color: #fff;
     border: none;
     text-decoration: none;
@@ -79,11 +80,12 @@ body{
     font-size: 12px;
 }
 
-.div_sel{
-  padding: 5px 10px 5px 10px;
-}
 .claro{
     background-color:#227c70;
+}
+a {
+    color: inherit;
+    text-decoration: none;
 }
 a:link, a:visited{
     background-color: transparent;
@@ -97,3 +99,31 @@ a:link, a:visited{
     text-align: center;
     color: #FFFFFF;
     background-image: url("https://pronosticos.atmosfera.unam.mx/atlasmeteorologico.gom/img/encabezado.jpg");
+}
+
+.plegable_btn{
+    width: 100%;
+    border-radius: 0px;
+    border-top:1px solid rgba(255,255,255,.1);
+}
+.plegable_btn:hover {
+    background-color: #439376;
+}
+.plegable_btn:after {
+  content: '\00BB';
+}
+.plegable{
+    display: none;
+}
+
+.tab-content{
+    position: relative;
+    top: 10px;
+    left: 10px;
+}
+
+.tab{
+    padding: 5px 10px 5px 10px;
+    background-color: #244F7E;
+    border-radius: 10px 10px 0px 0px;
+}

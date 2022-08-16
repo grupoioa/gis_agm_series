@@ -22,6 +22,7 @@
         <a class="a_header" href="docs/manual.html"> Manual de Usuario </a>
     </div>
     <div id="body">
+    <!-- Mapa -->
     <div id="cmap" class="overlay" style="width: 400px; height: 500px;" >  
         <H3> Selecciona una ubicación: </H3>
         <div id="div_button_map">
@@ -29,15 +30,17 @@
         </div>
         <div id="map" style="width: 350px; height: 400px;"> </div>
     </div>
+    <!-- Selección de variables -->
     <div id="csel" class="overlay contenedor" style="width: 380px; height: 500px;">
         <div >
-            <h3> Selecciona variable y estadístico </h3>
+            <h3> Generación de serie de tiempo </h3>
             <div id="div_button">
-                <button class="boton" name="plot" onclick="plot_btn()"> Desplegar </button>
+                <button class="boton" name="plot" onclick="plot_btn()"> Generar gráfica </button>
                 <button class="boton" id="download_csv" onclick="gen_csv()"> Generar CSV </button>
                 <button class="boton" id="hide_map" onclick="hide_sel()"> Cerrar </button>
             </div>
-            <div id="div_puntos" class='contenedor' style="width: 350px; height:400px; overflow-y: scroll; overflow-x: scroll"> </div>
+            <div id="div_tabs"  style="width: 350px; height:40px; display:block; overflow-x:scroll; white-space:nowrap;"> </div>
+            <div id="div_puntos" class='contenedor' style="width: 350px; height:400px; overflow-y: scroll; "> </div>
         </div>
     </div>
     <!--echarts-->
