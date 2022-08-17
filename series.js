@@ -82,6 +82,7 @@ var name_month =[
     "Nov",
     "Dic",
 ];
+//indica el 1o de mes en juliano
 function get_1j(jday, m){
     var days = [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335];
     return days.includes(jday);
@@ -96,14 +97,14 @@ myChart.setOption({
         },
         title:{
             text:"Climatología 1980-2016",
-            subtext:'Series de tiempo',
+            //subtext:'Series de tiempo',
         },
         xAxis: [{
             //eje juliano
             type: 'category',
             data: jdays,
             axisLabel:{
-                interval: 14,
+                //interval: 14,
                 },
             splitLine:{
                 show:true,
@@ -234,12 +235,11 @@ function onMapClick(e) {
 }
 map.on('click', onMapClick);
 
-
-console.log('vars:', Object.keys(vars));
+//Crea checkbox con clase "chk_var"
 //var_prop - objeto de variables
 //root - div para colocar
 function add_chkbox(var_prop, varname, root, id ){
-    var id_var = root[0].id+'_'+varname;
+    var id_var = root.id+'_'+varname;
     function toggle_opt(ele){
         if (ele.style.display === "block"){
             ele.style.display = "none";
@@ -336,8 +336,8 @@ function add_vars(vars, tabs, root, lat, lon, title='titulo'){
     //in_lon.addEventListener('change', update_marker);
     //Variables y estadísticos
     let div_vars = $('<div id="div_vars"> <h4> Selecciona estadístico por variable </h4>  </div>').
-        appendTo(div_main);
-    console.log('vars:', vars);
+        appendTo(div_main)[0];
+    //recorre claves principales (nombres de variables)
     for (const var_obj in vars){
         console.log('vars_obj', var_obj);
         add_chkbox(vars[var_obj], var_obj, div_vars, nid);
@@ -427,21 +427,23 @@ function gen_csv(){
     let nmens=1;
 
     series.forEach(function(e_serie){
+        console.log('eserie', e_serie);
         if (e_serie.data.length==12){
             csv_obj.mensuales.fields.push(e_serie.name);
             meses.forEach(function (mes, k){
-                csv_obj.mensuales.data[k][nmens]=e_serie.data[k][1];
+                csv_obj.mensuales.data[k][nmens]=e_serie.data[k];
             });
             nmens+=1;
         }
         else if (e_serie.data.length==365){
             csv_obj.diarios.fields.push(e_serie.name);
             dias.forEach(function( dia, k){
-                csv_obj.diarios.data[k][ndia]= e_serie.data[k][1];
+                csv_obj.diarios.data[k][ndia]= e_serie.data[k];
             });
             ndia+=1;
         }
     });
+    console.log('csv:', csv_obj);
     let header='';
     for (escala in csv_obj){
         if (csv_obj[escala].data[0].length>1){
