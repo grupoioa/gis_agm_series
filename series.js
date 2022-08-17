@@ -234,121 +234,13 @@ function onMapClick(e) {
 }
 map.on('click', onMapClick);
 
-//objeto con definición de capas para cada variable
-var vars={
-    'Temperatura':{
-        'Promedio Mensual':{
-            'value':"atlas_mensuales/T2",
-            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
-        },
-        'Promedio Diario':{
-            "value":"atlas_diario/T2",
-            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
-        },
-        'Máxima Absoluta Diaria':{
-            "value":"atlas_maxs_abs_diarios/T2",
-            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
-        },
-        'Máxima Absoluta por Mes':{
-            "value":"atlas_maxs_abs_mensuales/T2",
-            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
-        },
-        'Promedio de Máx. Abs. Mensuales':{
-            "value":"atlas_promedios_maxs_abs_mensuales/T2",
-            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
-        },
-        'Promedio Mensual de Mínimas':{
-            "value":"atlas_promedios_mins_mensuales/T2",
-            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
-        },
-        'Minima Absoluta por Mes':{
-            "value":"atlas_mins_abs_mensuales/T2",
-            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
-        },
-    },
-    'Viento':{
-        'Promedio Mensual':{
-            "value":"atlas_mensuales/U10:V10-mag",
-            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
-        },
-        'Promedio Diario':{
-            "value":"atlas_diario/U10:V10-mag",
-            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
-        },
-        'Máxima Absoluta Diaria':{
-            "value":"atlas_maxs_abs_diarios/U10:V10-mag",
-            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
-        },
-        'Máxima Absoluta por Mes':{
-            "value":"atlas_maxs_abs_mensuales/U10_MAX:V10_MAX-mag",
-            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
-        },
-        'Promedio de Máx. Abs. Mensuales':{
-            "value":"atlas_promedios_maxs_abs_mensuales/U10:V10-mag",
-            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
-        },
-    },
-    'Precipitación':{
-        'Promedio Acumulada Mensual':{
-            "value":"atlas_mensuales/PREC2",
-            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
-        },
-        'Promedio Acumulada Diaria':{
-            "value":"atlas_diario/PREC2",
-            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
-        },
-        'Máxima Absoluta Diaria':{
-            "value":"atlas_maxs_abs_diarios/PREC2",
-            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
-        },
-        'Máxima Absoluta por Mes':{
-            "value":"atlas_maxs_abs_mensuales/PREC2",
-            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
-        },
-        'Promedio de Máx. Abs. Mensuales':{
-            "value":"atlas_promedios_maxs_abs_mensuales/PREC2",
-            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
-        },
-    }
-}
-        
-for (let i=1980; i<2017; i++){
-    vars['Temperatura']['Máx. Abs. por mes ('+i+')'] = {
-        "value":"atlas_max_anuales/MAXT2",
-        'time': i+"-01-01T00:00:00.000Z/"+i+"-12-31T23:00:00.000Z"
-    }
-}
-
-//etiquetas por capa
-var labels={
-    "atlas_mensuales/T2":"T2M",
-    "atlas_diario/T2":"T2D",
-    "atlas_maxs_abs_diarios/T2":"T2maxD",
-    "atlas_maxs_abs_mensuales/T2":"T2maxM",
-    "atlas_promedios_maxs_abs_mensuales/T2":"T2pmaxM",
-    "atlas_promedios_mins_mensuales/T2":"T2pminM",
-    "atlas_mins_abs_mensuales/T2":"T2minM",
-    "atlas_mensuales/U10:V10-mag":"WSM",
-    "atlas_diario/U10:V10-mag":"WSD",
-    "atlas_maxs_abs_diarios/U10:V10-mag":"WSmaxD",
-    "atlas_maxs_abs_mensuales/U10:V10-mag":"WSmaxM",
-    "atlas_promedios_maxs_abs_mensuales/U10:V10-mag":"WSpmaxM",
-    "atlas_mensuales/PREC2":"RNM",
-    "atlas_diario/PREC2":"RND",
-    "atlas_maxs_abs_diarios/PREC2": "RNmaxD",
-    "atlas_maxs_abs_mensuales/PREC2": "RNmaxM",
-    "atlas_promedios_maxs_abs_mensuales/PREC2": "RNpmaxM",
-    "atlas_max_anuales/MAXT2": "T2maxA",
-}
 
 console.log('vars:', Object.keys(vars));
-//var_list - lista con variables 
 //var_prop - objeto de variables
 //root - div para colocar
 function add_chkbox(var_prop, varname, root, id ){
     var id_var = root[0].id+'_'+varname;
     function toggle_opt(ele){
-        console.log('toggle:', var_prop);
         if (ele.style.display === "block"){
             ele.style.display = "none";
         }else {
@@ -481,7 +373,7 @@ function plot_btn(){
         console.log('latlon:', latlon, layer, info);
         var lon= latlon['lng'];
         var lat= latlon['lat'];
-        var name_key= labels[layer];//.slice(6,-1);
+        var name_key= vars[varname][varsta]['label'];//.slice(6,-1);
         name_layers.push(info[0]+'_'+name_key);
         req_list.push(get_request(urlbase, rtype, layer, vtime, lon, lat,
             format='text/csv'));
