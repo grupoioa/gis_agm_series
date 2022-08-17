@@ -85,57 +85,133 @@ var name_month =[
 //indica el 1o de mes en juliano
 function get_1j(jday, m){
     var days = [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335];
-    return days.includes(jday);
+    return days.includes(jday+1);
 }
+var colors = {
+    'RN': '#21618C',
+    'WS': '#1B2631', 
+    'T': '#BB8FCE',
+};
 
 myChart.setOption({
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                animation: false
-            }
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            animation: false,
+            type: 'cross',
         },
-        title:{
-            text:"Climatología 1980-2016",
-            //subtext:'Series de tiempo',
+        showContent: false,
+    },
+    grid:{
+        right: '15%',
+        left: '12%',
+    },
+    backgroundColor: new echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [
+        {
+            offset: 0,
+            color: '#f7f8fa'
         },
-        xAxis: [{
-            //eje juliano
+        {
+            offset: 1,
+            color: '#D5D8DC',
+        }
+    ]),
+    title:{
+        text:"Climatología 1980-2016",
+        //subtext:'Series de tiempo',
+    },
+    xAxis: [
+        //eje juliano
+        {
             type: 'category',
             data: jdays,
             axisLabel:{
                 //interval: 14,
-                },
+            },
             splitLine:{
                 show:true,
                 interval: get_1j,
+                lineStyle: {
+                    color: '#aaa',
+                    //color: ['#aaa', '#ddd'],
                 },
             },
-            //eje mes
-            {
-                type: 'category',
-                data: name_month,
-                axisTick: {show : false},
-
-            }
-        ],
-        yAxis: {
-            type: 'value',
         },
-        series: [],
-        toolbox: {
-            show: true,
-            feature:{
-                dataZoom:{
-                    show: true
-                },
-                dataView:{
-                    readOnly: false
-                },
-                restore:{},
-                saveAsImage:{}
-            }
+        //eje mes
+        {
+            type: 'category',
+            data: name_month,
+            axisTick: {show : false},
+
         }
+    ],
+    yAxis: [
+        {
+            type: 'value',
+            name: 'Temperatura',
+            position: 'left',
+            nameLocation: 'start',
+            axisTick:{ show: true},
+            axisLine:{
+                show: true,
+                lineStyle:{
+                    color: colors['T']
+                }
+            },
+            axisLabel:{
+                formatter: '{value} C',
+                hideOverlap: true,
+            }
+        },
+        {
+            type: 'value',
+            name: 'Precipitación',
+            position: 'left',
+            nameLocation: 'end',
+            offset: 40,
+            axisTick:{ show: true},
+            axisLine:{
+                show: true,
+                lineStyle:{
+                    color: colors['RN']
+                }
+            },
+            axisLabel:{
+                formatter: '{value} mm'
+            }
+        },
+        {
+            type: 'value',
+            name: 'Viento',
+            position: 'right',
+            nameLocation: 'start',
+            axisTick:{ show: true},
+            axisLine:{
+                show: true,
+                lineStyle:{
+                    color: colors['WS']
+                }
+            },
+            axisLabel:{
+                formatter: '{value} m/s'
+            }
+        },
+
+    ],
+    series: [],
+    toolbox: {
+        show: true,
+        feature:{
+            dataZoom:{
+                show: true
+            },
+            dataView:{
+                readOnly: false
+            },
+            restore:{},
+            saveAsImage:{}
+        }
+    }
 
 },{notMerge: true});
 
@@ -147,7 +223,7 @@ function plot(series, legend){
         legend:{
             //type: 'scroll',
             orient: 'horizontal',
-            top: 25,
+            top: 45,
             //left: 100,
             right: 10,
             height: 500,
@@ -197,14 +273,33 @@ async function get_csv(url_list){
             series.push({'name': name_layers[i],
                 'xAxisIndex': 0,
                 'type': 'line',
-                'symbol':'circle',
+                //'symbol':'circle',
                 'data': output,
                 'tooltip':{'valueFormatter':(value) => value.toFixed(1)}
             });
+            //selecciona eje X
             if (output.length == 12){
                 series[series.length-1].xAxisIndex = 1;
-
             }
+            //selecciona eje Y
+            vartype = name_layers[i].split('_')[1]
+            if (vartype.slice(0,2) == "T2"){
+                series[series.length-1].type = "line";
+                series[series.length-1].symbol = "emptyCircle";
+                series[series.length-1].symbolSize = 6;
+                series[series.length-1].yAxisIndex = 0;
+            }
+            if (vartype.slice(0,2) == "RN"){
+                series[series.length-1].type = "bar";
+                series[series.length-1].yAxisIndex = 1;
+            }
+            if (vartype.slice(0,2) == "WS"){
+                series[series.length-1].type = "line";
+                series[series.length-1].symbol = "arrow";
+                series[series.length-1].symbolSize = 10;
+                series[series.length-1].yAxisIndex = 2;
+            }
+
         } catch (err){
             console.error('parse error', err)
         }
