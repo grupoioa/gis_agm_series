@@ -265,14 +265,6 @@ var vars={
             "value":"atlas_mins_abs_mensuales/T2",
             'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z"
         },
-        'Máx. Abs. por mes (1980)':{
-            "value":"atlas_max_anuales/MAXT2",
-            'time':"1980-01-03T00:00:00.000Z/1980-01-14T23:00:00.000Z"
-        },
-        'Máx. Abs. por mes (1981)':{
-            "value":"atlas_max_anuales/MAXT2",
-            'time':"1980-01-14T00:00:00.000Z/1980-01-25T23:00:00.000Z"
-        },
     },
     'Viento':{
         'Promedio Mensual':{
@@ -319,6 +311,14 @@ var vars={
         },
     }
 }
+        
+for (let i=1980; i<2017; i++){
+    vars['Temperatura']['Máx. Abs. por mes ('+i+')'] = {
+        "value":"atlas_max_anuales/MAXT2",
+        'time': i+"-01-01T00:00:00.000Z/"+i+"-12-31T23:00:00.000Z"
+    }
+}
+
 //etiquetas por capa
 var labels={
     "atlas_mensuales/T2":"T2M",
