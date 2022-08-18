@@ -1,4 +1,4 @@
-
+﻿
 var mbAttr = ' <a href="http://grupo-ioa.atmosfera.unam.mx/" > Interacción Océano-Atmósfera </a>, ICAyCC, UNAM';
         //Instituto de Ciencias de la Atmósfera y Cambio Climático ';
         mbUrl = "https://mt1.google.com/vt/lyrs=s&hl=pl&&x={x}&y={y}&z={z}";
@@ -330,33 +330,51 @@ function onMapClick(e) {
 }
 map.on('click', onMapClick);
 
-//Crea checkbox con clase "chk_var"
-//var_prop - objeto de variables
-//root - div para colocar
-function add_chkbox(var_prop, varname, root, id ){
-    var id_var = root.id+'_'+varname;
-    function toggle_opt(ele){
-        if (ele.style.display === "block"){
-            ele.style.display = "none";
-        }else {
-            ele.style.display = "block";
-        }
+//función que oculta menús
+function toggle_opt(ele, display="block"){
+    if (ele.style.display === display){
+        ele.style.display = "none";
+    }else {
+        ele.style.display = display;
     }
+}
+//Crea checkbox con clase "chk_var"
+//var_gral - objeto de variables
+//var_anuales - objeto de variables anuales
+//varname - nombre de la variable
+//root - div para colocar
+//class_btn - clase para el botón
+//id - id base para los checkbox
+function add_chkbox(var_gral, var_anuales, varname, root, id ){
+    var id_var = root.id+'_'+varname;
     //creando botón de variable
-    let btn_var = $('<button type="button" class="plegable_btn" >'+ varname+ '</button>').appendTo(root)[0];
-    console.log('btn_var:', btn_var);
+    let btn_var = $('<button type="button" class= "plegable_btn"  >'+ varname+ '</button>').appendTo(root)[0];
     //creando div
-    let div = $('<div class= "plegable" id="'+ id_var +'"> </div>').appendTo(root)[0];
-    btn_var.onclick = function(){toggle_opt(div)};
+    let div_var = $('<div class= "plegable" id="'+ id_var +'"> </div>').appendTo(root)[0];
+    btn_var.onclick = function(){toggle_opt(div_var)};
     let idfull=''
 
-    for (const var_obj in var_prop){
-        id_full=id+'*'+ varname+'*' +var_obj;//[var_obj]["value"];
-            console.log('id;', id_full);
+    for (const var_obj in var_gral){
+        id_full=[id, varname, var_obj].join('*');
         let chkbox= $('<label><input type="checkbox" class="chk_var" id="'
                 +id_full+'" value="' + var_obj +
                 '" >'+ var_obj + ' </label> <br>');
-        chkbox.appendTo(div);
+        chkbox.appendTo(div_var);
+    }
+    //recorre claves anuales
+    for (const var_name_anual in var_anuales){
+        let btn_var_anuales = $('<button type="button" class= "plegable_btn2 " >'+ var_name_anual +'</button>').
+            appendTo(div_var)[0];
+        let div_var_anuales = $('<div class= "div_anual plegable" id="'+ id_var + ' '+ var_name_anual+'"> </div>').
+            appendTo(div_var)[0];
+        btn_var_anuales.onclick = function(){toggle_opt(div_var_anuales, "flex")};
+        for (const var_obj in var_anuales[var_name_anual]){
+            id_full = [id, varname, var_name_anual +' '+ var_obj].join('*');
+            let chkbox_anual = $('<label><input type="checkbox" class="chk_var" id="'+
+                id_full+ '" value="' + var_obj +
+                '" >'+ var_obj + ' </label> <br>');
+            chkbox_anual.appendTo(div_var_anuales);
+        }
     }
 }
 
@@ -430,12 +448,12 @@ function add_vars(vars, tabs, root, lat, lon, title='titulo'){
     document.getElementById("inlon_"+title).addEventListener('change', function(){update_marker(title)});
     //in_lon.addEventListener('change', update_marker);
     //Variables y estadísticos
-    let div_vars = $('<div id="div_vars"> <h4> Selecciona estadístico por variable </h4>  </div>').
+    let div_vars = $('<div style= "width: 100%;" id="div_vars"> <h4> Selecciona estadístico por variable </h4>  </div>').
         appendTo(div_main)[0];
     //recorre claves principales (nombres de variables)
     for (const var_obj in vars){
         console.log('vars_obj', var_obj);
-        add_chkbox(vars[var_obj], var_obj, div_vars, nid);
+        add_chkbox(vars[var_obj], var_anuales[var_obj], var_obj, div_vars, nid);
     }
     let btn = $('<p><button onclick=\"del_id(\''+idmain+'\')\"> Eliminar punto </button></p>');
     btn.appendTo(div);
@@ -462,13 +480,21 @@ function plot_btn(){
         var info = idname.split('*');
         var varname= info[2];
         var varsta = info[3];
-        var layer= vars[varname][varsta]['value'];
-        var vtime= vars[varname][varsta]['time'];
+        var year_str = varsta.split(' ').slice(-1);
+        var year = parseInt(year_str);
+        if (isNaN(year)){
+            var layer= vars[varname][varsta]['value'];
+            var vtime= vars[varname][varsta]['time'];
+            var name_key= vars[varname][varsta]['label'];
+        }else{
+            var layer= var_anuales[varname][varsta.slice(0, -5)][year_str]['value'];
+            var vtime= var_anuales[varname][varsta.slice(0, -5)][year_str]['time'];
+            var name_key= var_anuales[varname][varsta.slice(0, -5)][year_str]['label'];
+        }
         var latlon=points[info[0]].getLatLng();
         console.log('latlon:', latlon, layer, info);
         var lon= latlon['lng'];
         var lat= latlon['lat'];
-        var name_key= vars[varname][varsta]['label'];//.slice(6,-1);
         name_layers.push(info[0]+'_'+name_key);
         req_list.push(get_request(urlbase, rtype, layer, vtime, lon, lat,
             format='text/csv'));
@@ -545,6 +571,11 @@ function gen_csv(){
             header="# Grupo Interacción Océano-Atmósfera\n";
             header+="# Atlas Meteorológico del Golfo de México\n";
             header+= "# Series de tiempo correspondientes a datos "+ escala + "\n";
+            Object.keys(points).forEach(function( pt, k){
+                latlon = points[pt].getLatLng(); 
+                header += "# " + pt + " lon: "+ latlon['lng']+
+                    " lat: "+ latlon['lat']+"\n";
+            });
             var csv= Papa.unparse(csv_obj[escala]);
             let link = document.createElement('a');
             link.download = "AMGM_series_"+escala+".csv";
