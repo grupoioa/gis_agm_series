@@ -13,26 +13,47 @@
     <script defer src='lib/echarts.min.js'></script>
     <script defer src='lib/series_lib.js'></script>
     <script defer src='data/PuntosRelevantes.js'></script>
+    <script defer src='data/capas.js'></script>
     <script defer src='series.js'></script>
 </head>
 <body>
-	<h1>Página para descargar las series de tiempo del AMGM</h1>
-
-    <a href="docs/manual.html"> Manual de Usuario </a>
-	<div class="contenedor">
-        <div> <p> Selecciona un punto: </p>
-            <div id="map" style="width: 500px; height: 450px;"> </div>
-        </div>
-        <div > <p> Selecciona variable y estadístico </p>
-                <div id="div_puntos" class='contenedor'> </div>
-            <div id="div_button">
-                <button class="boton" name="plot" onclick="plot_btn()"> Desplegar </button>
-                <button class="boton" id="download_csv" onclick="gen_csv()"> Generar CSV </button>
-            </div>
-        </div>
-        <!--echarts-->
-        <div id="main" style="width: 700px;height:600px;"></div>
-
+    <div id="header" class="claro">
+        <h1> COATL </h1>
+        <h2> Sistema de Descarga y Visualización de Series de Tiempo </h2>
+        <a class="a_header" href="docs/manual.html"> Manual de Usuario </a>
     </div>
+    <div id="body">
+    <!-- Mapa -->
+    <div id="cmap" class="overlay" style="width: 400px; height: 500px;" >  
+        <H3> Selecciona una ubicación: </H3>
+        <div id="div_button_map">
+            <button class="boton" id="hide_map2" onclick="hide_map()"> Cerrar Mapa </button>
+
+        </div>
+        <div id="map" style="width: 350px; height: 400px;"> </div>
+    </div>
+    <!-- Selección de variables -->
+    <div id="csel" class="overlay contenedor" style="width: 380px; height: 550px;">
+        <div >
+            <h3> Generación de serie de tiempo </h3>
+            <div id="div_button">
+                <button class="boton" name="plot" onclick="plot_btn()"> Generar gráfica </button>
+                <button class="boton" id="download_csv" onclick="gen_csv()"> Generar CSV </button>
+                <button class="boton" id="hide_map" onclick="hide_sel()"> Cerrar </button>
+            </div>
+            <div id="div_tabs"  style="width: 350px; height:40px; display:block; overflow-x:scroll; white-space:nowrap;"> </div>
+            <div id="div_puntos" class='contenedor' style="width: 350px; height:400px; overflow-y: scroll; "> </div>
+        </div>
+    </div>
+    <!--echarts-->
+    <div id="cmain" class="plot">
+        <div id="main" class="plot"></div>
+        <div id="div_button_main">
+            <button class="boton" id="btn_add" onclick="show_map()">+</button><p>
+            <button class="boton" id="btn_sel" onclick="show_sel()">~</button>
+        </div>
+    </div>
+    </div>
+
 </body>
 </html>

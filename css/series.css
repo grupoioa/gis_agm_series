@@ -3,13 +3,25 @@
 	flex-wrap: wrap;
 }
 
-.overlay {
-    /*position: fixed; /* Sit on top of the page content */
-    top: 100px;
-    left: 10px;
-    background-color: rgba(255,255,255,0.3); /* Black background with opacity */
+.plot{
+    width: 100%;
+    height: 600px;
+}
+
+.overlay{
+    position: fixed; /* Sit on top of the page content */
+    top: 130px;
+    left: 30px;
+    background-color: rgba(255,255,255,0.8); /* Black background with opacity */
     color: black;/*white;*/
-    z-index: 999; /* Specify a stack order in case you're using a different order for other elements */
+    display: none;
+}
+#cmap{
+    z-index: 0; 
+}
+#csel{
+    z-index: 0;
+    background-color: rgba(255,255,255,0.9); 
 }
 #layercontrol{
     width: 150px;
@@ -46,7 +58,8 @@
     padding: 5px 10px;
     font-size: 12px;
     border-radius: 12px;
-    background: #035369;
+    /*background: #035369;*/
+    background: #24667E;
     color: #fff;
     border: none;
     text-decoration: none;
@@ -55,6 +68,11 @@
     display: inline-block;
   
  }
+#div_button_main{
+    position: fixed;
+    top: 200px;
+    left: 20px;
+}
 
 body{
     background-color: #EFEFEF;
@@ -62,6 +80,76 @@ body{
     font-size: 12px;
 }
 
-.div_sel{
-  padding: 5px 10px 5px 10px;
+.claro{
+    background-color:#227c70;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+a:link, a:visited{
+    background-color: transparent;
+}
+.a_header{
+    color: white;
+    font-size: medium;
+}
+
+#header{
+    text-align: center;
+    color: #FFFFFF;
+    background-image: url("https://pronosticos.atmosfera.unam.mx/atlasmeteorologico.gom/img/encabezado.jpg");
+}
+
+.plegable_btn{
+    width: 100%;
+    border-radius: 0px;
+    border-top:1px solid rgba(255,255,255,.1);
+}
+.plegable_btn:hover {
+    background-color: #439376;
+}
+.plegable_btn:after {
+  content: '\00BB';
+}
+.plegable_btn2{
+    width: 100%;
+    border-radius: 0px;
+    border-top:1px solid rgba(255,255,255,.1);
+    background-color: transparent;
+    color: #000;
+    text-align: left;
+}
+.plegable_btn2:hover {
+    background-color: #CCD1D1;
+}
+.plegable_btn2:before{
+  content: '\27A4';
+}
+.div_anual{
+    /*height: 390px;*/
+    width: 100%;
+    display: flex;
+    /*flex-direction: column;*/
+    flex-wrap: wrap;
+}
+.plegable{
+    width: 100%;
+    display: none;
+}
+
+.tab-content{
+    position: relative;
+    top: 10px;
+    left: 10px;
+    width: 90%;
+}
+
+.tab{
+    padding: 5px 10px 5px 10px;
+    background-color: #244F7E;
+    border-radius: 10px 10px 0px 0px;
+}
+.tab:focus{
+    background-color: #34495E;
 }
