@@ -153,3 +153,7 @@ a:link, a:visited{
 .tab:focus{
     background-color: #34495E;
 }
+
+.leaflet-container {
+	cursor: url("img/location-dot-solid.png"), crosshair;
+}
