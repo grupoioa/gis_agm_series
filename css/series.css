@@ -155,5 +155,5 @@ a:link, a:visited{
 }
 
 .leaflet-container {
-	cursor: url("img/location-dot-solid.png"), crosshair;
+	cursor: url("https://pronosticos.atmosfera.unam.mx/AGMseries/gis_agm_series/img/location-dot-solid.png"), crosshair;
 }
