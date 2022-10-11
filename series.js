@@ -505,14 +505,16 @@ function plot_btn(){
 function show_map(){
     sel = document.getElementById("cmap");
     sel.style.display = "block";
-    sel.style.zIndex = 1;
+    sel = document.getElementById("map");
+    sel.style.display = "block";
     map.invalidateSize()
     //map.setView(bounds.getCenter(), 5.0);
 }
 function hide_map(){
     sel = document.getElementById("cmap");
     sel.style.display = "none";
-    sel.style.zIndex = 0;
+    sel = document.getElementById("map");
+    sel.style.display = "none";
 }
 
 function show_sel(){

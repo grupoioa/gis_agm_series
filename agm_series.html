@@ -23,36 +23,29 @@
         <a class="a_header" href="docs/manual.html"> Manual de Usuario </a>
     </div>
     <div id="body">
-    <!-- Mapa -->
-    <div id="cmap" class="overlay" style="width: 400px; height: 500px;" >  
-        <H3> Selecciona una ubicación: </H3>
-        <div id="div_button_map">
-            <button class="boton" id="hide_map2" onclick="hide_map()"> Cerrar Mapa </button>
-
+        <!-- Selección de variables -->
+        <div id="csel" >
+                <h3> Generación de serie de tiempo </h3>
+                <div id="div_button">
+                    <button class="boton" name="plot" onclick="plot_btn()"> Generar gráfica </button>
+                    <button class="boton" id="download_csv" onclick="gen_csv()"> Generar CSV </button>
+                    <button class="boton" id="hide_map" onclick="hide_sel()"> Cerrar </button>
+                    <button class="boton" id="btn_add" onclick="show_map()">+</button><p>
+                </div>
+                <div id="div_tabs"  ></div>
+                <div id="div_puntos"></div> 
         </div>
-        <div id="map" style="width: 350px; height: 400px;"> </div>
-    </div>
-    <!-- Selección de variables -->
-    <div id="csel" class="overlay contenedor" style="width: 380px; height: 550px;">
-        <div >
-            <h3> Generación de serie de tiempo </h3>
-            <div id="div_button">
-                <button class="boton" name="plot" onclick="plot_btn()"> Generar gráfica </button>
-                <button class="boton" id="download_csv" onclick="gen_csv()"> Generar CSV </button>
-                <button class="boton" id="hide_map" onclick="hide_sel()"> Cerrar </button>
+        <!--echarts-->
+        <div id="cmain" >
+            <div id="main" ></div>
+        </div>
+       <!-- Mapa -->
+        <div id="cmap" class="overlay" onclick=hide_map()>
+        </div>
+            <div id="map" class="overlay">
+                <button class="boton" id="hide_map2" onclick="hide_map()"> X </button>
             </div>
-            <div id="div_tabs"  style="width: 350px; height:40px; display:block; overflow-x:scroll; white-space:nowrap;"> </div>
-            <div id="div_puntos" class='contenedor' style="width: 350px; height:400px; overflow-y: scroll; "> </div>
-        </div>
-    </div>
-    <!--echarts-->
-    <div id="cmain" class="plot">
-        <div id="main" class="plot"></div>
-        <div id="div_button_main">
-            <button class="boton" id="btn_add" onclick="show_map()">+</button><p>
-            <button class="boton" id="btn_sel" onclick="show_sel()">~</button>
-        </div>
-    </div>
+
     </div>
 
 </body>
