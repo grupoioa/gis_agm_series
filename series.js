@@ -308,6 +308,25 @@ async function get_csv(url_list){
     console.log('series:', series);
     plot(series, name_layers);
 }
+const div_map = document.getElementById("map");
+div_map.addEventListener("contextmenu", click_sec, true );
+
+function click_sec(e){
+	console.log('click der',e);
+	console.log(e.x, e.y)
+	e.preventDefault();
+}
+//definición de función al hacer moveren el mapa
+function onMapMove(e) {
+    lat= e.latlng['lat'];
+    lon= e.latlng['lng'];
+    if (lat>lat_min && lat<lat_max && lon>lon_min && lon<lon_max){
+        popup
+            .setLatLng(e.latlng)
+            .setContent('Posición<br>lat: ' + lat.toFixed(8)+'<br>lon: '+ lon.toFixed(8) )
+            .openOn(map);
+    }
+}
 //lista de puntos
 let points={};
 let npoints=0;
@@ -315,19 +334,14 @@ let npoints=0;
 function onMapClick(e) {
     lat= e.latlng['lat'];
     lon= e.latlng['lng'];
-    var btn_series = L.DomUtil.create('button', );
-    btn_series.setAttribute('type','button');
-    btn_series.innerHTML="Serie de tiempo";
     if (lat>lat_min && lat<lat_max && lon>lon_min && lon<lon_max){
-        str_in= "<button onclick=\"add_vars(vars, \'#div_tabs\', \'#div_puntos\', lat, lon, \'punto-\'+npoints)\" > "+
-                    "Agregar punto </button>";
-        popup
-            .setLatLng(e.latlng)
-            .setContent('Posición<br>lat: ' + lat.toFixed(8)+'<br>lon: '+ lon.toFixed(8) +')<br>'+str_in)
-            .openOn(map);
         console.log('test',lat,lon);
+	add_vars(vars, '#div_tabs', '#div_puntos', lat, lon, 'punto-'+npoints);
     }
 }
+//evento para movimiento en mapa
+map.on('mousemove', onMapMove);
+//evento para click en mapa
 map.on('click', onMapClick);
 
 //función que oculta menús

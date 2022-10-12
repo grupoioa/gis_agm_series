@@ -22,7 +22,14 @@
 #hide_map2{
     position: relative;
     top: 0;
-    left: 90%;
+    left: 350px;
+    z-index: 999; 
+}
+#texto_mapa{
+    position: relative;
+    top: 0;
+    color: white;
+    left: 180px;
     z-index: 999; 
 }
 #map{
