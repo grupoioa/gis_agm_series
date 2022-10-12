@@ -1,6 +1,34 @@
 :root {
     --sel-width: 300px;
 }
+label{
+    display: block;
+}
+
+ button{
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 12px;
+    /*background: #035369;*/
+    background: #24667E;
+    color: #fff;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline-block;
+  
+ }
+
+body{
+    background-color: #EFEFEF;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+.claro{
+    background-color:#227c70;
+}
 .contenedor{
 	display: flex;
 	flex-wrap: wrap;
@@ -45,10 +73,25 @@
     display: flex;
     justify-content: space-between;
 }
-/* div de selección */
+#lateral{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 320px;
+}
+/* div de punto */
+#ccoor{
+}
+#div_add{
+    display: flex;
+    justify-content: space-evenly;
+    margin:10px;
+    width: 80%;
+}
+
+/* div de selección de variable */
 #csel{
     display: inline-block;
-    width: 310px;
     height: 580px;
     background-color: #e6e8eb;
     padding: 10px;
@@ -72,7 +115,7 @@
     width:calc(100% - 330px);
 }
 
-#main{
+#main31{
     display: inline-block;
     width: 100%; 
 }
@@ -89,6 +132,9 @@
     font-size: 14px;
     font-family: 'sans';
     text-align: left;
+}
+.div_lateral{
+    widht:310px;
 }
 
 .menu_btn{
@@ -113,38 +159,6 @@
     right: 0%;
     height: 15px;
  }
-
- button{
-    padding: 5px 10px;
-    font-size: 12px;
-    border-radius: 12px;
-    /*background: #035369;*/
-    background: #24667E;
-    color: #fff;
-    border: none;
-    text-decoration: none;
-    cursor: pointer;
-    font-family: Arial, Helvetica, sans-serif;
-    display: inline-block;
-  
- }
-
-body{
-    background-color: #EFEFEF;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-}
-
-.claro{
-    background-color:#227c70;
-}
-a {
-    color: inherit;
-    text-decoration: none;
-}
-a:link, a:visited{
-    background-color: transparent;
-}
 .a_header{
     color: white;
     font-size: medium;

@@ -20,21 +20,41 @@
     <div id="header" class="claro">
         <h1> COATL </h1>
         <h2> Sistema de Descarga y Visualización de Series de Tiempo </h2>
-        <a class="a_header" href="docs/manual.html"> Manual de Usuario </a>
     </div>
     <div id="body">
-        <!-- Selección de variables -->
-        <div id="csel" >
-                <h3> Generación de serie de tiempo </h3>
-                <div id="div_button">
-                    <button class="boton" name="plot" onclick="plot_btn()"> Generar gráfica </button>
-                    <button class="boton" id="download_csv" onclick="gen_csv()"> Generar CSV </button>
-                    <button class="boton" id="hide_map" onclick="hide_sel()"> Cerrar </button>
-                    <button class="boton" id="btn_add" onclick="show_map()">+</button><p>
-                </div>
-                <div id="div_tabs"  ></div>
-                <div id="div_puntos"></div> 
+    <div id="lateral" >
+        <div id="div_manual" class="div_lateral">
+            <a href="docs/manual.html"> Manual de Usuario </a>
         </div>
+        <!-- coordenadas de punto -->
+        <!-- definir min y max en JS -->
+        <div id="ccoor" class="div_lateral">
+            <H3> Agrega punto de interés: </H3>
+            <label > Lon ( -99.56, -78.52): 
+                <input id="inlon_main" size="8"  type= "number" step=0.001 value="92.1">
+                
+            </label>
+            <label > Lat ( 16.50, 32.44 ): 
+                <input id="inlat_main" size="8"  type= "number" step=0.001 value="24.5">
+                
+            </label>
+            <div id="div_add">
+                <button class="button" id="btn_add" > Agrega </button>
+                <button class="boton" id="btn_show_map" onclick="show_map()"> Agrega<BR>en Mapa </button><p>
+            </div>
+        </div>
+            <!-- Selección de variables -->
+            <div id="csel" class="div_lateral">
+                    <h3> Generación de serie de tiempo </h3>
+                    <div id="div_button">
+                        <button class="boton" name="plot" onclick="plot_btn()"> Generar gráfica </button>
+                        <button class="boton" id="download_csv" onclick="gen_csv()"> Generar CSV </button>
+                        <button class="boton" id="hide_map" onclick="hide_sel()"> Cerrar </button>
+                    </div>
+                    <div id="div_tabs"  ></div>
+                    <div id="div_puntos"></div> 
+            </div>
+    </div>
         <!--echarts-->
         <div id="cmain" >
             <div id="main" ></div>
@@ -44,7 +64,7 @@
         </div>
             <div id="map" class="overlay" oncontextmenu="click_sec()" >
                 <!--button class="boton" id="hide_map2" onclick="hide_map()"> X </button--!>
-			<div id="texto_mapa"> Para agregar un punto,<BR>da click en las coordenadas de interés </div>
+			<div id="texto_mapa"> &gt;&gt; Agregar punto: click en el mapa<BR>&gt;&gt; Cerrar: click fuera del mapa </div>
             </div>
 
     </div>
