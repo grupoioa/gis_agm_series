@@ -316,7 +316,7 @@ function click_sec(e){
 	console.log(e.x, e.y)
 	e.preventDefault();
 }
-//definición de función al hacer moveren el mapa
+//definición de función al mover el mapa
 function onMapMove(e) {
     lat= e.latlng['lat'];
     lon= e.latlng['lng'];
