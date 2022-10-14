@@ -79,8 +79,15 @@ body{
     flex-wrap: wrap;
     width: 320px;
 }
+/*para fines de desarrollo*/
+div{
+    border: solid #32a1ce;
+}
+
 /* div de punto */
 #ccoor{
+    width: 250px;
+    border: thick double #32a1ce;
 }
 #div_add{
     display: flex;

@@ -21,13 +21,10 @@
         <h1> COATL </h1>
         <h2> Sistema de Descarga y Visualización de Series de Tiempo </h2>
     </div>
-    <div id="body">
-    <div id="lateral" >
+    <div id="div_intro">
         <div id="div_manual" class="div_lateral">
             <a href="docs/manual.html"> Manual de Usuario </a>
         </div>
-        <!-- coordenadas de punto -->
-        <!-- definir min y max en JS -->
         <div id="ccoor" class="div_lateral">
             <H3> Agrega punto de interés: </H3>
             <label > Lon ( -99.56, -78.52): 
@@ -43,17 +40,23 @@
                 <button class="boton" id="btn_show_map" onclick="show_map()">Usar Mapa </button><p>
             </div>
         </div>
-            <!-- Selección de variables -->
-            <div id="csel" class="div_lateral">
-                    <h3> Generación de serie de tiempo </h3>
-                    <div id="div_tabs"  ></div>
-                    <div id="div_puntos"></div> 
-                    <div id="div_button">
-                        <button class="boton" name="plot" onclick="plot_btn()"> Generar gráfica </button>
-                        <button class="boton" id="download_csv" onclick="gen_csv()"> Generar CSV </button>
-                        <button class="boton" id="hide_map" onclick="hide_sel()"> Cerrar </button>
-                    </div>
-            </div>
+        
+    </div >
+    <div id="body">
+    <div id="lateral" >
+        <!-- coordenadas de punto -->
+        <!-- definir min y max en JS -->
+        <!-- Selección de variables -->
+        <div id="csel" class="div_lateral">
+                <h3> Generación de serie de tiempo </h3>
+                <div id="div_tabs"  ></div>
+                <div id="div_puntos"></div> 
+                <div id="div_button">
+                    <button class="boton" name="plot" onclick="plot_btn()"> Generar gráfica </button>
+                    <button class="boton" id="download_csv" onclick="gen_csv()"> Generar CSV </button>
+                    <button class="boton" id="hide_map" onclick="hide_sel()"> Cerrar </button>
+                </div>
+        </div>
     </div>
         <!--echarts-->
         <div id="cmain" >
