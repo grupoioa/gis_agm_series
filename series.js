@@ -321,15 +321,27 @@ function onMapMove(e) {
     lat= e.latlng['lat'];
     lon= e.latlng['lng'];
     if (lat>lat_min && lat<lat_max && lon>lon_min && lon<lon_max){
-        popup
-            .setLatLng(e.latlng)
-            .setContent('Posición<br>lat: ' + lat.toFixed(8)+'<br>lon: '+ lon.toFixed(8) )
-            .openOn(map);
+        document.getElementById('inlon_main').value = lon.toFixed(8);
+        document.getElementById('inlat_main').value = lat.toFixed(8);
     }
 }
 //lista de puntos
 let points={};
 let npoints=0;
+function show_cfg(){
+    cfg = document.getElementById('div_cfg');
+    cfg.style.visibility='visible';
+}
+//definición de función botón agregar
+function addMark(){
+    lon= document.getElementById('inlon_main').value
+    lat= document.getElementById('inlat_main').value
+    if (lat>lat_min && lat<lat_max && lon>lon_min && lon<lon_max){
+        console.log('test',lat,lon);
+	add_vars(vars, '#div_tabs', '#div_puntos', lat, lon, 'punto-'+npoints);
+    }
+    show_cfg();
+}
 //definición de función al hacer click en el mapa
 function onMapClick(e) {
     lat= e.latlng['lat'];
@@ -338,11 +350,36 @@ function onMapClick(e) {
         console.log('test',lat,lon);
 	add_vars(vars, '#div_tabs', '#div_puntos', lat, lon, 'punto-'+npoints);
     }
+    show_cfg();
+
 }
 //evento para movimiento en mapa
 map.on('mousemove', onMapMove);
 //evento para click en mapa
 map.on('click', onMapClick);
+tp ={}
+function showMark(){
+    try{
+        tp.remove();
+    }catch(error){
+        console.log('error');
+    }
+    lon= document.getElementById('inlon_main').value
+    lat= document.getElementById('inlat_main').value
+    if (lat>lat_min && lat<lat_max && lon>lon_min && lon<lon_max){
+        tp =L.marker([lat,lon],
+        {
+            icon: new L.DivIcon({
+                className: 'my-div-icon',
+                html: '<img class="my-div-img" src="img/location-dot-solid.svg"/>'+
+                    '<span  >'+'test'+'</span>'
+            })
+        }
+  
+    )
+        .addTo(map);
+    }
+}
 
 //función que oculta menús
 function toggle_opt(ele, display="block"){
@@ -372,7 +409,7 @@ function add_chkbox(var_gral, var_anuales, varname, root, id ){
         id_full=[id, varname, var_obj].join('*');
         let chkbox= $('<label><input type="checkbox" class="chk_var" id="'
                 +id_full+'" value="' + var_obj +
-                '" >'+ var_obj + ' </label> <br>');
+                '" >'+ var_obj + ' </label> ');
         chkbox.appendTo(div_var);
     }
     //recorre claves anuales
@@ -442,23 +479,22 @@ function add_vars(vars, tabs, root, lat, lon, title='titulo'){
         idmain+'\')" '+'id="'+idtab+'">'+ title+ '</button>').appendTo(tabs);
     let div = $('<div > <h4> Opciones de punto </h4> </div>')
         .appendTo(div_main);
-    let in_name = $('<label > Nombre:</label>'+
-        '<input value="'+ title+ '"><br>').appendTo(div);
+    let in_name = $('<label > Nombre: <input size=12 value="'+ title+ '" /> </label>').appendTo(div);
     //latitud
-    let in_lat = $('<label for=inlat_'+title+'> Lat: </label>'+
-        '<input min=\"'+lat_min+
+    let in_lat = $('<label for=inlat_'+title+'>'+
+        'Latitud: <input min=\"'+lat_min+
         '\" max= \"'+lat_max+
         '\" id=\"inlat_'+title+
         '\" type=\"number\" value=\"'+
-        lat+'\" step=0.001><br>').appendTo(div);
+        lat+'\" step=0.001 /> </label>').appendTo(div);
     document.getElementById("inlat_"+title).addEventListener('change', function(){update_marker(title)});
     //longitud
-    let in_lon = $('<label for=inlon_'+title+'> Lon: </label>'+
-        '<input min=\"'+lon_min+
+    let in_lon = $('<label for=inlon_'+title+'> '+
+        'Longitud: <input min=\"'+lon_min+
         '\" max= \"'+lon_max+
         '\" id=\"inlon_'+title+
         '\" type=\"number\" value=\"'+
-        lon+'\" step=0.001>').appendTo(div);
+        lon+'\" step=0.001 /> </label> ').appendTo(div);
     document.getElementById("inlon_"+title).addEventListener('change', function(){update_marker(title)});
     //in_lon.addEventListener('change', update_marker);
     //Variables y estadísticos
@@ -466,7 +502,6 @@ function add_vars(vars, tabs, root, lat, lon, title='titulo'){
         appendTo(div_main)[0];
     //recorre claves principales (nombres de variables)
     for (const var_obj in vars){
-        console.log('vars_obj', var_obj);
         add_chkbox(vars[var_obj], var_anuales[var_obj], var_obj, div_vars, nid);
     }
     let btn = $('<p><button onclick=\"del_id(\''+idmain+'\')\"> Eliminar punto </button></p>');
@@ -514,21 +549,17 @@ function plot_btn(){
             format='text/csv'));
     });
     get_csv(req_list);
-    //document.getElementById("overlay").style.display = "none";//???
+    show_plot();
 }
-function show_map(){
-    sel = document.getElementById("cmap");
-    sel.style.display = "block";
-    sel = document.getElementById("map");
-    sel.style.display = "block";
-    map.invalidateSize()
-    //map.setView(bounds.getCenter(), 5.0);
+
+function show_plot(){
+    sel = document.getElementById("cmain");
+    sel.style.visibility = "visible";
 }
-function hide_map(){
-    sel = document.getElementById("cmap");
-    sel.style.display = "none";
-    sel = document.getElementById("map");
-    sel.style.display = "none";
+
+function close_plot(){
+    sel = document.getElementById("cmain");
+    sel.style.visibility = "hidden";
 }
 
 function show_sel(){
@@ -537,9 +568,8 @@ function show_sel(){
     sel.style.zIndex=1;
 }
 function hide_sel(){
-    sel = document.getElementById("csel");
-    sel.style.display = "none";
-    sel.style.zIndex=0;
+    sel = document.getElementById("div_cfg");
+    sel.style.visibility= "hidden";
 }
 
 function gen_csv(){

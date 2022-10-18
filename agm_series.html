@@ -22,55 +22,87 @@
         <h2> Sistema de Descarga y Visualización de Series de Tiempo </h2>
     </div>
     <div id="div_intro">
-        <div id="div_manual" class="div_lateral">
+
+        <!-- div descripción --!>
+        <div id="div_describe" class="div_central div_cool" >
+            <H3> Descripción </H3>
+            <p> Este sistema permite el despliegue y descarga de series de tiempo de estadísticos generados a partir de datos de reanálisis de datos del WRF en el periodo de 1980 - 2016.
+            </p>
+            <p> Contiene datos de temperatura, viento y precipitación 
+            </p>
+            <p> Los intervalos son diarios, mensuales y anuales (mensuales por año)
+            </p>
+        </div>
+
+        <!-- div manual --!>
+        <div id="div_manual" class= "div_central div_cool" >
+            <H3> Ayuda </H3>
+            <H4> 1. Indica las coordenadas de un punto de interés </H4>
+            <H4> 2. Selecciona la variable y estadístico </H4>
+            <H4> 3. Presiona Generar gráfica </H4>
             <a href="docs/manual.html"> Manual de Usuario </a>
         </div>
-        <div id="ccoor" class="div_lateral">
+        <!-- div id="cmap" class="overlay div_central" onclick=hide_map()>
+        </div--!>
+
+        <!-- div selección de coordenadas --!>
+        <div id="div_coor" class="div_central div_cool">
             <H3> Agrega punto de interés: </H3>
-            <label > Lon ( -99.56, -78.52): 
-                <input id="inlon_main" size="8"  type= "number" step=0.001 value="92.1">
-                
-            </label>
-            <label > Lat ( 16.50, 32.44 ): 
-                <input id="inlat_main" size="8"  type= "number" step=0.001 value="24.5">
-                
-            </label>
-            <div id="div_add">
-                <button class="button" id="btn_add" > Agrega </button>
-                <button class="boton" id="btn_show_map" onclick="show_map()">Usar Mapa </button><p>
+            <div class="div_incoor">
+                <div class="div_centered">
+                    <label > Lon ( -99.56, -78.52): 
+                        <input id="inlon_main" type= "number" step=0.1 value="-92.1" min="-99.56" max="-78.52" />
+                    </label>
+
+                    <label > Lat ( +16.50, +32.44 ): 
+                        <input id="inlat_main" type= "number" step=0.1 value="24.5" min="16.50" max="32.44" />
+                    </label>
+                </div>
+                <div class="div_centered">
+                    <button class="button" id="btn_show" onclick="showMark()" > Muestra<BR>en mapa</button><BR>
+                    <button class="button" id="btn_add" onclick="addMark()" > Agrega </button>
+                </div>
             </div>
         </div>
-        
-    </div >
-    <div id="body">
-    <div id="lateral" >
+            
+        <!-- Mapa -->
+        <div id="map" oncontextmenu="click_sec()" class="div_cool">
+                <!--button class="boton" id="hide_map2" onclick="hide_map()"> X </button--!>
+            <div id="texto_mapa"> &gt;&gt; Click en el mapa para agregar punto</div>
+        </div>
+        <div id="div_barra" class="div_centered div_cool">
+            <button onclick="show_cfg()"> ⚙ </button>
+            <button onclick="show_plot()"> &#128480</button>
+            <button onclick="location.href='docs/manual.html';"> &#129988 </button>
+            <button onclick="location.href='https://github.com/grupoioa/gis_agm_series';"> &#128462 </button>
+        </div>
+    </div>
+
+    <div id="div_cfg" class="overlay" >
+        <div class="div_cool">
         <!-- coordenadas de punto -->
         <!-- definir min y max en JS -->
         <!-- Selección de variables -->
-        <div id="csel" class="div_lateral">
+            <div id="csel" class="div_lateral div_cool">
                 <h3> Generación de serie de tiempo </h3>
                 <div id="div_tabs"  ></div>
                 <div id="div_puntos"></div> 
                 <div id="div_button">
                     <button class="boton" name="plot" onclick="plot_btn()"> Generar gráfica </button>
-                    <button class="boton" id="download_csv" onclick="gen_csv()"> Generar CSV </button>
                     <button class="boton" id="hide_map" onclick="hide_sel()"> Cerrar </button>
                 </div>
-        </div>
-    </div>
-        <!--echarts-->
-        <div id="cmain" >
-            <div id="main" ></div>
-        </div>
-       <!-- Mapa -->
-        <div id="cmap" class="overlay" onclick=hide_map()>
-        </div>
-            <div id="map" class="overlay" oncontextmenu="click_sec()" >
-                <!--button class="boton" id="hide_map2" onclick="hide_map()"> X </button--!>
-			<div id="texto_mapa"> &gt;&gt; Agregar punto: click en el mapa<BR>&gt;&gt; Cerrar: click fuera del mapa </div>
             </div>
-
+        </div>
     </div>
+    <!--echarts-->
+    <div id="cmain" class="overlay" > 
+        <div id="main" ></div>
+        <div>
+            <button class="boton" id="download_csv" onclick="gen_csv()"> Generar CSV </button>
+            <button class="boton" id="close_plot" onclick="close_plot()"> Cerrar </button>
+        </div>
+    </div>
+
 
 </body>
 </html>

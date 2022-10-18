@@ -3,9 +3,10 @@
 }
 label{
     display: block;
+    padding: 3px;
 }
 
- button{
+button{
     padding: 5px 10px;
     font-size: 12px;
     border-radius: 12px;
@@ -18,12 +19,29 @@ label{
     font-family: Arial, Helvetica, sans-serif;
     display: inline-block;
   
- }
+}
 
 body{
     background-color: #EFEFEF;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
+    font-family: 'Source Sans Pro', sans-serif;
+    /*font-family: Arial, Helvetica, sans-serif;*/
+    font-size: 14px;
+}
+h1 {
+  margin: 0;
+  font-family: 'Bree Serif', serif;
+  font-size: 36px;
+}
+
+h2 {
+  margin: 0;
+  font-family: 'Bree Serif', serif;
+  font-size: 24px;
+}
+
+h3 {
+  margin: 0;
+  font-size: 20px;
 }
 
 .claro{
@@ -35,14 +53,20 @@ body{
 }
 
 .overlay{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: rgba(255,255,255,0.8); /* Black background with opacity */
     color: black;/*white;*/
-    display: none;
+    position: absolute;
+    width: 100%;
+    /*height: calc(100% - 100px);*/
+    height: 100%;
 }
 /* div de mapa */
 #cmap{
     position: absolute;
-    width: 100%;
+    top: 0px;
     height: 100%;
     z-index: 9; 
     /*z-index: 0; */
@@ -61,46 +85,125 @@ body{
     z-index: 999; 
 }
 #map{
-    position: absolute;
+    position: relative;
     width: 400px;
     height: 400px;
-    top: 50%;
-    left: 50%;
-    margin: -200px 0 0 -200px;
-    z-index: 10; 
+    top: 0;
+    left: 0;
+    margin: 0;
+    animation: slide2r 3s 1;
 }
-#body{
-    display: flex;
-    justify-content: space-between;
+#div_cfg{
+    position: absolute;
+    visibility: hidden;
+    /*width: 320px;*/
+    z-index: 1000;
+    top: 0px;
 }
-#lateral{
+/*para fines de desarrollo*/
+/*
+div{
+    border: 1px dashed #32a1ce;
+}
+*/
+#div_central{
+    width: 450px;
+}
+.div_central{
+    width: 355px;
+    margin: 1%;
+    padding: 2%;
+}
+#div_intro{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    width: 320px;
+    align-items: center;
+    height: 650px;
 }
-/*para fines de desarrollo*/
-div{
-    border: solid #32a1ce;
+/* div ayuda / manual de usuario */
+#div_manual{
+    position: relative;
+    width: 355px;
+    height: 200px;
+    animation: slide2d 3s 1;
+}
+#div_describe{
+    position: relative;
+    height: 280px;
+    animation: slide2l 3s 1;
+}
+@keyframes slide2r{
+  from {
+      left: -400px;
+      opacity: 0;
+  }
+
+  to {
+      left: 0px;
+      opacity: 1;
+  }
+}
+@keyframes slide2u {
+  from {
+      bottom: -400px;
+      opacity: 0;
+  }
+
+  to {
+      bottom: 0px;
+      opacity: 1;
+  }
+}
+
+@keyframes slide2l{
+  from {
+      right: -400px;
+      opacity: 0;
+  }
+
+  to {
+      right: 0px;
+      opacity: 1;
+  }
+}
+@keyframes slide2d {
+  from {
+      top: -400px;
+      opacity: 0;
+  }
+
+  to {
+      top: 0px;
+      opacity: 1;
+  }
 }
 
 /* div de punto */
-#ccoor{
-    width: 250px;
-    border: thick double #32a1ce;
-}
-#div_add{
+#div_coor{
+    position: relative;
     display: flex;
-    justify-content: space-evenly;
-    margin:10px;
-    width: 80%;
+    flex-direction: column;
+    height: 150px;
+    animation: slide2u 3s 1;
 }
-
+.div_incoor{
+    margin: 5px;
+    padding: 5px;
+    height: 70px;
+    display: flex;
+    flex: 1 ;
+}
+.div_centered{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 /* div de selección de variable */
 #csel{
     display: inline-block;
     height: 580px;
-    background-color: #e6e8eb;
+    width: 400px;
     padding: 10px;
 }
 #div_tabs{
@@ -112,19 +215,36 @@ div{
 }
 
 #div_puntos{
-    width: var(--sel-width);
+    width: 100%;
     height: 400px;
     overflow-y: scroll;
 }
 /* div gráficas */
 #cmain{
-    display: inline-block;
-    width:calc(100% - 330px);
+    flex-direction: column;
+    z-index: 1001;
+    top: 100px;
+    visibility: hidden;
+}
+#div_barra{
+    width: 50px;
+    height:150px;
+    font-size: 32px;
+    margin: 2px;
+    padding: 1px;
+    right: 0px;
+    justify-content: space-around;
 }
 
-#main31{
-    display: inline-block;
+.div_cool{
+    border: 2px solid #24667E;
+    border-radius: 12px;
+    background-color: #ffffffaa;
+}
+
+#main{
     width: 100%; 
+    margin: 10px;
 }
 
 #div_button_main{
@@ -141,7 +261,7 @@ div{
     text-align: left;
 }
 .div_lateral{
-    widht:310px;
+    widht:350px;
 }
 
 .menu_btn{
@@ -216,9 +336,7 @@ div{
 
 .tab-content{
     position: relative;
-    top: 10px;
-    left: 10px;
-    width: 90%;
+    margin: 10px;
 }
 
 .tab{
