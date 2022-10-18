@@ -112,7 +112,7 @@ div{
 .div_central{
     width: 355px;
     margin: 1%;
-    padding: 2%;
+    padding: 1%;
 }
 #div_intro{
     display: flex;
@@ -130,7 +130,7 @@ div{
 }
 #div_describe{
     position: relative;
-    height: 280px;
+    height: 290px;
     animation: slide2l 3s 1;
 }
 @keyframes slide2r{
@@ -184,7 +184,7 @@ div{
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 150px;
+    height: 160px;
     animation: slide2u 3s 1;
 }
 .div_incoor{
