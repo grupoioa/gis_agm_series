@@ -138,6 +138,79 @@ div{
     height: 290px;
     animation: slide2l 3s 1;
 }
+@media (max-width: 600px){
+.div_central{
+    width: 300px;
+    margin: 2px;
+    padding: 2px;
+}
+#div_intro{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    height: 2000px;
+}
+/* div ayuda / manual de usuario */
+#div_manual{
+    position: relative;
+    width: 300px;
+    height: 180px;
+    animation: slide2d 3s 1;
+}
+#div_describe{
+    position: relative;
+    height: 250px;
+    animation: slide2l 3s 1;
+}
+#div_coor{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 160px;
+    animation: slide2u 3s 1;
+}
+
+#div_barra{
+    width: 55px;
+    height:150px;
+    position: absolute;
+    top: 180px;
+    left: 2px;
+    font-size: 10px;
+    margin: 0px;
+    padding: 0px;
+    right: 0px;
+    justify-content: space-around;
+}
+h2 {
+  margin: 0;
+  font-family: 'Bree Serif', serif;
+  font-size: 16px;
+}
+h3 {
+  margin: 0;
+  font-size: 14px;
+}
+
+#map{
+    position: relative;
+    width: 300px;
+    height: 300px;
+    top: 0;
+    left: 0;
+    margin: 0;
+    animation: slide2r 3s 1;
+}
+#div_cfg{
+    position: absolute;
+    visibility: hidden;
+    /*width: 320px;*/
+    z-index: 1000;
+    top: 100px;
+}
+
+}
 @keyframes slide2r{
   from {
       left: -400px;
