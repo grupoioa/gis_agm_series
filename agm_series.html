@@ -22,6 +22,13 @@
         <h2> Sistema de Descarga y Visualización de Series de Tiempo </h2>
     </div>
     <div id="div_intro">
+        <!-- barra  --!>
+        <div id="div_barra" class="div_centered div_cool">
+            <button onclick="show_cfg()"> ⚙ </button>
+            <button onclick="show_plot()"> &#128480</button>
+            <button onclick="location.href='docs/manual.html';"> &#129988 </button>
+            <button onclick="location.href='https://github.com/grupoioa/gis_agm_series';"> &#128462 </button>
+        </div>
 
         <!-- div descripción --!>
         <div id="div_describe" class="div_central div_cool" >
@@ -61,7 +68,7 @@
                     </label>
                 </div>
                 <div class="div_centered">
-                    <button class="button" id="btn_show" onclick="showMark()" > Muestra<BR>en mapa</button><BR>
+                    <button class="button" id="btn_show" onclick="showMark('img/location-dot-gray.svg')" > Muestra<BR>en mapa</button><BR>
                     <button class="button" id="btn_add" onclick="addMark()" > Agrega </button>
                 </div>
             </div>
@@ -71,12 +78,6 @@
         <div id="map" oncontextmenu="click_sec()" class="div_cool">
                 <!--button class="boton" id="hide_map2" onclick="hide_map()"> X </button--!>
             <div id="texto_mapa"> &gt;&gt; Click en el mapa para agregar punto</div>
-        </div>
-        <div id="div_barra" class="div_centered div_cool">
-            <button onclick="show_cfg()"> ⚙ </button>
-            <button onclick="show_plot()"> &#128480</button>
-            <button onclick="location.href='docs/manual.html';"> &#129988 </button>
-            <button onclick="location.href='https://github.com/grupoioa/gis_agm_series';"> &#128462 </button>
         </div>
     </div>
 

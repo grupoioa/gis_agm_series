@@ -39,7 +39,7 @@ L.geoJSON(pts_interes,{
     icon: new L.DivIcon({
         className: 'my-div-icon',
         html: '<img src="img/bullseye-solid2.svg"/>'+
-              '<span class="my-div-span">'+
+              '<span class="map-txt">'+
             //geoJsonPoint.properties.name +
             '</span>'
     })
@@ -358,21 +358,21 @@ map.on('mousemove', onMapMove);
 //evento para click en mapa
 map.on('click', onMapClick);
 tp ={}
-function showMark(){
+function showMark( src="img/location-dot-solid.svg"){
     try{
         tp.remove();
     }catch(error){
         console.log('error');
     }
-    lon= document.getElementById('inlon_main').value
-    lat= document.getElementById('inlat_main').value
+    lon= parseFloat(document.getElementById('inlon_main').value)
+    lat= parseFloat(document.getElementById('inlat_main').value)
     if (lat>lat_min && lat<lat_max && lon>lon_min && lon<lon_max){
         tp =L.marker([lat,lon],
         {
             icon: new L.DivIcon({
                 className: 'my-div-icon',
-                html: '<img class="my-div-img" src="img/location-dot-solid.svg"/>'+
-                    '<span  >'+'test'+'</span>'
+                html: '<img class="my-div-img" src="'+src+'" />'+
+                    '<span  class="map-txt"> P('+lon.toFixed(4)+','+lat.toFixed(4)+')</span>'
             })
         }
   
@@ -462,8 +462,8 @@ function add_vars(vars, tabs, root, lat, lon, title='titulo'){
         {
             icon: new L.DivIcon({
                 className: 'my-div-icon',
-                html: '<img class="my-div-img" src="img/thumbtack-solid2.svg"/>'+
-                    '<span  >'+title.replace('-','_')+'</span>'
+                html: '<img class="my-div-img" src="img/location-dot-red.svg"/>'+
+                    '<span  class="map-txt">'+title.replace('-','_')+'</span>'
             })
         }
   

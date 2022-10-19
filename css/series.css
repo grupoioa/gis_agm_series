@@ -86,7 +86,7 @@ h4 {
     position: relative;
     top: 0;
     color: white;
-    left: 180px;
+    left: 50px;
     z-index: 999; 
 }
 #map{
@@ -305,13 +305,17 @@ h3 {
     visibility: hidden;
 }
 #div_barra{
+position: absolute;
+top: 100px;
+left: 10px;
     width: 50px;
-    height:150px;
+    height: 150px;
     font-size: 32px;
     margin: 2px;
     padding: 1px;
     right: 0px;
     justify-content: space-around;
+    z-index: 100;
 }
 
 .div_cool{
@@ -358,6 +362,9 @@ h3 {
 
 .menu_btn:hover{font-size:14px;}
 
+.map-txt{
+    color: white;
+}
 .my-div-img{
     position:absolute;
     bottom: 50%;
