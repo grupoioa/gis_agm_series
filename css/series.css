@@ -123,16 +123,20 @@ div{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    grid-auto-flow: row;
     justify-content: space-around;
     height: 650px;
 }
 .div_in-intro{
+    display: flex;
+    flex-wrap: wrap;
     grid-auto-flow: column ;
+    align-items: center;
+    width: 380px;
 }
 /* div ayuda / manual de usuario */
 #div_manual{
     position: relative;
-    width: 355px;
     animation: slide2d 3s 1;
 }
 #div_describe{
@@ -141,7 +145,7 @@ div{
 }
 @media (max-width: 600px){
 .div_central{
-    width: 300px;
+    width: 335px;
     margin: 2px;
     padding: 2px;
 }
@@ -149,13 +153,18 @@ div{
     display: flex;
 flex-wrap: wrap;
     justify-content: right;
-    height: 1000px;
+    height: 850px;
     width: 395px;
+}
+.div_in-intro{
+    display: flex;
+    grid-auto-flow: column ;
+    justify-content: right;
+    width: 380px;
 }
 /* div ayuda / manual de usuario */
 #div_manual{
     position: relative;
-    width: 300px;
     animation: slide2d 3s 1;
 }
 #div_describe{
@@ -260,7 +269,6 @@ h3 {
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 160px;
     animation: slide2u 3s 1;
 }
 .div_incoor{
