@@ -120,22 +120,23 @@ div{
     padding: 1%;
 }
 #div_intro{
+    width: 100%;
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
-    align-items: center;
+    justify-content: space-around;
     height: 650px;
+}
+.div_in-intro{
+    grid-auto-flow: column ;
 }
 /* div ayuda / manual de usuario */
 #div_manual{
     position: relative;
     width: 355px;
-    height: 200px;
     animation: slide2d 3s 1;
 }
 #div_describe{
     position: relative;
-    height: 290px;
     animation: slide2l 3s 1;
 }
 @media (max-width: 600px){
@@ -146,28 +147,25 @@ div{
 }
 #div_intro{
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    height: 2000px;
+flex-wrap: wrap;
+    justify-content: right;
+    height: 1000px;
+    width: 395px;
 }
 /* div ayuda / manual de usuario */
 #div_manual{
     position: relative;
     width: 300px;
-    height: 180px;
     animation: slide2d 3s 1;
 }
 #div_describe{
     position: relative;
-    height: 250px;
     animation: slide2l 3s 1;
 }
 #div_coor{
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 160px;
     animation: slide2u 3s 1;
 }
 
@@ -318,6 +316,9 @@ left: 10px;
     z-index: 100;
 }
 
+.input_coord{
+    width: 8em;
+}
 .div_cool{
     border: 2px solid #24667E;
     border-radius: 12px;
