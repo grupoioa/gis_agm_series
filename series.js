@@ -22,13 +22,16 @@ var map = L.map('map', {
         //center:[19.3262492550136, -99.17620429776193],//coordenadas CU
         center:[ 25.008, -92.153 ],
         zoomSnap: 0.1,
-        zoom: 5.0,
+        zoom: 6.5,
         minZoom:5,
         maxZoom:20,
         layers: [ back_layer, ],
         maxBounds: bounds,
         maxBoundsViscosity: 1,
         });
+if (window.innerWidth<600){
+    map.setZoom(5);
+}
 //crea y dibuja área de trabajo
 //L.rectangle(bounds, {color: "#caf0f8", weight:1}).addTo(map);
 //crea etiquetas de puntos de interés
@@ -217,6 +220,12 @@ myChart.setOption({
 
 window.onresize = function(){
     myChart.resize();
+    if (window.innerWidth<600){
+        map.setZoom(5.0);
+    }
+    else{
+    map.setZoom(6.5);
+    }
 };
 function plot(series, legend){
     var option = {
@@ -634,4 +643,14 @@ function gen_csv(){
         }
     }
 
+}
+
+function ayuda_toggle(){
+    var sel = document.getElementById('div_ayuda');
+    if (sel.style.display == 'none'){
+        sel.style.display = 'grid';
+    }
+    else{
+        sel.style.display = 'none';
+    }
 }

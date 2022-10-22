@@ -24,14 +24,27 @@
     <div id="div_intro">
         <!-- barra  --!>
         <div id="div_barra" class="div_centered div_cool">
-            <button onclick="show_cfg()"> ⚙ </button>
-            <button onclick="show_plot()"> &#128480</button>
-            <button onclick="location.href='docs/manual.html' '_blank';">  &#129988 </button>
-            <button onclick="window.open('https://github.com/grupoioa/gis_agm_series','_blank') "> &#128462 </button>
+            <button class="button_bar" onclick="show_cfg()" title="Configuración" > &target;
+                 <span class= "button_text_bar"> Estadístico </span>
+             </button>
+            <button class="button_bar" onclick="show_plot()" > &#128480;
+                <span class="button_text_bar"> Gráfica </span>
+             </button>
+            <button class="button_bar" onclick="ayuda_toggle()">  &#129988;
+                <span class="button_text_bar"> Ayuda </span>
+            </button>
+            <button class="button_bar" onclick="window.open('https://github.com/grupoioa/gis_agm_series','_blank') "> &#128462; 
+                <span class= "button_text_bar"> Github </span>
+            </button>
         </div>
 
+        <div id="div_ayuda" class="div_cool" >
+            <div class="div_central " >
+                X
+            </div>
+
             <!-- div descripción --!>
-            <div id="div_describe" class="div_central div_cool" >
+            <div id="div_describe" class="div_central " >
                 <H3> Descripción </H3>
                 <p> Este sistema permite el despliegue y descarga de series de tiempo de estadísticos generados a partir de datos de reanálisis de datos del WRF en el periodo de 1980 - 2016.
                 </p>
@@ -42,17 +55,21 @@
             </div>
 
             <!-- div manual --!>
-            <div id="div_manual" class= "div_central div_cool" >
+            <div id="div_inayuda" class= "div_central " >
                 <H3> Ayuda </H3>
                 <ol>
                     <li> Indica las coordenadas de un punto de interés </li>
                     <li> Selecciona la variable y estadístico </li>
                     <li> Presiona Generar gráfica </li>
                 </ol>
-                <a href="docs/manual.html"> Manual de Usuario </a>
             </div>
             <!-- div id="cmap" class="overlay div_central" onclick=hide_map()>
             </div--!>
+            <div id="div_manual" class= "div_central " >
+                <a href="docs/manual.html"> Manual de Usuario </a>
+            </div>
+            
+        </div>
 
             <!-- div selección de coordenadas --!>
             <div id="div_coor" class="div_central div_cool">

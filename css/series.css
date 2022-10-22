@@ -65,8 +65,7 @@ h4 {
     color: black;/*white;*/
     position: absolute;
     width: 100%;
-    /*height: calc(100% - 100px);*/
-    height: 100%;
+    height: calc(100% - 100px);
 }
 /* div de mapa */
 #cmap{
@@ -94,7 +93,7 @@ h4 {
     width: 75%;
     transform: translateX(-50%);
     height: calc(100% - 150px);
-    top: 150;
+    top: 100px;
     left: 50%;
     margin: 0;
     z-index: 0;
@@ -116,16 +115,19 @@ div{
     width: 450px;
 }
 .div_central{
-    width: 355px;
-    margin: 1%;
+    margin: 10px;
     padding: 1%;
+    display: flex;
+    flex-direction: column;
+    /*align-items: flex-end;*/
+    
 }
 #div_intro{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    grid-auto-flow: row;
     justify-content: space-around;
+    align-items: flex-start;
     height: 650px;
 }
 .div_in-intro{
@@ -135,15 +137,22 @@ div{
     align-items: center;
     width: 380px;
 }
+#div_ayuda{
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    width: 350px;
+    z-index: 1;
+    padding: 10px;
+}
+
 /* div ayuda / manual de usuario */
 #div_manual{
     position: relative;
-    z-index: 1;
     animation: slide2d 3s 1;
 }
 #div_describe{
     position: relative;
-    z-index: 1;
     animation: slide2l 3s 1;
 }
 @media (max-width: 600px){
@@ -156,8 +165,8 @@ div{
     display: flex;
 flex-wrap: wrap;
     justify-content: right;
-    height: 850px;
     width: 395px;
+    height: 80%;
 }
 .div_in-intro{
     display: flex;
@@ -204,13 +213,9 @@ h3 {
 }
 
 #map{
-    position: relative;
-    width: 300px;
-    height: 300px;
-    top: 0;
-    left: 0;
-    margin: 0;
-    animation: slide2r 3s 1;
+    height: calc(100% - 200px);
+    bottom: 10px;
+    width: 95%;
 }
 #div_cfg{
     position: absolute;
@@ -318,14 +323,31 @@ h3 {
 position: absolute;
 top: 100px;
 left: 10px;
-    width: 50px;
+    width: 30px;
     height: 150px;
-    font-size: 32px;
-    margin: 2px;
-    padding: 1px;
+    margin: 0px;
+    padding: 1px 10px;
     right: 0px;
     justify-content: space-around;
     z-index: 100;
+    opacity: 0.9;
+}
+#div_barra:hover{
+    width: 120px;
+}
+.button_bar{
+    font-size: 20px;
+    width: 100%;
+    margin: 1px;
+    padding: 2px 8px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.button_bar:hover{
+    color: black;
+}
+.button_text_bar{
+    font-size: 12px;
 }
 
 .input_coord{
