@@ -56,6 +56,7 @@
 
         <div id="div_intro">
             <div id="div_ayuda" class="div_cool" >
+                <div id="cierra_hp" onclick="ayuda_toggle()" title="Cerrar ayuda"> x </div>
                 <!-- div descripción --!>
                 <div id="div_describe" class="div_central " >
                     <H3> Descripción </H3>
@@ -69,18 +70,28 @@
 
                 <!-- div ayuda --!>
                 <div id="div_inayuda" class= "div_central " >
-                    <H3> Ayuda </H3>
+                    <H3> Cómo generar la gráfica de una serie de tiempo</H3>
                     <ol>
                         <li> Indica las coordenadas de un punto de interés </li>
                         <li> Selecciona la variable y estadístico </li>
                         <li> Presiona Generar gráfica </li>
                     </ol>
+                    <H3> Funciones del menú </H3>
+                    El menú a la izquierda permite abrir/cerrar diferentes secciones:
+                    <ul>
+                    <li> Estadístico: accede a la selección de variable y estadístico. </li>
+                    <li> Gráfica: accede a la gráfica de series de tiempo </li>
+                    <li> Temperatura: despliega climatología de temperatura mensual </li>
+                    <li> Viento: despliega climatología de viento mensual </li>
+                    <li> Ayuda: abre/cierra esta ayuda </li>
+                    <li> Github: abre el repositorio de este sistema </li>
+                    </ul>
                 </div>
                 <!-- div id="cmap" class="overlay div_central" onclick=hide_map()>
                 </div--!>
                 <!-- div manual --!>
                 <div id="div_manual" class= "div_central " >
-                <span> <a href="docs/manual.html"> Manual de Usuario </a></span><span> x </span>
+                <span> <a href="docs/manual.html"> Manual de Usuario </a></span>
                 </div>
                 
             </div>

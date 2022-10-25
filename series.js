@@ -653,7 +653,7 @@ function gen_csv(){
 function ayuda_toggle(){
     var sel = document.getElementById('div_ayuda');
     if (sel.style.display == 'none'){
-        sel.style.display = 'grid';
+        sel.style.display = 'flex';
     }
     else{
         sel.style.display = 'none';
