@@ -14,22 +14,38 @@
     <script defer src='lib/series_lib.js'></script>
     <script defer src='data/PuntosRelevantes.js'></script>
     <script defer src='data/capas.js'></script>
+    <script defer src='data/wms.js'></script>
     <script defer src='series.js'></script>
 </head>
 <body>
-    <div id="header" class="claro">
-        <h2> Sistema de Descarga y Visualización de Series de Tiempo </h2>
-        <h1> COATL </h1>
+    <!-- Mapa -->
+    <div id="map" oncontextmenu="click_sec()" >
+            <!--button class="boton" id="hide_map2" onclick="hide_map()"> X </button--!>
     </div>
-    <div id="div_intro">
+
+    <div title="Coatl es un sistema de descarga y visualización de series de tiempo" id="header" class="">
+        <h1 > Coatl </h1>
+    </div>
+    <div id="div_logos" class="div_cool" >
+        <img src="img/ioa_original.svg" class="logos" >
+        <img src="img/unam_negro.svg" class="logos" >
+        <img src="img/logo_CIGoM.svg" class="logos" >
+    </div>
+    <div id="div_info" >
         <!-- barra  --!>
-        <div id="div_barra" class="div_centered div_cool">
+        <div id="div_barra" class="div_cool">
             <button class="button_bar" onclick="show_cfg()" title="Configuración" > &target;
                  <span class= "button_text_bar"> Estadístico </span>
              </button>
             <button class="button_bar" onclick="show_plot()" > &#128480;
                 <span class="button_text_bar"> Gráfica </span>
              </button>
+            <button class="button_bar" onclick="toggle_var('Temperatura')">  &#127777; 
+                <span class="button_text_bar"> Temperatura </span>
+            </button>
+            <button class="button_bar" onclick="toggle_var('Viento')"> 〜 
+                <span class="button_text_bar"> Viento </span>
+            </button>
             <button class="button_bar" onclick="ayuda_toggle()">  &#129988;
                 <span class="button_text_bar"> Ayuda </span>
             </button>
@@ -38,65 +54,58 @@
             </button>
         </div>
 
-        <div id="div_ayuda" class="div_cool" >
-            <div class="div_central " >
-                X
+        <div id="div_intro">
+            <div id="div_ayuda" class="div_cool" >
+                <!-- div descripción --!>
+                <div id="div_describe" class="div_central " >
+                    <H3> Descripción </H3>
+                    <p> Este sistema permite el despliegue y descarga de series de tiempo de estadísticos generados a partir de datos de reanálisis de datos del WRF en el periodo de 1980 - 2016.
+                    </p>
+                    <p> Contiene datos de temperatura, viento y precipitación 
+                    </p>
+                    <p> Los intervalos son diarios, mensuales y anuales (mensuales por año)
+                    </p>
+                </div>
+
+                <!-- div ayuda --!>
+                <div id="div_inayuda" class= "div_central " >
+                    <H3> Ayuda </H3>
+                    <ol>
+                        <li> Indica las coordenadas de un punto de interés </li>
+                        <li> Selecciona la variable y estadístico </li>
+                        <li> Presiona Generar gráfica </li>
+                    </ol>
+                </div>
+                <!-- div id="cmap" class="overlay div_central" onclick=hide_map()>
+                </div--!>
+                <!-- div manual --!>
+                <div id="div_manual" class= "div_central " >
+                <span> <a href="docs/manual.html"> Manual de Usuario </a></span><span> x </span>
+                </div>
+                
             </div>
 
-            <!-- div descripción --!>
-            <div id="div_describe" class="div_central " >
-                <H3> Descripción </H3>
-                <p> Este sistema permite el despliegue y descarga de series de tiempo de estadísticos generados a partir de datos de reanálisis de datos del WRF en el periodo de 1980 - 2016.
-                </p>
-                <p> Contiene datos de temperatura, viento y precipitación 
-                </p>
-                <p> Los intervalos son diarios, mensuales y anuales (mensuales por año)
-                </p>
-            </div>
+                <!-- div selección de coordenadas --!>
+                <div id="div_coor" class="div_central div_cool">
+                    <H3> Agrega punto de interés: </H3>
+                    <div class="div_incoor">
+                        <div class="div_centered">
+                            <label > Lon ( -99.56, -78.52): 
+                                <input id="inlon_main" class="input_coord" type= "number" step=0.1 value="-92.1" min="-99.56" max="-78.52" />
+                            </label>
 
-            <!-- div manual --!>
-            <div id="div_inayuda" class= "div_central " >
-                <H3> Ayuda </H3>
-                <ol>
-                    <li> Indica las coordenadas de un punto de interés </li>
-                    <li> Selecciona la variable y estadístico </li>
-                    <li> Presiona Generar gráfica </li>
-                </ol>
-            </div>
-            <!-- div id="cmap" class="overlay div_central" onclick=hide_map()>
-            </div--!>
-            <div id="div_manual" class= "div_central " >
-                <a href="docs/manual.html"> Manual de Usuario </a>
-            </div>
-            
-        </div>
-
-            <!-- div selección de coordenadas --!>
-            <div id="div_coor" class="div_central div_cool">
-                <H3> Agrega punto de interés: </H3>
-                <div class="div_incoor">
-                    <div class="div_centered">
-                        <label > Lon ( -99.56, -78.52): 
-                            <input id="inlon_main" class="input_coord" type= "number" step=0.1 value="-92.1" min="-99.56" max="-78.52" />
-                        </label>
-
-                        <label > Lat ( +16.50, +32.44 ): 
-                            <input id="inlat_main" class="input_coord" type= "number" step=0.1 value="24.5" min="16.50" max="32.44" />
-                        </label>
-                    </div>
-                    <div class="div_centered">
-                        <button class="button" id="btn_show" onclick="showMark('img/location-dot-gray.svg')" > Muestra<BR>en mapa</button><BR>
-                        <button class="button" id="btn_add" onclick="addMark()" > Agrega </button>
+                            <label > Lat ( +16.50, +32.44 ): 
+                                <input id="inlat_main" class="input_coord" type= "number" step=0.1 value="24.5" min="16.50" max="32.44" />
+                            </label>
+                        </div>
+                        <div class="div_centered">
+                            <button class="button" id="btn_show" onclick="showMark('img/location-dot-gray.svg')" > Muestra<BR>en mapa</button><BR>
+                            <button class="button" id="btn_add" onclick="addMark()" > Agrega </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-                
-            <!-- Mapa -->
-            <div id="map" oncontextmenu="click_sec()" class="div_cool">
-                    <!--button class="boton" id="hide_map2" onclick="hide_map()"> X </button--!>
-                <div id="texto_mapa"> &gt;&gt; Click en el mapa para agregar punto</div>
-            </div>
-
+                    
+        </div>
     </div>
 
     <div id="div_cfg" class="overlay" >
@@ -124,6 +133,14 @@
         </div>
     </div>
 
+    <!--slider --!>
+    <div id="div_slider" >
+        <div id="title_month" > Enero </div>
+        <input type= "range" min="0" max="11" value="0" class="slider" id="slider_month" >
+    </div>
+
+        <img id="cbar" class="" >
+        
 
 </body>
 </html>

@@ -29,11 +29,15 @@ var map = L.map('map', {
         maxBounds: bounds,
         maxBoundsViscosity: 1,
         });
+
 if (window.innerWidth<600){
     map.setZoom(5);
 }
+//L.imageOverlay("img/ioa_original.svg", [[22, -99], [20, -97]]).addTo(map);
+
 //crea y dibuja área de trabajo
-//L.rectangle(bounds, {color: "#caf0f8", weight:1}).addTo(map);
+//r = L.rectangle(bounds, {color: "#caf0f8", fill: false, weight:3})
+    //.addTo(map);
 //crea etiquetas de puntos de interés
 L.geoJSON(pts_interes,{
     pointToLayer: function( geoJsonPoint, latlng){
@@ -557,6 +561,7 @@ function plot_btn(){
         req_list.push(get_request(urlbase, rtype, layer, vtime, lon, lat,
             format='text/csv'));
     });
+    console.log(req_list);
     get_csv(req_list);
     show_plot();
 }
@@ -653,4 +658,48 @@ function ayuda_toggle(){
     else{
         sel.style.display = 'none';
     }
+}
+var mes_date =[
+    "2018-01-16T00:00:00.000Z",
+    "2018-02-16T00:00:00.000Z",
+    "2018-03-16T00:00:00.000Z", 
+    "2018-04-16T00:00:00.000Z", 
+    "2018-05-16T00:00:00.000Z", 
+    "2018-06-16T00:00:00.000Z", 
+    "2018-07-16T00:00:00.000Z", 
+    "2018-08-16T00:00:00.000Z",
+    "2018-09-16T00:00:00.000Z",
+    "2018-10-16T00:00:00.000Z",
+    "2018-11-16T00:00:00.000Z",
+    "2018-12-16T00:00:00.000Z",
+]
+let var_sel = "Temperatura";
+let cbar_txt = "https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/wms?SERVICE=WMS&REQUEST=GetLegendGraphic&VERSION=1.3.0"
+wms_args['TIME'] =mes_date[0];
+let ov = L.tileLayer.wms('https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/wms?',
+        {...wms_args, ...wms_info[var_sel]['Promedio Mensual']});
+function toggle_var(v){
+    var_sel = v;
+    if (map.hasLayer(ov))
+        map.removeLayer(ov);
+    wms_args['TIME'] =mes_date[slider.value];
+    ov = L.tileLayer.wms('https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/wms?',
+        {...wms_args, ...wms_info[v]['Promedio Mensual']});
+    map.addLayer(ov);
+    var cbar= document.getElementById("cbar");
+    cbar.src=cbar_txt;
+    for (p in wms_info[v]['Promedio Mensual']){
+        cbar.src+='&'+p+'='+ wms_info[v]['Promedio Mensual'][p];
+    }
+    console.log(cbar.src);
+}
+
+//slider
+var slider = document.getElementById("slider_month");
+var mes = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+    "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+slider.oninput = function(){
+    document.getElementById("title_month").innerHTML = mes[slider.value];
+    toggle_var(var_sel);
+
 }

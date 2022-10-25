@@ -22,6 +22,9 @@ button{
 }
 
 body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #EFEFEF;
     font-family: 'Source Sans Pro', sans-serif;
     /*font-family: Arial, Helvetica, sans-serif;*/
@@ -30,13 +33,13 @@ body{
 h1 {
   margin: 0;
   font-family: 'Bree Serif', serif;
-  font-size: 36px;
+  font-size: 24px;
 }
 
 h2 {
   margin: 0;
   font-family: 'Bree Serif', serif;
-  font-size: 24px;
+  font-size: 22px;
 }
 
 h3 {
@@ -49,9 +52,6 @@ h4 {
   font-size: 18px;
 }
 
-.claro{
-    background-color:#227c70;
-}
 .contenedor{
 	display: flex;
 	flex-wrap: wrap;
@@ -90,11 +90,10 @@ h4 {
 }
 #map{
     position: absolute;
-    width: 75%;
-    transform: translateX(-50%);
-    height: calc(100% - 150px);
-    top: 100px;
-    left: 50%;
+    width: 99%;
+    height: 99%;
+    top: 0px;
+    left: 0px;
     margin: 0;
     z-index: 0;
 }
@@ -111,24 +110,22 @@ div{
     border: 1px dashed #32a1ce;
 }
 */
-#div_central{
-    width: 450px;
+#div_info{
+    display:flex;
+    width: 100%;
+    align-items: flex-start;
+    padding: 5px;
 }
+
 .div_central{
     margin: 10px;
     padding: 1%;
-    display: flex;
-    flex-direction: column;
-    /*align-items: flex-end;*/
-    
 }
 #div_intro{
-    width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
     justify-content: space-around;
     align-items: flex-start;
-    height: 650px;
 }
 .div_in-intro{
     display: flex;
@@ -141,32 +138,30 @@ div{
     display: flex;
     flex-direction: column;
     justify-content: right;
-    width: 350px;
     z-index: 1;
     padding: 10px;
+    width: 400px;
 }
 
 /* div ayuda / manual de usuario */
 #div_manual{
     position: relative;
-    animation: slide2d 3s 1;
 }
 #div_describe{
     position: relative;
-    animation: slide2l 3s 1;
 }
 @media (max-width: 600px){
+#header{
+    width: 250px;
+}
 .div_central{
-    width: 335px;
     margin: 2px;
     padding: 2px;
 }
 #div_intro{
     display: flex;
 flex-wrap: wrap;
-    justify-content: right;
-    width: 395px;
-    height: 80%;
+    justify-content: left;
 }
 .div_in-intro{
     display: flex;
@@ -175,24 +170,23 @@ flex-wrap: wrap;
     width: 380px;
 }
 /* div ayuda / manual de usuario */
+#div_ayuda{
+    width: 250px;
+}
 #div_manual{
     position: relative;
-    animation: slide2d 3s 1;
 }
 #div_describe{
     position: relative;
-    animation: slide2l 3s 1;
 }
 #div_coor{
     position: relative;
     display: flex;
-    flex-direction: column;
-    animation: slide2u 3s 1;
+    width: 100%;
 }
 
 #div_barra{
     width: 55px;
-    height:150px;
     position: absolute;
     top: 180px;
     left: 2px;
@@ -212,11 +206,6 @@ h3 {
   font-size: 14px;
 }
 
-#map{
-    height: calc(100% - 200px);
-    bottom: 10px;
-    width: 95%;
-}
 #div_cfg{
     position: absolute;
     visibility: hidden;
@@ -225,6 +214,18 @@ h3 {
     top: 100px;
 }
 
+}
+@keyframes grow_2r{
+  from {
+      width: 0px;
+      opacity: 0.5;
+      height: 470px;
+  }
+
+  to {
+      width 350px: ;
+      opacity: 1;
+  }
 }
 @keyframes slide2r{
   from {
@@ -277,7 +278,6 @@ h3 {
     position: relative;
     display: flex;
     flex-direction: column;
-    animation: slide2u 3s 1;
     z-index: 1;
 }
 .div_incoor{
@@ -320,11 +320,8 @@ h3 {
     visibility: hidden;
 }
 #div_barra{
-position: absolute;
-top: 100px;
-left: 10px;
-    width: 30px;
-    height: 150px;
+position: relative;
+    width: 120px;
     margin: 0px;
     padding: 1px 10px;
     right: 0px;
@@ -336,7 +333,7 @@ left: 10px;
     width: 120px;
 }
 .button_bar{
-    font-size: 20px;
+    font-size: 18px;
     width: 100%;
     margin: 1px;
     padding: 2px 8px;
@@ -351,7 +348,7 @@ left: 10px;
 }
 
 .input_coord{
-    width: 8em;
+    width: 6em;
 }
 .div_cool{
     border: 2px solid #24667E;
@@ -406,15 +403,52 @@ left: 10px;
     right: 0%;
     height: 15px;
  }
-.a_header{
-    color: white;
-    font-size: medium;
-}
 
 #header{
-    text-align: center;
-    color: #FFFFFF;
-    background-image: url("https://pronosticos.atmosfera.unam.mx/atlasmeteorologico.gom/img/encabezado.jpg");
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    color: white;
+    height: 70px;
+    z-index: 10;
+}
+#div_logos{
+    position: absolute;
+    left: 10px;
+    bottom: 30px;
+    z-index: 10;
+}
+.logos{
+    height: 30px;
+    padding: 2px;
+    z-index: 10;
+}
+#div_slider{
+    position: absolute;
+    bottom: 80px;
+    left: 10px;
+    width: 100%;
+    z-index: 100;
+}
+#slider_month{
+    width: 50%;
+}
+#title_month{
+    font: bold 16px cursive;
+    color: white;
+}
+#div_cbar{
+    display: flex;
+    height: 80px;
+}
+#cbar{
+    position: absolute;
+    bottom: 3px;
+    right: 160px;
+    transform: rotate(90deg);
+    opacity: 0.5;
+    width: 60px;
 }
 
 .plegable_btn{
