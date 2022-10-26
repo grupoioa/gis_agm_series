@@ -38,6 +38,7 @@ if (window.innerWidth<600){
 //crea y dibuja área de trabajo
 //r = L.rectangle(bounds, {color: "#caf0f8", fill: false, weight:3})
     //.addTo(map);
+
 //crea etiquetas de puntos de interés
 L.geoJSON(pts_interes,{
     pointToLayer: function( geoJsonPoint, latlng){
@@ -509,6 +510,7 @@ function add_vars(vars, tabs, root, lat, lon, title='titulo'){
         '\" id=\"inlon_'+title+
         '\" type=\"number\" value=\"'+
         lon+'\" step=0.001 /> </label> ').appendTo(div);
+
     document.getElementById("inlon_"+title).addEventListener('change', function(){update_marker(title)});
     //in_lon.addEventListener('change', update_marker);
     //Variables y estadísticos
@@ -575,6 +577,7 @@ function show_plot(){
 function close_plot(){
     sel = document.getElementById("cmain");
     sel.style.visibility = "hidden";
+
 }
 
 function show_sel(){

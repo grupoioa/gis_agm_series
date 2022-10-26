@@ -58,6 +58,7 @@ h4 {
 	flex-wrap: wrap;
 }
 
+
 .overlay{
     display: flex;
     align-items: center;
@@ -67,6 +68,7 @@ h4 {
     position: absolute;
     width: 99%;
     height: calc(100% - 100px);
+
 }
 /* div de mapa */
 #cmap{
@@ -455,6 +457,7 @@ position: relative;
     transform: rotate(90deg);
     opacity: 0.5;
     width: 60px;
+
 }
 
 #download_csv{
