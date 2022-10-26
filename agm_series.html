@@ -56,7 +56,7 @@
 
         <div id="div_intro">
             <div id="div_ayuda" class="div_cool" >
-                <div id="cierra_hp" onclick="ayuda_toggle()" title="Cerrar ayuda"> x </div>
+                <div id="cierra_hp" class='btn_close' onclick="ayuda_toggle()" title="Cerrar ayuda"> X </div>
                 <!-- div descripción --!>
                 <div id="div_describe" class="div_central " >
                     <H3> Descripción </H3>
@@ -121,27 +121,27 @@
 
     <div id="div_cfg" class="overlay" >
         <div class="div_cool">
+            <div id="close_cfg" class="btn_close" onclick="hide_sel()" title="Cerrar"> X </div>
         <!-- coordenadas de punto -->
         <!-- definir min y max en JS -->
         <!-- Selección de variables -->
-            <div id="csel" class="div_lateral div_cool">
+            <div id="csel" class="div_lateral ">
                 <h3> Generación de serie de tiempo </h3>
                 <div id="div_tabs"  ></div>
                 <div id="div_puntos"></div> 
                 <div id="div_button">
                     <button class="boton" name="plot" onclick="plot_btn()"> Generar gráfica </button>
-                    <button class="boton" id="hide_map" onclick="hide_sel()"> Cerrar </button>
                 </div>
             </div>
         </div>
     </div>
     <!--echarts-->
     <div id="cmain" class="overlay" > 
-        <div id="main" ></div>
-        <div>
+        <div id='header_plot' >
             <button class="boton" id="download_csv" onclick="gen_csv()"> Generar CSV </button>
-            <button class="boton" id="close_plot" onclick="close_plot()"> Cerrar </button>
+            <div id="close_plot" class="btn_close" onclick="close_plot()" title="Cerrar"> X </div>
         </div>
+        <div id="main" > </div>
     </div>
 
     <!--slider --!>

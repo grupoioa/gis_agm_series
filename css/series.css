@@ -64,7 +64,7 @@ h4 {
     background-color: rgba(255,255,255,0.8); /* Black background with opacity */
     color: black;/*white;*/
     position: absolute;
-    width: 100%;
+    width: 99%;
     height: calc(100% - 100px);
 }
 /* div de mapa */
@@ -314,7 +314,9 @@ h3 {
 }
 /* div gráficas */
 #cmain{
+    display: flex;
     flex-direction: column;
+    align-items: flex-end;
     z-index: 1001;
     top: 100px;
     visibility: hidden;
@@ -357,8 +359,9 @@ position: relative;
 }
 
 #main{
-    width: 100%; 
+    width: 99%; 
     margin: 10px;
+    padding: 10px;
 }
 
 #div_button_main{
@@ -451,11 +454,18 @@ position: relative;
     width: 60px;
 }
 
+#download_csv{
+    position: relative;
+    left: 0px;
+}
+#header_plot{
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    justify-content: space-between;
+    padding: 0px 10px;
+}
 #cierra_hp{
-    position:relative;
-    color: black;
-    font-size: 18px;
-    cursor: pointer;
 }
 .plegable_btn{
     width: 100%;
@@ -508,6 +518,14 @@ position: relative;
     background-color: #34495E;
 }
 
+.btn_close{
+    display: flex;
+    justify-content: right;
+    cursor: pointer;
+    padding: 3px;
+    margin: 3px;
+    font-weight: bold;
+}
 .leaflet-container {
 	cursor: url("https://pronosticos.atmosfera.unam.mx/AGMseries/gis_agm_series/img/location-dot-solid.png"), crosshair;
 }
