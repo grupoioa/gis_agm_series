@@ -30,7 +30,7 @@ var map = L.map('map', {
         center:[ 25.008, -92.153 ],
         zoomSnap: 0.1,
         zoom: 6.5,
-        minZoom:5,
+        minZoom: 6.5,
         maxZoom:20,
         //layers: [ back_layer, mbase],
         layers: [ mbase],
@@ -39,7 +39,7 @@ var map = L.map('map', {
         });
 
 if (window.innerWidth<600){
-    map.setZoom(5);
+    map.setZoom(8);
 }
 //L.imageOverlay("img/ioa_original.svg", [[22, -99], [20, -97]]).addTo(map);
 
@@ -688,34 +688,53 @@ var mes_date =[
 map.createPane('vars');
 map.getPane('vars').style.zIndex = 800;
 
-let var_sel = "Temperatura";
-let cbar_txt = "https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/wms?SERVICE=WMS&REQUEST=GetLegendGraphic&VERSION=1.3.0"
-wms_args['TIME'] =mes_date[0];
-let ov = L.tileLayer.wms('https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/wms?',
-    {...wms_args, ...wms_info[var_sel]['Promedio Mensual'], pane:'vars'});
-function toggle_var(v){
-    var_sel = v;
-    if (map.hasLayer(ov))
-        map.removeLayer(ov);
-    if (ov.wmsParams.layers == wms_info[v]['Promedio Mensual'].layers)
-        return 0;
-    wms_args['TIME'] =mes_date[slider.value];
-    ov = L.tileLayer.wms('https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/wms?',
-        {...wms_args, ...wms_info[v]['Promedio Mensual'], pane:'vars'});
-    map.addLayer(ov);
-    var cbar= document.getElementById("cbar");
-    cbar.src=cbar_txt;
-    for (p in wms_info[v]['Promedio Mensual']){
-        cbar.src+='&'+p+'='+ wms_info[v]['Promedio Mensual'][p];
-    }
-}
 
 //slider
+let var_sel = "Temperatura";
 var slider = document.getElementById("slider_month");
 var mes = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
     "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 slider.oninput = function(){
-    document.getElementById("title_month").innerHTML = mes[slider.value];
+    document.getElementById("title_month").innerHTML = var_sel + 
+        ' de ' + mes[slider.value];
     toggle_var(var_sel);
 
+}
+function slide_name_update(){
+    let title = document.getElementById("title_month").innerHTML = var_sel ;
+    if (var_sel == 'Precipitación')
+        title += ' Promedio Acumulada ';
+    else
+        title += ' Promedio ';
+    title += 'Mensual de ' + mes[slider.value];
+    document.getElementById("title_month").innerHTML = title;
+}
+slide_name_update();
+
+
+let cbar_txt = "https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/wms?SERVICE=WMS&REQUEST=GetLegendGraphic&VERSION=1.3.0"
+wms_args['TIME'] =mes_date[slider.value];
+let ov = L.tileLayer.wms('https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/wms?',
+    {...wms_args, ...wms_info[var_sel]['Promedio Mensual'], pane:'vars'});
+map.addLayer(ov);
+function toggle_var(v){
+    let sta = 'Promedio Mensual';
+    if (v == 'Precipitación')
+        sta = "Promedio Acumulada Mensual";
+    var_sel = v;
+    let layer_actual = ov.wmsParams.layers;
+    let time_actual = ov.wmsParams.TIME;
+    let time_new = mes_date[slider.value];
+    if (map.hasLayer(ov))
+        map.removeLayer(ov);
+    wms_args['TIME'] = time_new;
+    ov = L.tileLayer.wms('https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/wms?',
+        {...wms_args, ...wms_info[v][sta], pane:'vars'});
+    map.addLayer(ov);
+    var cbar= document.getElementById("cbar");
+    cbar.src=cbar_txt;
+    for (p in wms_info[v][sta]){
+        cbar.src+='&'+p+'='+ wms_info[v][sta][p];
+    }
+    slide_name_update();
 }

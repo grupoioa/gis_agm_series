@@ -375,15 +375,18 @@ position: relative;
     position: absolute;
     bottom: 10px;
     left: 20px;
-    width: 100%;
+    width: 50%;
     z-index: 100;
 }
 #slider_month{
-    width: 50%;
+    width: 100%;
 }
 #title_month{
     font-size: 16px;
-    color: white;
+    color: black;
+    background-color: #ffffffdd;
+    display: flex;
+    justify-content: center;
 }
 #div_cbar{
     display: flex;
@@ -394,7 +397,7 @@ position: relative;
     bottom: 3px;
     right: 160px;
     transform: rotate(90deg);
-    opacity: 0.5;
+    opacity: 0.8;
     width: 60px;
 
 }
@@ -537,4 +540,7 @@ position: relative;
         z-index: 1000;
     }
 
+    #title_month{
+        font-size: 12px;
+    }
 }

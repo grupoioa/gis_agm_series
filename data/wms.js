@@ -61,7 +61,7 @@ var wms_info={
         'Promedio Mensual':{
             'layers':"atlas_mensuales/MAGNITUD_VIENTO",
             'styles':'default-scalar/windatlas',
-            'COLORSCALERANGE': '0,60',
+            'COLORSCALERANGE': '0,25',
             'NUMCOLORBANDS': '250',
         },
         'Promedio Diario':{
@@ -91,10 +91,10 @@ var wms_info={
     },
     'Precipitación':{
         'Promedio Acumulada Mensual':{
-            "value":"atlas_mensuales/PREC2",
-            'time':"2018-01-01T00:00:00.000Z/2018-12-31T23:00:00.000Z",
-            'label':"RNM",
-            "type" : "mensual",
+            'layers':"atlas_mensuales/PREC2",
+            'styles':'default-scalar/precipitacion',
+            'COLORSCALERANGE': '0,500',
+            'NUMCOLORBANDS': '17',
         },
         'Promedio Acumulada Diaria':{
             "value":"atlas_diario/PREC2",
