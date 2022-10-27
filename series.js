@@ -19,7 +19,7 @@ bounds = new L.LatLngBounds(new L.LatLng(16.491, -78.511), new L.LatLng(32.448, 
 //image layer
 imageBounds=[[16.5, -99.53], [32.5, -78.5]];
 var mbase = L.imageOverlay('img/mapa_base.png', imageBounds, )
-.setOpacity(0.8)
+.setOpacity(1.0)
 .bringToBack()
 .setZIndex(-1);
 //.addTo(map);
@@ -32,7 +32,8 @@ var map = L.map('map', {
         zoom: 6.5,
         minZoom:5,
         maxZoom:20,
-        layers: [ back_layer, mbase],
+        //layers: [ back_layer, mbase],
+        layers: [ mbase],
         maxBounds: bounds,
         maxBoundsViscosity: 1,
         });

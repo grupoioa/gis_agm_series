@@ -71,7 +71,6 @@ h4 {
     color: black;/*white;*/
     position: absolute;
     width: 99%;
-    height: calc(100% - 100px);
 
 }
 /* div de mapa */
@@ -109,7 +108,7 @@ h4 {
     visibility: hidden;
     /*width: 320px;*/
     z-index: 1000;
-    top: 0px;
+    top: 100px;
 }
 /*para fines de desarrollo*/
 /*
@@ -157,70 +156,10 @@ div{
 #div_describe{
     position: relative;
 }
-@media (max-width: 600px){
-#header{
-    width: 250px;
-}
-.div_central{
-    margin: 2px;
+.logos{
+    height: 50px;
     padding: 2px;
-}
-#div_intro{
-    display: flex;
-flex-wrap: wrap;
-    justify-content: left;
-}
-.div_in-intro{
-    display: flex;
-    grid-auto-flow: column ;
-    justify-content: right;
-    width: 380px;
-}
-/* div ayuda / manual de usuario */
-#div_ayuda{
-    width: 250px;
-}
-#div_manual{
-    position: relative;
-}
-#div_describe{
-    position: relative;
-}
-#div_coor{
-    position: relative;
-    display: flex;
-    width: 100%;
-}
-
-#div_barra{
-    width: 55px;
-    position: absolute;
-    top: 180px;
-    left: 2px;
-    font-size: 10px;
-    margin: 0px;
-    padding: 0px;
-    right: 0px;
-    justify-content: space-around;
-}
-h2 {
-  margin: 0;
-  font-family: 'Bree Serif', serif;
-  font-size: 16px;
-}
-h3 {
-  margin: 0;
-  font-size: 14px;
-}
-
-#div_cfg{
-    position: absolute;
-    visibility: hidden;
-    /*width: 320px;*/
-    z-index: 1000;
-    top: 100px;
-}
-
+    z-index: 10;
 }
 @keyframes grow_2r{
   from {
@@ -420,21 +359,17 @@ position: relative;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    align-items: center;
-    color: white;
+    justify-content: center;
+    color: black;
     height: 70px;
     z-index: 10;
+    padding: 0px 30px;
 }
 #div_logos{
     position: absolute;
     right: 20px;
     top: 10px;
     z-index: 1002;
-}
-.logos{
-    height: 50px;
-    padding: 2px;
-    z-index: 10;
 }
 #div_slider{
     position: absolute;
@@ -538,4 +473,68 @@ position: relative;
 }
 .leaflet-container {
 	cursor: url("https://pronosticos.atmosfera.unam.mx/AGMseries/gis_agm_series/img/location-dot-solid.png"), crosshair;
+}
+
+@media (max-width: 600px){
+    .logos{
+        height: 25px;
+    }
+
+    .div_central{
+        margin: 2px;
+        padding: 2px;
+    }
+    #div_intro{
+        display: flex;
+    flex-wrap: wrap;
+        justify-content: left;
+    }
+    .div_in-intro{
+        display: flex;
+        grid-auto-flow: column ;
+        justify-content: right;
+        width: 380px;
+    }
+    /* div ayuda / manual de usuario */
+    #div_ayuda{
+        width: 90%; 
+    }
+    #div_manual{
+        position: relative;
+    }
+    #div_describe{
+        position: relative;
+    }
+    #div_coor{
+        position: relative;
+        display: flex;
+        width: 100%;
+    }
+
+    #div_barra{
+        top: 180px;
+        left: 2px;
+        font-size: 10px;
+        margin: 0px;
+        padding: 0px;
+        right: 0px;
+        justify-content: space-around;
+    }
+    h2 {
+      margin: 0;
+      font-family: 'Bree Serif', serif;
+      font-size: 16px;
+    }
+    h3 {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    #div_cfg{
+        position: absolute;
+        visibility: hidden;
+        /*width: 320px;*/
+        z-index: 1000;
+    }
+
 }

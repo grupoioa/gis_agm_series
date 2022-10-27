@@ -28,7 +28,7 @@
             <!--button class="boton" id="hide_map2" onclick="hide_map()"> X </button--!>
     </div>
 
-    <div title="Coatl es un sistema de descarga y visualización de series de tiempo" id="header" class="">
+    <div title="Coatl es un sistema de descarga y visualización de series de tiempo" id="header" class="div_cool">
         <h1 > Coatl </h1>
     </div>
     <div id="div_logos" class="div_cool" >
@@ -39,14 +39,6 @@
     <div id="div_info" >
         <!-- barra  --!>
         <div id="div_barra" class="div_cool">
-            <button class="button_bar " onclick="show_cfg()" title="Configuración" > 
-                <span class="material-symbols-outlined"> wysiwyg </span>
-                <span class= "button_text_bar"> Estadístico </span>
-            </button>
-            <button class="button_bar" onclick="show_plot()" > 
-                <span class="material-symbols-outlined"> timeline </span>
-                <span class="button_text_bar"> Gráfica </span>
-             </button>
             <button class="button_bar" onclick="toggle_var('Temperatura')">  
                 <span class="material-symbols-outlined"> device_thermostat </span>
                 <span class="button_text_bar"> Temperatura </span>
@@ -55,6 +47,22 @@
                 <span class="material-symbols-outlined"> air </span>
                 <span class="button_text_bar"> Viento </span>
             </button>
+            <button class="button_bar" onclick="">  
+                <span class="material-symbols-outlined"> rainy </span>
+                <span class="button_text_bar"> Precipitación</span>
+            </button>
+            <button class="button_bar" onclick="">  
+                <span class="material-symbols-outlined"> layers </span>
+                <span class="button_text_bar"> Capas </span>
+            </button>
+            <button class="button_bar " onclick="show_cfg()" title="Configuración" > 
+                <span class="material-symbols-outlined"> wysiwyg </span>
+                <span class= "button_text_bar"> Estadístico </span>
+            </button>
+            <button class="button_bar" onclick="show_plot()" > 
+                <span class="material-symbols-outlined"> timeline </span>
+                <span class="button_text_bar"> Gráfica </span>
+             </button>
             <button class="button_bar" onclick="ayuda_toggle()"> 
                 <span class="material-symbols-outlined"> info </span>
                 <span class="button_text_bar"> Ayuda </span>
