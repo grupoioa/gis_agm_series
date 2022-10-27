@@ -58,7 +58,11 @@ h4 {
 	flex-wrap: wrap;
 }
 
-
+#div_opt{
+    display: flex;
+    flex-flow: column;
+    height: 600px;
+}
 .overlay{
     display: flex;
     align-items: center;

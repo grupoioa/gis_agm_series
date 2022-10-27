@@ -16,6 +16,13 @@ var lon_min=-99.56926749;
 var lat_min= 16.49108867;
 var lat_max= 32.44792175;
 bounds = new L.LatLngBounds(new L.LatLng(16.491, -78.511), new L.LatLng(32.448, -99.569));
+//image layer
+imageBounds=[[16.5, -99.53], [32.5, -78.5]];
+var mbase = L.imageOverlay('img/mapa_base.png', imageBounds, )
+.setOpacity(0.8)
+.bringToBack()
+.setZIndex(-1);
+//.addTo(map);
 //crea mapa de leaflet
 var map = L.map('map', {
         //center: bounds.getCenter(),
@@ -25,7 +32,7 @@ var map = L.map('map', {
         zoom: 6.5,
         minZoom:5,
         maxZoom:20,
-        layers: [ back_layer, ],
+        layers: [ back_layer, mbase],
         maxBounds: bounds,
         maxBoundsViscosity: 1,
         });
@@ -677,25 +684,29 @@ var mes_date =[
     "2018-11-16T00:00:00.000Z",
     "2018-12-16T00:00:00.000Z",
 ]
+map.createPane('vars');
+map.getPane('vars').style.zIndex = 800;
+
 let var_sel = "Temperatura";
 let cbar_txt = "https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/wms?SERVICE=WMS&REQUEST=GetLegendGraphic&VERSION=1.3.0"
 wms_args['TIME'] =mes_date[0];
 let ov = L.tileLayer.wms('https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/wms?',
-        {...wms_args, ...wms_info[var_sel]['Promedio Mensual']});
+    {...wms_args, ...wms_info[var_sel]['Promedio Mensual'], pane:'vars'});
 function toggle_var(v){
     var_sel = v;
     if (map.hasLayer(ov))
         map.removeLayer(ov);
+    if (ov.wmsParams.layers == wms_info[v]['Promedio Mensual'].layers)
+        return 0;
     wms_args['TIME'] =mes_date[slider.value];
     ov = L.tileLayer.wms('https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/wms?',
-        {...wms_args, ...wms_info[v]['Promedio Mensual']});
+        {...wms_args, ...wms_info[v]['Promedio Mensual'], pane:'vars'});
     map.addLayer(ov);
     var cbar= document.getElementById("cbar");
     cbar.src=cbar_txt;
     for (p in wms_info[v]['Promedio Mensual']){
         cbar.src+='&'+p+'='+ wms_info[v]['Promedio Mensual'][p];
     }
-    console.log(cbar.src);
 }
 
 //slider
