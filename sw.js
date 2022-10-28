@@ -1,12 +1,12 @@
 self.addEventListener('install', (e) => {
   e.waitUntil(
     caches.open('fox-store').then((cache) => cache.addAll([
-      '/lib/',
-      '/agm_series.html',
-      '/index.js',
-      '/css/series.css',
-        '/series.js',
-        '/img/mapa_base.png',
+      'lib/',
+      'agm_series.html',
+      'index.js',
+      'css/series.css',
+        'series.js',
+        'img/mapa_base.png',
     ])),
   );
 });
