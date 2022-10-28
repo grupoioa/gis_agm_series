@@ -39,7 +39,8 @@ var map = L.map('map', {
         });
 
 if (window.innerWidth<600){
-    map.setZoom(8);
+    map.setMinZoom(5);
+    map.setZoom(5);
 }
 //L.imageOverlay("img/ioa_original.svg", [[22, -99], [20, -97]]).addTo(map);
 
@@ -236,9 +237,11 @@ window.onresize = function(){
     console.log(window.innerWidth);
     if (window.innerWidth<600){
         map.setZoom(5.0);
+        map.setMinZoom(5.0);
     }
     else{
-    map.setZoom(6.5);
+        map.setZoom(6.5);
+        map.setMinZoom(6.5);
     }
 };
 function plot(series, legend){
