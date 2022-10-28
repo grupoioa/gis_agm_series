@@ -4,9 +4,9 @@
   "display": "fullscreen",
   "icons": [
     {
-      "src": "img/timeline_24dp.svg",
-      "sizes": "24x24",
-      "type": "image/svg"
+      "src": "img/sun.png",
+      "sizes": "256x256",
+      "type": "image/png"
     }
   ],
   "name": "Series de tiempo, AGoM",
