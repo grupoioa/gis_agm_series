@@ -18,7 +18,7 @@ var lat_max= 32.44792175;
 bounds = new L.LatLngBounds(new L.LatLng(16.491, -78.511), new L.LatLng(32.448, -99.569));
 //image layer
 imageBounds=[[16.5, -99.53], [32.5, -78.5]];
-var mbase = L.imageOverlay('img/mapa_base.png', imageBounds, )
+var mbase = L.imageOverlay('img/mapa_base.png', imageBounds, {attribution: mbAttr})
 .setOpacity(1.0)
 .bringToBack()
 .setZIndex(-1);
@@ -30,7 +30,7 @@ var map = L.map('map', {
         center:[ 25.008, -92.153 ],
         zoomSnap: 0.1,
         zoom: 6.5,
-        minZoom: 6.5,
+        minZoom: 6.2,
         maxZoom:20,
         //layers: [ back_layer, mbase],
         layers: [ mbase],
@@ -241,7 +241,7 @@ window.onresize = function(){
     }
     else{
         map.setZoom(6.5);
-        map.setMinZoom(6.5);
+        map.setMinZoom(6.2);
     }
 };
 function plot(series, legend){

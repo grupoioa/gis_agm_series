@@ -32,10 +32,16 @@
         <h1 > Coatl </h1>
     </div>
     <div id="div_logos" class="div_cool" >
-        <img src="img/ioa_original.svg" class="logos" >
-        <img src="img/unam_negro.svg" class="logos" >
-        <img src="img/logo_CIGoM.svg" class="logos" >
+        <img src="img/ioa_original.svg" id="logo1" class="logos" >
+        <img src="img/unam_negro.svg" id="logo2" class="logos" >
+        <img src="img/logo_CIGoM.svg" id="logo3" class="logos" >
     </div>
+    <!--slider --!>
+    <div id="div_slider" >
+        <div id="title_month"  class='div_cool'> Enero </div>
+        <input type= "range" min="0" max="11" value="0" class="slider" id="slider_month" >
+    </div>
+
     <div id="div_info" >
         <!-- barra  --!>
         <div id="div_barra" class="div_cool">
@@ -165,12 +171,6 @@
             <div id="close_plot" class="btn_close" onclick="close_plot()" title="Cerrar"> X </div>
         </div>
         <div id="main" > </div>
-    </div>
-
-    <!--slider --!>
-    <div id="div_slider" >
-        <div id="title_month"  class='div_cool'> Enero </div>
-        <input type= "range" min="0" max="11" value="0" class="slider" id="slider_month" >
     </div>
 
         <img id="cbar" class="" >
