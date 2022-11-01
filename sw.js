@@ -1,12 +1,20 @@
 self.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open('fox-store').then((cache) => cache.addAll([
-      'lib/',
-      'agm_series.html',
-      'index.js',
-      'css/series.css',
+    caches.open('coatl-store').then((cache) => cache.addAll([
+        'lib/echarts.min.js',
+        'lib/leaflet.css',
+        'lib/leaflet.js',
+        'lib/leaflet.js.map',
+        'lib/papaparse.js',
+        'lib/papaparse.min.js',
+        'lib/series_lib.js',
+        'agm_series.html',
+        'index.js',
+        'css/series.css',
         'series.js',
         'img/mapa_base.png',
+        'img/unam_negro.svg',
+        'img/ioa_original.svg',
     ])),
   );
 });
