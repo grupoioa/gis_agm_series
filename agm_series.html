@@ -25,25 +25,26 @@
     <script defer src='series.js'></script>
 </head>
 <body>
-    <!-- Mapa -->
-    <div id="map" oncontextmenu="click_sec()" >
-            <!--button class="boton" id="hide_map2" onclick="hide_map()"> X </button--!>
-    </div>
-
-    <div title="Coatl es un sistema de descarga y visualización de series de tiempo" id="header" class="div_cool">
-        <h1 > Coatl </h1>
-    </div>
     <div id="div_logos" class="div_cool" >
         <img src="img/ioa_original.svg" id="logo1" class="logos" >
         <img src="img/unam_negro.svg" id="logo2" class="logos" >
         <img src="img/logo_CIGoM.svg" id="logo3" class="logos" >
     </div>
-    <!--slider --!>
-    <div id="div_slider" >
-        <div id="title_month"  class='div_cool'> Enero </div>
-        <input type= "range" min="0" max="11" value="0" class="slider" id="slider_month" >
-    </div>
+    <div id= "div_header" ><img src="img/banner_atlas.png" id="logo1" class="logos" > </div>
+    <div id='div_title'  > <h1 > Coatl </h1>
 
+        <!--slider --!>
+        <div id="div_slider" >
+            <div id="title_month"  class='div_cool'> Enero </div>
+            <input type= "range" min="0" max="11" value="0" class="slider" id="slider_month" >
+        </div>
+
+    </div>
+    <!-- Mapa -->
+    <div id="div_map" >
+        <div id="map" oncontextmenu="click_sec()" >
+                <!--button class="boton" id="hide_map2" onclick="hide_map()"> X </button--!>
+        </div>
     <div id="div_info" >
         <!-- barra  --!>
         <div id="div_barra" class="div_cool">
@@ -143,8 +144,11 @@
                     </div>
                 </div>
                     
+            </div>
         </div>
+        <div title="Coatl es un sistema de descarga y visualización de series de tiempo" id="header" class="div_cool">
     </div>
+
 
     <div id="div_cfg" class="overlay" >
         <div id="div_opt" class="div_cool">

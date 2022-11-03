@@ -234,7 +234,6 @@ myChart.setOption({
 
 window.onresize = function(){
     myChart.resize();
-    console.log(window.innerWidth);
     if (window.innerWidth<600){
         map.setZoom(5.0);
         map.setMinZoom(5.0);

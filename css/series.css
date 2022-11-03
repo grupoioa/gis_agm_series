@@ -25,7 +25,7 @@ button{
 body{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     background-color: #EFEFEF;
     font-family: 'Oxygen', sans-serif;
     /*font-family: Arial, Helvetica, sans-serif;*/
@@ -97,7 +97,7 @@ h4 {
 #map{
     position: absolute;
     width: 99%;
-    height: 99%;
+    /*height: 99%;*/
     top: 0px;
     left: 0px;
     margin: 0;
@@ -329,12 +329,6 @@ position: relative;
     padding: 10px;
 }
 
-#div_button_main{
-    position: fixed;
-    top: 200px;
-    left: 20px;
-}
-
 #layercontrol{
     width: 150px;
     height: 100px;
@@ -372,6 +366,22 @@ position: relative;
     height: 15px;
  }
 
+#div_header{
+    position: relative;
+    display:flex;
+    background:  #035369;
+    width: 100%;
+    height: 75px;
+}
+#div_title{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background:  #035369;
+    width: 100%;
+}
+
 #header{
     display: flex;
     flex-direction: column;
@@ -390,10 +400,8 @@ position: relative;
     display: flex;
 }
 #div_slider{
-    position: absolute;
-    bottom: 10px;
-    left: 20px;
-    width: 50%;
+    position: relative;
+    width: 100%;
     z-index: 100;
 }
 #slider_month{
@@ -495,6 +503,25 @@ position: relative;
 .leaflet-container {
 	cursor: url("https://pronosticos.atmosfera.unam.mx/AGMseries/gis_agm_series/img/location-dot-solid.png"), crosshair;
 }
+/*leaflet zoom buttons */
+.button{
+    font-size: 12px;
+    border-radius: 6px;
+    /*background: #035369;*/
+    background: #24667E !important;
+    color: #fff;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    /*font-family: Arial, Helvetica, sans-serif;*/
+    font-family: 'Oxygen', sans-serif;
+    display: inline-block;
+}
+#div_map{
+    position: relative;
+}
+
+
 
 @media (max-width: 600px){
     .logos{
@@ -508,6 +535,7 @@ position: relative;
     #div_intro{
         display: flex;
         flex-wrap: wrap;
+        width: 300px;
         justify-content: left;
         font-size: 12px;
     }
@@ -559,11 +587,14 @@ position: relative;
         height: 600px;
         top: 10px;
     }
+    #div_map{
+        width: 600px;
+        height: 600px;
+    }
     #cmain{
         height: 600px;
     }
     #div_slider{
-        top: 510px;
     }
     #cbar{
         top: 460px;
