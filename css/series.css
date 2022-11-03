@@ -94,18 +94,23 @@ h4 {
     left: 50px;
     z-index: 999; 
 }
-#map{
-    position: absolute;
+#div_map{
+    position: relative;
     width: 99%;
     height: 75%;
     height: calc(99% - 150px);
-    top: 0px;
-    left: 0px;
+    z-index: 0;
+}
+#map{
+    position: relative;
+    width: 99%;
+    height: 700px;
     margin: 0;
     z-index: 0;
 }
 #div_cfg{
     position: absolute;
+    top: 150px;
     visibility: hidden;
     /*width: 320px;*/
     z-index: 1000;
@@ -118,6 +123,8 @@ div{
 }
 */
 #div_info{
+    position: absolute;
+    top: 0px;
     display:flex;
     width: 100%;
     align-items: flex-start;
@@ -392,6 +399,8 @@ position: relative;
     height: 70px;
     z-index: 10;
     padding: 0px 30px;
+    position: absolute;
+    top: 150px;
 }
 #div_logos{
     position: absolute;
@@ -517,9 +526,6 @@ position: relative;
     /*font-family: Arial, Helvetica, sans-serif;*/
     font-family: 'Oxygen', sans-serif;
     display: inline-block;
-}
-#div_map{
-    position: relative;
 }
 
 
