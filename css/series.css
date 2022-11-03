@@ -97,7 +97,8 @@ h4 {
 #map{
     position: absolute;
     width: 99%;
-    /*height: 99%;*/
+    height: 75%;
+    height: calc(99% - 150px);
     top: 0px;
     left: 0px;
     margin: 0;
