@@ -1,0 +1,15 @@
+{
+  "background_color": "purple",
+  "description": "Muestra series de tiempo del Atlas del Gom",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "img/sun.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ],
+  "name": "Series de tiempo, AGoM",
+  "short_name": "Coatl",
+  "start_url": "agm_series.html"
+}

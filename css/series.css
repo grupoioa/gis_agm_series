@@ -1,34 +1,351 @@
+:root {
+    --sel-width: 300px;
+}
+label{
+    display: block;
+    padding: 3px;
+}
+
+button{
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 12px;
+    /*background: #035369;*/
+    background: #24667E;
+    color: #fff;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    /*font-family: Arial, Helvetica, sans-serif;*/
+    font-family: 'Oxygen', sans-serif;
+    display: inline-block;
+  
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #EFEFEF;
+    font-family: 'Oxygen', sans-serif;
+    /*font-family: Arial, Helvetica, sans-serif;*/
+    font-size: 14px;
+}
+h1 {
+    margin: 0;
+    font-family: "Merienda", cursive;
+    font-size: 36px;
+}
+
+h2 {
+  margin: 0;
+  font-family: 'Bree Serif', serif;
+  font-size: 22px;
+}
+
+h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+h4 {
+  margin: 0;
+  font-size: 18px;
+}
+
 .contenedor{
 	display: flex;
 	flex-wrap: wrap;
 }
 
-.plot{
-    width: 100%;
+#div_opt{
+    display: flex;
+    flex-flow: column;
     height: 600px;
 }
-
 .overlay{
-    position: fixed; /* Sit on top of the page content */
-    top: 130px;
-    left: 30px;
-    background-color: rgba(255,255,255,0.8); /* Black background with opacity */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255,255,255,0.9); /* Black background with opacity */
     color: black;/*white;*/
-    display: none;
+    position: absolute;
+    width: 99%;
+
 }
+/* div de mapa */
 #cmap{
-    z-index: 0; 
+    position: absolute;
+    top: 0px;
+    height: 100%;
+    z-index: 9; 
+    /*z-index: 0; */
 }
-#csel{
+#hide_map2{
+    position: relative;
+    top: 0;
+    left: 350px;
+    z-index: 999; 
+}
+#texto_mapa{
+    position: relative;
+    top: 0;
+    color: white;
+    left: 50px;
+    z-index: 999; 
+}
+#div_map{
+    position: relative;
+    width: 99%;
+    height: 75%;
+    height: calc(99% - 150px);
     z-index: 0;
-    background-color: rgba(255,255,255,0.9); 
 }
+#map{
+    position: relative;
+    width: 99%;
+    height: 700px;
+    margin: 0;
+    z-index: 0;
+}
+#div_cfg{
+    position: absolute;
+    top: 150px;
+    visibility: hidden;
+    /*width: 320px;*/
+    z-index: 1000;
+    height: 99%;
+}
+/*para fines de desarrollo*/
+/*
+div{
+    border: 1px dashed #32a1ce;
+}
+*/
+#div_info{
+    position: absolute;
+    top: 0px;
+    display:flex;
+    width: 100%;
+    align-items: flex-start;
+    padding: 5px;
+}
+
+.div_central{
+    margin: 10px;
+    padding: 1%;
+}
+#div_intro{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+.div_in-intro{
+    display: flex;
+    flex-wrap: wrap;
+    grid-auto-flow: column ;
+    align-items: center;
+    width: 380px;
+}
+#div_ayuda{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    z-index: 1;
+    padding: 10px;
+    width: 400px;
+}
+
+/* div ayuda / manual de usuario */
+#div_manual{
+    position: relative;
+}
+#div_describe{
+    position: relative;
+}
+.logos{
+    height: 50px;
+    padding: 2px;
+    z-index: 10;
+}
+#logo1{
+    animation: 2s 1 slide2r;
+    z-index: 11;
+}
+#logo2{
+    animation: 2s 1 slide2r2;
+}
+#logo3{
+    animation: 2s 1 slide2r3;
+}
+
+@keyframes grow_2r{
+  from {
+      width: 0px;
+      opacity: 0.5;
+      height: 470px;
+  }
+
+  to {
+      width 350px: ;
+      opacity: 1;
+  }
+}
+@keyframes slide2r{
+  from {
+      transform: translateX(105px);
+    border-radius: 20px;
+    background-color: white;
+    opacity: 1;
+  }
+  50% {
+      transform: translateX(105px);
+    border-radius: 20px;
+    background-color: white;
+    opacity: 1;
+  }
+  to{
+      transform: translateX(0px);
+    border-radius: 20px;
+    background-color: white;
+    opacity: 0.75;
+  }
+
+}
+@keyframes slide2r2{
+  from {
+      border-radius: 20px;
+      opacity: 0;
+  }
+  70% {
+    border-radius: 20px;
+    opacity: 0;
+  }
+  to{
+    border-radius: 5px;
+    opacity: 1;
+  }
+
+}
+@keyframes slide2r3{
+  from {
+      border-radius: 20px;
+      opacity: 0;
+  }
+  60%{
+      border-radius: 20px;
+      opacity: 0;
+  }
+  to{
+    border-radius: 5px;
+    opacity: 1;
+  }
+
+}
+
+/* div de punto */
+#div_coor{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+}
+.div_incoor{
+    margin: 5px;
+    padding: 5px;
+    height: 70px;
+    width: 230px;
+    display: flex;
+    flex: 1 ;
+}
+.div_centered{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+/* div de selección de variable */
+#csel{
+    display: inline-block;
+    height: 580px;
+    width: 400px;
+    padding: 10px;
+}
+#div_tabs{
+    width: var(--sel-width);
+    height: 40px;
+    display: block;
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+
+#div_puntos{
+    width: 100%;
+    height: 400px;
+    overflow-y: scroll;
+}
+/* div gráficas */
+#cmain{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    z-index: 1001;
+    top: 70px;
+    visibility: hidden;
+}
+#div_barra{
+position: relative;
+    width: 120px;
+    margin: 0px;
+    padding: 1px 10px;
+    right: 0px;
+    justify-content: space-around;
+    z-index: 100;
+    opacity: 0.9;
+}
+#div_barra:hover{
+    width: 120px;
+}
+.button_bar{
+    font-size: 18px;
+    width: 100%;
+    margin: 1px;
+    padding: 2px 8px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.button_bar:hover{
+    color: black;
+    margin: 5px;
+}
+.button_text_bar{
+    font-size: 12px;
+}
+
+.input_coord{
+    width: 6em;
+}
+.div_cool{
+    border-radius: 12px;
+    background-color: #ffffffaa;
+    margin: 2px 5px;
+}
+
+#main{
+    width: 99%; 
+    margin: 10px;
+    padding: 10px;
+}
+
 #layercontrol{
     width: 150px;
     height: 100px;
     font-size: 14px;
     font-family: 'sans';
     text-align: left;
+}
+.div_lateral{
+    widht:350px;
 }
 
 .menu_btn{
@@ -47,6 +364,9 @@
 
 .menu_btn:hover{font-size:14px;}
 
+.map-txt{
+    color: white;
+}
 .my-div-img{
     position:absolute;
     bottom: 50%;
@@ -54,53 +374,83 @@
     height: 15px;
  }
 
- button{
-    padding: 5px 10px;
-    font-size: 12px;
-    border-radius: 12px;
-    /*background: #035369;*/
-    background: #24667E;
-    color: #fff;
-    border: none;
-    text-decoration: none;
-    cursor: pointer;
-    font-family: Arial, Helvetica, sans-serif;
-    display: inline-block;
-  
- }
-#div_button_main{
-    position: fixed;
-    top: 200px;
-    left: 20px;
+#div_header{
+    position: relative;
+    display:flex;
+    background:  #035369;
+    width: 100%;
+    height: 75px;
 }
-
-body{
-    background-color: #EFEFEF;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-}
-
-.claro{
-    background-color:#227c70;
-}
-a {
-    color: inherit;
-    text-decoration: none;
-}
-a:link, a:visited{
-    background-color: transparent;
-}
-.a_header{
-    color: white;
-    font-size: medium;
+#div_title{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background:  #035369;
+    width: 100%;
 }
 
 #header{
-    text-align: center;
-    color: #FFFFFF;
-    background-image: url("https://pronosticos.atmosfera.unam.mx/atlasmeteorologico.gom/img/encabezado.jpg");
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    color: black;
+    height: 70px;
+    z-index: 10;
+    padding: 0px 30px;
+    position: absolute;
+    top: 150px;
+}
+#div_logos{
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    z-index: 1002;
+    display: flex;
+}
+#div_slider{
+    position: relative;
+    width: 100%;
+    z-index: 100;
+}
+#slider_month{
+    width: 100%;
+}
+#title_month{
+    font-size: 16px;
+    color: black;
+    background-color: #ffffffdd;
+    display: flex;
+    justify-content: center;
+}
+#div_cbar{
+    display: flex;
+    height: 80px;
+}
+#cbar{
+    position: absolute;
+    bottom: 3px;
+    right: 160px;
+    transform: rotate(90deg);
+    opacity: 0.8;
+    width: 70px;
+
 }
 
+#download_csv{
+    position: relative;
+    left: 0px;
+}
+#header_plot{
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    justify-content: space-between;
+    padding: 0px 10px;
+}
+#cierra_hp{
+}
 .plegable_btn{
     width: 100%;
     border-radius: 0px;
@@ -140,9 +490,7 @@ a:link, a:visited{
 
 .tab-content{
     position: relative;
-    top: 10px;
-    left: 10px;
-    width: 90%;
+    margin: 10px;
 }
 
 .tab{
@@ -152,4 +500,111 @@ a:link, a:visited{
 }
 .tab:focus{
     background-color: #34495E;
+}
+
+.btn_close{
+    display: flex;
+    justify-content: right;
+    cursor: pointer;
+    padding: 3px;
+    margin: 3px;
+    font-weight: bold;
+}
+.leaflet-container {
+	cursor: url("https://pronosticos.atmosfera.unam.mx/AGMseries/gis_agm_series/img/location-dot-solid.png"), crosshair;
+}
+/*leaflet zoom buttons */
+.button{
+    font-size: 12px;
+    border-radius: 6px;
+    /*background: #035369;*/
+    background: #24667E !important;
+    color: #fff;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    /*font-family: Arial, Helvetica, sans-serif;*/
+    font-family: 'Oxygen', sans-serif;
+    display: inline-block;
+}
+
+
+
+@media (max-width: 600px){
+    .logos{
+        height: 25px;
+    }
+
+    .div_central{
+        margin: 2px;
+        padding: 2px;
+    }
+    #div_intro{
+        display: flex;
+        flex-wrap: wrap;
+        width: 300px;
+        justify-content: left;
+        font-size: 12px;
+    }
+    /* div ayuda / manual de usuario */
+    #div_ayuda{
+        width: 90%; 
+    }
+    #div_manual{
+        position: relative;
+    }
+    #div_describe{
+        position: relative;
+    }
+    #div_coor{
+        position: relative;
+        display: flex;
+        width: 100%;
+    }
+
+    #div_barra{
+        left: 2px;
+        font-size: 10px;
+        margin: 0px;
+        padding: 0px;
+        right: 0px;
+        justify-content: space-around;
+    }
+    h2 {
+      margin: 0;
+      font-family: 'Bree Serif', serif;
+      font-size: 16px;
+    }
+    h3 {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    #div_cfg{
+        position: absolute;
+        visibility: hidden;
+        /*width: 320px;*/
+        z-index: 1000;
+    }
+
+    #title_month{
+        font-size: 12px;
+    }
+    #map{
+        height: 600px;
+        top: 10px;
+    }
+    #div_map{
+        width: 600px;
+        height: 600px;
+    }
+    #cmain{
+        height: 600px;
+    }
+    #div_slider{
+    }
+    #cbar{
+        top: 460px;
+        right: 65px;
+        width: 50px;
 }

@@ -16,21 +16,38 @@ var lon_min=-99.56926749;
 var lat_min= 16.49108867;
 var lat_max= 32.44792175;
 bounds = new L.LatLngBounds(new L.LatLng(16.491, -78.511), new L.LatLng(32.448, -99.569));
+//image layer
+imageBounds=[[16.5, -99.53], [32.5, -78.5]];
+var mbase = L.imageOverlay('img/mapa_base.png', imageBounds, {attribution: mbAttr})
+.setOpacity(1.0)
+.bringToBack()
+.setZIndex(-1);
+//.addTo(map);
 //crea mapa de leaflet
 var map = L.map('map', {
         //center: bounds.getCenter(),
         //center:[19.3262492550136, -99.17620429776193],//coordenadas CU
         center:[ 25.008, -92.153 ],
         zoomSnap: 0.1,
-        zoom: 5.0,
-        minZoom:5,
+        zoom: 6.5,
+        minZoom: 6.2,
         maxZoom:20,
-        layers: [ back_layer, ],
+        //layers: [ back_layer, mbase],
+        layers: [ mbase],
         maxBounds: bounds,
         maxBoundsViscosity: 1,
         });
+
+if (window.innerWidth<600){
+    map.setMinZoom(5);
+    map.setZoom(5);
+}
+//L.imageOverlay("img/ioa_original.svg", [[22, -99], [20, -97]]).addTo(map);
+
 //crea y dibuja área de trabajo
-//L.rectangle(bounds, {color: "#caf0f8", weight:1}).addTo(map);
+//r = L.rectangle(bounds, {color: "#caf0f8", fill: false, weight:3})
+    //.addTo(map);
+
 //crea etiquetas de puntos de interés
 L.geoJSON(pts_interes,{
     pointToLayer: function( geoJsonPoint, latlng){
@@ -39,7 +56,7 @@ L.geoJSON(pts_interes,{
     icon: new L.DivIcon({
         className: 'my-div-icon',
         html: '<img src="img/bullseye-solid2.svg"/>'+
-              '<span class="my-div-span">'+
+              '<span class="map-txt">'+
             //geoJsonPoint.properties.name +
             '</span>'
     })
@@ -217,6 +234,14 @@ myChart.setOption({
 
 window.onresize = function(){
     myChart.resize();
+    if (window.innerWidth<600){
+        map.setZoom(5.0);
+        map.setMinZoom(5.0);
+    }
+    else{
+        map.setZoom(6.5);
+        map.setMinZoom(6.2);
+    }
 };
 function plot(series, legend){
     var option = {
@@ -308,27 +333,78 @@ async function get_csv(url_list){
     console.log('series:', series);
     plot(series, name_layers);
 }
+const div_map = document.getElementById("map");
+div_map.addEventListener("contextmenu", click_sec, true );
+
+function click_sec(e){
+	console.log('click der',e);
+	console.log(e.x, e.y)
+	e.preventDefault();
+}
+//definición de función al mover el mapa
+function onMapMove(e) {
+    lat= e.latlng['lat'];
+    lon= e.latlng['lng'];
+    if (lat>lat_min && lat<lat_max && lon>lon_min && lon<lon_max){
+        document.getElementById('inlon_main').value = lon.toFixed(8);
+        document.getElementById('inlat_main').value = lat.toFixed(8);
+    }
+}
 //lista de puntos
 let points={};
 let npoints=0;
+function show_cfg(){
+    cfg = document.getElementById('div_cfg');
+    cfg.style.visibility='visible';
+}
+//definición de función botón agregar
+function addMark(){
+    lon= document.getElementById('inlon_main').value
+    lat= document.getElementById('inlat_main').value
+    if (lat>lat_min && lat<lat_max && lon>lon_min && lon<lon_max){
+        console.log('test',lat,lon);
+	add_vars(vars, '#div_tabs', '#div_puntos', lat, lon, 'punto-'+npoints);
+    }
+    show_cfg();
+}
 //definición de función al hacer click en el mapa
 function onMapClick(e) {
     lat= e.latlng['lat'];
     lon= e.latlng['lng'];
-    var btn_series = L.DomUtil.create('button', );
-    btn_series.setAttribute('type','button');
-    btn_series.innerHTML="Serie de tiempo";
     if (lat>lat_min && lat<lat_max && lon>lon_min && lon<lon_max){
-        str_in= "<button onclick=\"add_vars(vars, \'#div_tabs\', \'#div_puntos\', lat, lon, \'punto-\'+npoints)\" > "+
-                    "Agregar punto </button>";
-        popup
-            .setLatLng(e.latlng)
-            .setContent('Posición<br>lat: ' + lat.toFixed(8)+'<br>lon: '+ lon.toFixed(8) +')<br>'+str_in)
-            .openOn(map);
         console.log('test',lat,lon);
+	add_vars(vars, '#div_tabs', '#div_puntos', lat, lon, 'punto-'+npoints);
+    }
+    show_cfg();
+
+}
+//evento para movimiento en mapa
+map.on('mousemove', onMapMove);
+//evento para click en mapa
+map.on('click', onMapClick);
+tp ={}
+function showMark( src="img/location-dot-solid.svg"){
+    try{
+        tp.remove();
+    }catch(error){
+        console.log('error');
+    }
+    lon= parseFloat(document.getElementById('inlon_main').value)
+    lat= parseFloat(document.getElementById('inlat_main').value)
+    if (lat>lat_min && lat<lat_max && lon>lon_min && lon<lon_max){
+        tp =L.marker([lat,lon],
+        {
+            icon: new L.DivIcon({
+                className: 'my-div-icon',
+                html: '<img class="my-div-img" src="'+src+'" />'+
+                    '<span  class="map-txt"> P('+lon.toFixed(4)+','+lat.toFixed(4)+')</span>'
+            })
+        }
+  
+    )
+        .addTo(map);
     }
 }
-map.on('click', onMapClick);
 
 //función que oculta menús
 function toggle_opt(ele, display="block"){
@@ -358,7 +434,7 @@ function add_chkbox(var_gral, var_anuales, varname, root, id ){
         id_full=[id, varname, var_obj].join('*');
         let chkbox= $('<label><input type="checkbox" class="chk_var" id="'
                 +id_full+'" value="' + var_obj +
-                '" >'+ var_obj + ' </label> <br>');
+                '" >'+ var_obj + ' </label> ');
         chkbox.appendTo(div_var);
     }
     //recorre claves anuales
@@ -411,8 +487,8 @@ function add_vars(vars, tabs, root, lat, lon, title='titulo'){
         {
             icon: new L.DivIcon({
                 className: 'my-div-icon',
-                html: '<img class="my-div-img" src="img/thumbtack-solid2.svg"/>'+
-                    '<span  >'+title.replace('-','_')+'</span>'
+                html: '<img class="my-div-img" src="img/location-dot-red.svg"/>'+
+                    '<span  class="map-txt">'+title.replace('-','_')+'</span>'
             })
         }
   
@@ -428,23 +504,23 @@ function add_vars(vars, tabs, root, lat, lon, title='titulo'){
         idmain+'\')" '+'id="'+idtab+'">'+ title+ '</button>').appendTo(tabs);
     let div = $('<div > <h4> Opciones de punto </h4> </div>')
         .appendTo(div_main);
-    let in_name = $('<label > Nombre:</label>'+
-        '<input value="'+ title+ '"><br>').appendTo(div);
+    let in_name = $('<label > Nombre: <input size=12 value="'+ title+ '" /> </label>').appendTo(div);
     //latitud
-    let in_lat = $('<label for=inlat_'+title+'> Lat: </label>'+
-        '<input min=\"'+lat_min+
+    let in_lat = $('<label for=inlat_'+title+'>'+
+        'Latitud: <input min=\"'+lat_min+
         '\" max= \"'+lat_max+
         '\" id=\"inlat_'+title+
         '\" type=\"number\" value=\"'+
-        lat+'\" step=0.001><br>').appendTo(div);
+        lat+'\" step=0.001 /> </label>').appendTo(div);
     document.getElementById("inlat_"+title).addEventListener('change', function(){update_marker(title)});
     //longitud
-    let in_lon = $('<label for=inlon_'+title+'> Lon: </label>'+
-        '<input min=\"'+lon_min+
+    let in_lon = $('<label for=inlon_'+title+'> '+
+        'Longitud: <input min=\"'+lon_min+
         '\" max= \"'+lon_max+
         '\" id=\"inlon_'+title+
         '\" type=\"number\" value=\"'+
-        lon+'\" step=0.001>').appendTo(div);
+        lon+'\" step=0.001 /> </label> ').appendTo(div);
+
     document.getElementById("inlon_"+title).addEventListener('change', function(){update_marker(title)});
     //in_lon.addEventListener('change', update_marker);
     //Variables y estadísticos
@@ -452,7 +528,6 @@ function add_vars(vars, tabs, root, lat, lon, title='titulo'){
         appendTo(div_main)[0];
     //recorre claves principales (nombres de variables)
     for (const var_obj in vars){
-        console.log('vars_obj', var_obj);
         add_chkbox(vars[var_obj], var_anuales[var_obj], var_obj, div_vars, nid);
     }
     let btn = $('<p><button onclick=\"del_id(\''+idmain+'\')\"> Eliminar punto </button></p>');
@@ -499,20 +574,20 @@ function plot_btn(){
         req_list.push(get_request(urlbase, rtype, layer, vtime, lon, lat,
             format='text/csv'));
     });
+    console.log(req_list);
     get_csv(req_list);
-    //document.getElementById("overlay").style.display = "none";//???
+    show_plot();
 }
-function show_map(){
-    sel = document.getElementById("cmap");
-    sel.style.display = "block";
-    sel.style.zIndex = 1;
-    map.invalidateSize()
-    //map.setView(bounds.getCenter(), 5.0);
+
+function show_plot(){
+    sel = document.getElementById("cmain");
+    sel.style.visibility = "visible";
 }
-function hide_map(){
-    sel = document.getElementById("cmap");
-    sel.style.display = "none";
-    sel.style.zIndex = 0;
+
+function close_plot(){
+    sel = document.getElementById("cmain");
+    sel.style.visibility = "hidden";
+
 }
 
 function show_sel(){
@@ -521,9 +596,8 @@ function show_sel(){
     sel.style.zIndex=1;
 }
 function hide_sel(){
-    sel = document.getElementById("csel");
-    sel.style.display = "none";
-    sel.style.zIndex=0;
+    sel = document.getElementById("div_cfg");
+    sel.style.visibility= "hidden";
 }
 
 function gen_csv(){
@@ -588,4 +662,81 @@ function gen_csv(){
         }
     }
 
+}
+
+function ayuda_toggle(){
+    var sel = document.getElementById('div_ayuda');
+    if (sel.style.display == 'none'){
+        sel.style.display = 'flex';
+    }
+    else{
+        sel.style.display = 'none';
+    }
+}
+var mes_date =[
+    "2018-01-16T00:00:00.000Z",
+    "2018-02-16T00:00:00.000Z",
+    "2018-03-16T00:00:00.000Z", 
+    "2018-04-16T00:00:00.000Z", 
+    "2018-05-16T00:00:00.000Z", 
+    "2018-06-16T00:00:00.000Z", 
+    "2018-07-16T00:00:00.000Z", 
+    "2018-08-16T00:00:00.000Z",
+    "2018-09-16T00:00:00.000Z",
+    "2018-10-16T00:00:00.000Z",
+    "2018-11-16T00:00:00.000Z",
+    "2018-12-16T00:00:00.000Z",
+]
+map.createPane('vars');
+map.getPane('vars').style.zIndex = 800;
+
+
+//slider
+let var_sel = "Temperatura";
+var slider = document.getElementById("slider_month");
+var mes = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+    "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+slider.oninput = function(){
+    document.getElementById("title_month").innerHTML = var_sel + 
+        ' de ' + mes[slider.value];
+    toggle_var(var_sel);
+
+}
+function slide_name_update(){
+    let title = document.getElementById("title_month").innerHTML = var_sel ;
+    if (var_sel == 'Precipitación')
+        title += ' Promedio Acumulada ';
+    else
+        title += ' Promedio ';
+    title += 'Mensual de ' + mes[slider.value];
+    document.getElementById("title_month").innerHTML = title;
+}
+slide_name_update();
+
+
+let cbar_txt = "https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/wms?SERVICE=WMS&REQUEST=GetLegendGraphic&VERSION=1.3.0"
+wms_args['TIME'] =mes_date[slider.value];
+let ov = L.tileLayer.wms('https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/wms?',
+    {...wms_args, ...wms_info[var_sel]['Promedio Mensual'], pane:'vars'});
+map.addLayer(ov);
+function toggle_var(v){
+    let sta = 'Promedio Mensual';
+    if (v == 'Precipitación')
+        sta = "Promedio Acumulada Mensual";
+    var_sel = v;
+    let layer_actual = ov.wmsParams.layers;
+    let time_actual = ov.wmsParams.TIME;
+    let time_new = mes_date[slider.value];
+    if (map.hasLayer(ov))
+        map.removeLayer(ov);
+    wms_args['TIME'] = time_new;
+    ov = L.tileLayer.wms('https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/wms?',
+        {...wms_args, ...wms_info[v][sta], pane:'vars'});
+    map.addLayer(ov);
+    var cbar= document.getElementById("cbar");
+    cbar.src=cbar_txt;
+    for (p in wms_info[v][sta]){
+        cbar.src+='&'+p+'='+ wms_info[v][sta][p];
+    }
+    slide_name_update();
 }
