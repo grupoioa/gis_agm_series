@@ -33,20 +33,27 @@
     <div id= "div_header" ><img src="img/banner_atlas.png" id="logo1" class="logos" > </div>
     <div id='div_title'  > <h1 > Coatl </h1>
 
-        <!--slider --!>
+        <!--slider -->
         <div id="div_slider" >
             <div id="title_month"  class='div_cool'> Enero </div>
             <input type= "range" min="0" max="11" value="0" class="slider" id="slider_month" >
         </div>
 
     </div>
-    <!-- Mapa -->
-    <div id="div_map" >
-        <div id="map" oncontextmenu="click_sec()" >
-                <!--button class="boton" id="hide_map2" onclick="hide_map()"> X </button--!>
+
+    <div id="div_cbar" class="" >
+        <div id="cbar" class="" >
+            <span id="cbar1" class= "cbar_val"></span><span id="cbar2" class= "cbar_val"></span><span id="cbar3" class= "cbar_val"></span><span id="cbar4" class= "cbar_val"></span><span id="cbar5" class= "cbar_val"></span><span id="cbar6" class= "cbar_val"></span><span id="cbar_ur" class= "cbar_u"></span>
         </div>
+
+    </div>
+
+    <!-- Mapa -->
+    <div id="map" oncontextmenu="click_sec()" >
+        <!--button class="boton" id="hide_map2" onclick="hide_map()"> X </button-->
+    </div>
     <div id="div_info" >
-        <!-- barra  --!>
+        <!-- barra  -->
         <div id="div_barra" class="div_cool">
             <button class="button_bar" onclick="toggle_var('Temperatura')">  
                 <span class="material-symbols-outlined"> device_thermostat </span>
@@ -85,7 +92,7 @@
         <div id="div_intro">
             <div id="div_ayuda" class="div_cool" >
                 <div id="cierra_hp" class='btn_close' onclick="ayuda_toggle()" title="Cerrar ayuda"> X </div>
-                <!-- div descripción --!>
+                <!-- div descripción -->
                 <div id="div_describe" class="div_central " >
                     <H3> Descripción </H3>
                     <p> Este sistema permite el despliegue y descarga de series de tiempo de estadísticos generados a partir de datos de reanálisis de datos del WRF en el periodo de 1980 - 2016.
@@ -96,7 +103,7 @@
                     </p>
                 </div>
 
-                <!-- div ayuda --!>
+                <!-- div ayuda -->
                 <div id="div_inayuda" class= "div_central " >
                     <H3> Cómo generar la gráfica de una serie de tiempo</H3>
                     <ol>
@@ -116,37 +123,37 @@
                     </ul>
                 </div>
                 <!-- div id="cmap" class="overlay div_central" onclick=hide_map()>
-                </div--!>
-                <!-- div manual --!>
+                </div-->
+                <!-- div manual -->
                 <div id="div_manual" class= "div_central " >
-                <span> <a href="docs/manual.html"> Manual de Usuario </a></span>
+                    <span> <a href="docs/manual.html"> Manual de Usuario </a></span>
                 </div>
                 
             </div>
-
-                <!-- div selección de coordenadas --!>
-                <div id="div_coor" class="div_central div_cool">
-                    <H3> Agrega punto de interés: </H3>
-                    <div class="div_incoor">
-                        <div class="div_centered">
-                            <label title="Lon ( -99.56, -78.52)"> Longitud: 
-                                <input id="inlon_main" class="input_coord" type= "number" step=0.1 value="-92.1" min="-99.56" max="-78.52" />
-                            </label>
-
-                            <label title="Lat ( 16.50, 32.44 )"> Latitud: 
-                                <input id="inlat_main" class="input_coord" type= "number" step=0.1 value="24.5" min="16.50" max="32.44" />
-                            </label>
-                        </div>
-                        <div class="div_centered">
-                            <button class="button" id="btn_show" onclick="showMark('img/location-dot-gray.svg')" > Muestra<BR>en mapa</button><BR>
-                            <button class="button" id="btn_add" onclick="addMark()" > Agrega </button>
-                        </div>
-                    </div>
-                </div>
                     
+        </div> <!-- div intro-->
+
+        <!-- div selección de coordenadas -->
+        <div id="div_coor" class="div_central div_cool">
+            <H3> Agrega punto de interés: </H3>
+            <div class="div_incoor">
+                <div class="div_centered">
+                    <label title="Lon ( -99.56, -78.52)"> Longitud: 
+                        <input id="inlon_main" class="input_coord" type= "number" step=0.1 value="-92.1" min="-99.56" max="-78.52" />
+                    </label>
+
+                    <label title="Lat ( 16.50, 32.44 )"> Latitud: 
+                        <input id="inlat_main" class="input_coord" type= "number" step=0.1 value="24.5" min="16.50" max="32.44" />
+                    </label>
+                </div>
+                <div class="div_centered">
+                    <button class="button" id="btn_show" onclick="showMark('img/location-dot-gray.svg')" > Muestra<BR>en mapa</button><BR>
+                    <button class="button" id="btn_add" onclick="addMark()" > Agrega </button>
+                </div>
             </div>
-        </div>
-        <div title="Coatl es un sistema de descarga y visualización de series de tiempo" id="header" class="div_cool">
+        </div> <!-- div coordenadas -->
+    </div> <!--div info-->
+    <div title="Coatl es un sistema de descarga y visualización de series de tiempo" id="header" class="div_cool">
     </div>
 
 
@@ -179,7 +186,6 @@
         <div id="main" > </div>
     </div>
 
-        <img id="cbar" class="" >
 
 </body>
 </html>

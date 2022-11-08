@@ -715,6 +715,24 @@ slide_name_update();
 
 
 let cbar_txt = "https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/wms?SERVICE=WMS&REQUEST=GetLegendGraphic&VERSION=1.3.0"
+bar_colors ={
+    "Temperatura" : {
+        "colors": "#5A006E 0%, #F0D2FE 22.5%, #0060C5 22.5%, #D1FAFF 37.5%, #FAF3B3 37.5%, #D29E00 45%, #C9FFC9 45%, #294707 60%, #FFDBCC 60%,#A62727 75%, #A75209 75%, #311800 82.5%, #D2D7CD 82.5%,#555555 97.5%, #555555",
+        "span": [-10, 0, 10, 20, 30, 40 ],
+        "unit": "C",
+    },
+    "Viento" : {
+        "colors": "#ffffff 0%, #23b2dc 7.5%, #20c920 22.5%, #EFE810 37.5%, #2f178f 52.5%, #DB4C0E 67.5%, #8f1717 82.5%, #8f1717 97.5%",
+        "span": [2.5, 5, 7.5, 10, 12.5, 15],
+        "unit": "m/s",
+    },
+    "Precipitación" : {
+        "colors": "#ffffff 0%, #23b2dc 15%, #17748f 30%, #17208f 45%, #2f178f 60%, #7b178f 75%, #8f1717 90%, #8f1717 100%",
+        "span": [1.25, 3.75, 6.25, 8.75, 11.25, 13.75],
+        "unit": "mm",
+    }
+}
+
 wms_args['TIME'] =mes_date[slider.value];
 let ov = L.tileLayer.wms('https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/wms?',
     {...wms_args, ...wms_info[var_sel]['Promedio Mensual'], pane:'vars'});
@@ -733,10 +751,21 @@ function toggle_var(v){
     ov = L.tileLayer.wms('https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/wms?',
         {...wms_args, ...wms_info[v][sta], pane:'vars'});
     map.addLayer(ov);
-    var cbar= document.getElementById("cbar");
-    cbar.src=cbar_txt;
-    for (p in wms_info[v][sta]){
-        cbar.src+='&'+p+'='+ wms_info[v][sta][p];
-    }
+    create_cbar(bar_colors[var_sel]);
     slide_name_update();
 }
+
+function create_cbar(colors){
+    div = document.getElementById("cbar");
+    div.style.backgroundImage= "linear-gradient( to right, "+ colors["colors"]+")";
+    for (var i=1; i<7; i++){
+        el = document.getElementById("cbar"+i);
+        el.innerText = colors["span"][i-1];
+    }
+    el = document.getElementById("cbar_ur");
+    el.innerText = colors["unit"];
+    el = document.getElementById("cbar_ul");
+    el.innerText = colors["unit"];
+}
+    
+create_cbar(bar_colors[var_sel]);
