@@ -764,8 +764,6 @@ function create_cbar(colors){
     }
     el = document.getElementById("cbar_ur");
     el.innerText = colors["unit"];
-    el = document.getElementById("cbar_ul");
-    el.innerText = colors["unit"];
 }
     
 create_cbar(bar_colors[var_sel]);

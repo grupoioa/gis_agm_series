@@ -175,6 +175,10 @@ div{
     animation: 2s 1 slide2r3;
 }
 
+#install{
+    z-index:2;
+}
+
 @keyframes grow_2r{
   from {
       width: 0px;
@@ -297,6 +301,9 @@ position: relative;
     justify-content: space-around;
     z-index: 100;
     opacity: 0.9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 #div_barra:hover{
     width: 120px;
@@ -308,6 +315,9 @@ position: relative;
     padding: 2px 8px;
     white-space: nowrap;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    text-align: left;
 }
 .button_bar:hover{
     color: black;
