@@ -418,6 +418,9 @@ position: relative;
 }
 #div_slider{
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     z-index: 100;
 }
@@ -430,6 +433,8 @@ position: relative;
     background-color: #ffffffdd;
     display: flex;
     justify-content: center;
+    width: fit-content;
+    padding: 0px 5px;
 }
 #div_cbar{
     display: flex;
@@ -557,17 +562,13 @@ position: relative;
     .logos{
         height: 25px;
     }
+    #div_info{
+        flex-direction: column;
+    }
 
     .div_central{
         margin: 2px;
         padding: 2px;
-    }
-    #div_intro{
-        display: flex;
-        flex-wrap: wrap;
-        width: 300px;
-        justify-content: left;
-        font-size: 12px;
     }
     /* div ayuda / manual de usuario */
     #div_ayuda{

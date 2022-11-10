@@ -693,22 +693,28 @@ map.getPane('vars').style.zIndex = 800;
 
 //slider
 let var_sel = "Temperatura";
-var slider = document.getElementById("slider_month");
+let nmes = new Date().getMonth();
+function nmes_inc(){
+    nmes +=1;
+    nmes %=12;
+    toggle_var(var_sel);
+}
+function nmes_dec(){
+    nmes -=1;
+    if (nmes == -1)
+        nmes = 11;
+    toggle_var(var_sel);
+}
+    
 var mes = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
     "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-slider.oninput = function(){
-    document.getElementById("title_month").innerHTML = var_sel + 
-        ' de ' + mes[slider.value];
-    toggle_var(var_sel);
-
-}
 function slide_name_update(){
     let title = document.getElementById("title_month").innerHTML = var_sel ;
     if (var_sel == 'Precipitación')
         title += ' Promedio Acumulada ';
     else
         title += ' Promedio ';
-    title += 'Mensual de ' + mes[slider.value];
+    title += 'Mensual de ' + mes[nmes];
     document.getElementById("title_month").innerHTML = title;
 }
 slide_name_update();
@@ -733,7 +739,7 @@ bar_colors ={
     }
 }
 
-wms_args['TIME'] =mes_date[slider.value];
+wms_args['TIME'] =mes_date[nmes];
 let ov = L.tileLayer.wms('https://pronosticos.atmosfera.unam.mx:8443/ncWMS_2015/wms?',
     {...wms_args, ...wms_info[var_sel]['Promedio Mensual'], pane:'vars'});
 map.addLayer(ov);
@@ -744,7 +750,7 @@ function toggle_var(v){
     var_sel = v;
     let layer_actual = ov.wmsParams.layers;
     let time_actual = ov.wmsParams.TIME;
-    let time_new = mes_date[slider.value];
+    let time_new = mes_date[nmes];
     if (map.hasLayer(ov))
         map.removeLayer(ov);
     wms_args['TIME'] = time_new;
