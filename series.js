@@ -688,7 +688,7 @@ var mes_date =[
     "2018-12-16T00:00:00.000Z",
 ]
 map.createPane('vars');
-map.getPane('vars').style.zIndex = 800;
+map.getPane('vars').style.zIndex = 400;
 
 
 //slider

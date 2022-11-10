@@ -121,6 +121,8 @@ div{
     position: relative;
     top: 0px;
     display:flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
     width: 90%;
     align-items: flex-start;
     padding: 5px;
@@ -563,7 +565,6 @@ position: relative;
         height: 25px;
     }
     #div_info{
-        flex-direction: column;
     }
 
     .div_central{
@@ -583,7 +584,6 @@ position: relative;
     #div_coor{
         position: relative;
         display: flex;
-        width: 100%;
     }
 
     #div_barra{
