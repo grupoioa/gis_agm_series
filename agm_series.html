@@ -35,9 +35,9 @@
 
         <!--slider -->
         <div id="div_slider" >
-            <div class="material-symbols-outlined" onclick= "nmes_inc()" > arrow_drop_up </div>
+            <div class="material-symbols-outlined btn_move" onclick= "nmes_inc()" > arrow_drop_up </div>
             <div id="title_month"  class='div_cool'> Enero </div>
-            <div class="material-symbols-outlined" onclick= "nmes_dec()" > arrow_drop_down </div>
+            <div class="material-symbols-outlined btn_move" onclick= "nmes_dec()" > arrow_drop_down </div>
         </div>
 
     </div>
@@ -67,7 +67,7 @@
                 <span class="material-symbols-outlined"> rainy </span>
                 <span class="button_text_bar"> Precipitación</span>
             </button>
-            <button class="button_bar" onclick="">  
+            <button class="button_bar" onclick="toggle_div_capas()">  
                 <span class="material-symbols-outlined"> layers </span>
                 <span class="button_text_bar"> Capas </span>
             </button>
@@ -93,6 +93,12 @@
             </button>
         </div>
 
+        <div id="div_capas" class="div_cool" >
+            Capas disponibles:
+            <button id="capa_bati" onclick='toggle_capa("bati")'> Batimetría </button>
+            <button id="capa_rio" onclick='toggle_capa("rio")' > Ríos </button>
+            <button id="capa_grid" onclick='toggle_capa("grid")'> Grid  </button>
+        </div>
         <div id="div_intro">
             <div id="div_ayuda" class="div_cool" >
                 <div id="cierra_hp" class='btn_close' onclick="ayuda_toggle()" title="Cerrar ayuda"> X </div>

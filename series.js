@@ -18,10 +18,17 @@ var lat_max= 32.44792175;
 bounds = new L.LatLngBounds(new L.LatLng(16.491, -78.511), new L.LatLng(32.448, -99.569));
 //image layer
 imageBounds=[[16.5, -99.53], [32.5, -78.5]];
-var mbase = L.imageOverlay('img/mapa_base.png', imageBounds, {attribution: mbAttr})
+var mbase = L.imageOverlay('img/limites.png', imageBounds, )
+var mbati = L.imageOverlay('img/bati.png', imageBounds, )
+var mrio = L.imageOverlay('img/rio.png', imageBounds, )
+var mgrid = L.imageOverlay('img/grids.png', imageBounds, )
 .setOpacity(1.0)
-.bringToBack()
-.setZIndex(-1);
+let capas={
+    'bati': mbati,
+    'rio': mrio,
+    'grid': mgrid,
+}
+
 //.addTo(map);
 //crea mapa de leaflet
 var map = L.map('map', {
@@ -33,7 +40,7 @@ var map = L.map('map', {
         minZoom: 6.2,
         maxZoom:20,
         //layers: [ back_layer, mbase],
-        layers: [ mbase],
+        layers: [ mrio, mgrid, mbase, mbati],
         maxBounds: bounds,
         maxBoundsViscosity: 1,
         });
@@ -688,7 +695,7 @@ var mes_date =[
     "2018-12-16T00:00:00.000Z",
 ]
 map.createPane('vars');
-map.getPane('vars').style.zIndex = 400;
+map.getPane('vars').style.zIndex = 399;
 
 
 //slider
@@ -759,6 +766,27 @@ function toggle_var(v){
     map.addLayer(ov);
     create_cbar(bar_colors[var_sel]);
     slide_name_update();
+}
+
+//capas
+let div = document.getElementById('div_capas');
+div.style.display="None";
+function toggle_div_capas(){
+    let div = document.getElementById('div_capas');
+    if (div.style.display == 'none')
+        div.style.display = 'flex';
+    else
+        div.style.display = 'none';
+        
+}
+function toggle_capa(capa){
+    if (map.hasLayer(capas[capa])){
+        capas[capa].remove()
+    }
+    else{
+        capas[capa].addTo(map)
+    }
+    
 }
 
 function create_cbar(colors){

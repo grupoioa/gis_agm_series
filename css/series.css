@@ -8,6 +8,7 @@ label{
 
 button{
     padding: 5px 10px;
+    margin: 1px;
     font-size: 12px;
     border-radius: 12px;
     /*background: #035369;*/
@@ -543,6 +544,9 @@ position: relative;
     font-family: 'Oxygen', sans-serif;
     display: inline-block;
 }
+.btn_move{
+    cursor: pointer;
+}
 
 .cbar_u{
     width: 10%;
@@ -558,6 +562,11 @@ position: relative;
     text-align: center;
     vertical-align: middle;
     font-size: 13px;
+}
+#div_capas{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
 }
 
 @media (max-width: 600px){
