@@ -30,24 +30,20 @@
         <img src="img/unam_negro.svg" id="logo2" class="logos" >
         <img src="img/logo_CIGoM.svg" id="logo3" class="logos" >
     </div>
-    <div id= "div_header" ><img src="img/banner_atlas.png" id="logo1" class="logos" > </div>
-    <div id='div_title'  > <h1 > Coatl </h1>
-
+    <div id="div_ban" class= "color_prim" >
+        <div id='div_title2' class=""  > <h1 > Coatl </h1>
+        </div>
         <!--slider -->
-        <div id="div_slider" >
+        <div id="div_slider" class="" >
             <div class="material-symbols-outlined btn_move" onclick= "nmes_inc()" > arrow_drop_up </div>
-            <div id="title_month"  class='div_cool'> Enero </div>
+            <div id="title_month"  class=''> Enero </div>
             <div class="material-symbols-outlined btn_move" onclick= "nmes_dec()" > arrow_drop_down </div>
         </div>
 
-    </div>
-
-    <div id="div_cbar" class="" >
-        <div id="cbar" class="" >
-            <span id="cbar1" class= "cbar_val"></span><span id="cbar2" class= "cbar_val"></span><span id="cbar3" class= "cbar_val"></span><span id="cbar4" class= "cbar_val"></span><span id="cbar5" class= "cbar_val"></span><span id="cbar6" class= "cbar_val"></span><span id="cbar_ur" class= "cbar_u"></span>
+        <div id='div_title' class=""  > <h1 > Coatl </h1>
         </div>
-    </div>
 
+    </div>
     <!-- Mapa -->
     <div id="map" oncontextmenu="click_sec()" >
         <!--button class="boton" id="hide_map2" onclick="hide_map()"> X </button-->
@@ -143,26 +139,27 @@
                     
         </div> <!-- div intro-->
 
-        <!-- div selección de coordenadas -->
-        <div id="div_coor" class="div_central div_cool">
-            <H3> Agrega punto de interés: </H3>
-            <div class="div_incoor">
-                <div class="div_centered">
-                    <label title="Lon ( -99.56, -78.52)"> Longitud: 
-                        <input id="inlon_main" class="input_coord" type= "number" step=0.1 value="-92.1" min="-99.56" max="-78.52" />
-                    </label>
-
-                    <label title="Lat ( 16.50, 32.44 )"> Latitud: 
-                        <input id="inlat_main" class="input_coord" type= "number" step=0.1 value="24.5" min="16.50" max="32.44" />
-                    </label>
-                </div>
-                <div class="div_centered">
-                    <button class="button" id="btn_show" onclick="showMark('img/location-dot-gray.svg')" > Muestra<BR>en mapa</button><BR>
-                    <button class="button" id="btn_add" onclick="addMark()" > Agrega </button>
-                </div>
-            </div>
-        </div> <!-- div coordenadas -->
     </div> <!--div info-->
+
+    <!-- div selección de coordenadas -->
+    <div id="div_coor" class="div_central color_prim">
+        <H3> Agrega punto de interés: </H3>
+        <div class="div_incoor">
+            <div class="div_centered">
+                <label title="Lon ( -99.56, -78.52)"> Longitud: 
+                    <input id="inlon_main" class="input_coord" type= "number" step=0.1 value="-92.1" min="-99.56" max="-78.52" />
+                </label>
+
+                <label title="Lat ( 16.50, 32.44 )"> Latitud: 
+                    <input id="inlat_main" class="input_coord" type= "number" step=0.1 value="24.5" min="16.50" max="32.44" />
+                </label>
+            </div>
+            <div class="div_centered">
+                <button class="button" id="btn_show" onclick="showMark('img/location-dot-gray.svg')" > Muestra<BR>en mapa</button><BR>
+                <button class="button" id="btn_add" onclick="addMark()" > Agrega </button>
+            </div>
+        </div>
+    </div> <!-- div coordenadas -->
 
     <div id="div_cfg" class="overlay" >
         <div id="div_opt" class="div_cool">
@@ -191,6 +188,10 @@
             <div id="close_plot" class="btn_close" onclick="close_plot()" title="Cerrar"> X </div>
         </div>
         <div id="main" > </div>
+    </div>
+
+    <div id="cbar" class="" >
+        <span id="cbar1" class= "cbar_val"></span><span id="cbar2" class= "cbar_val"></span><span id="cbar3" class= "cbar_val"></span><span id="cbar4" class= "cbar_val"></span><span id="cbar5" class= "cbar_val"></span><span id="cbar6" class= "cbar_val"></span><span id="cbar_ur" class= "cbar_u"></span>
     </div>
 
 
