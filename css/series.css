@@ -577,6 +577,21 @@ position: relative;
     flex-direction: column;
     padding: 5px;
 }
+@media (max-height: 600px){
+    #map{
+        width: 80%;
+        height: 600px;
+        top: 100px;
+    }
+    #cbar{
+        top: 600px;
+        right: 80px;
+    }
+    #div_logos{
+        top: 630px;
+        left: 80px;
+    }
+}
 
 @media (max-width: 600px){
     #div_header{
