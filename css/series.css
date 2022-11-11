@@ -69,6 +69,8 @@ h4 {
     display: flex;
     flex-flow: column;
     height: 600px;
+    top: 50px;
+    position: relative;
 }
 .overlay{
     display: flex;
